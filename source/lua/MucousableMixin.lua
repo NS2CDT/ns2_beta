@@ -24,7 +24,7 @@ function MucousableMixin:__initmixin()
     
 end
 
-local function ClearShield(self)
+function MucousableMixin:ClearShield()
 
     self.mucousShield = false
     self.shieldRemaining = 0    
@@ -34,7 +34,7 @@ end
 function MucousableMixin:OnDestroy()
 
     if self:GetHasMucousShield() then
-        ClearShield(self)
+        self:ClearShield()
     end
     
 end

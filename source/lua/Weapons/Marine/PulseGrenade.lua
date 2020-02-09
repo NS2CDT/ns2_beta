@@ -86,6 +86,24 @@ local function EnergyDamage(hitEntities, origin, radius, damage)
 
 end
 
+local function DebuffDamage(hitEntities, self)
+
+    for _, entity in ipairs(hitEntities) do
+
+        -- Remove the mucous shield
+        if HasMixin(entity, "Mucousable") then
+            entity:ClearShield()
+        end
+
+        -- Remove the enzyme effect
+        if entity.ClearEnzyme then
+            entity:ClearEnzyme()
+        end
+
+    end
+
+end
+
 if Server then
 
     function PulseGrenade:TimedDetonateCallback()
@@ -108,6 +126,7 @@ if Server then
 
         end
 
+        DebuffDamage(hitEntities, self) -- Remove buffs before applying damages
         RadiusDamage(hitEntities, self:GetOrigin(), kPulseGrenadeDamageRadius, kPulseGrenadeDamage, self)
         EnergyDamage(hitEntities, self:GetOrigin(), kPulseGrenadeEnergyDamageRadius, kPulseGrenadeEnergyDamage)
 

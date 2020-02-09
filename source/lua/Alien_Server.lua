@@ -24,14 +24,6 @@ function Alien:TriggerEnzyme(duration)
     
 end
 
-function Alien:CancelEnzyme()
-
-    if self.timeWhenEnzymeExpires > Shared.GetTime() then        
-        self.timeWhenEnzymeExpires = Shared.GetTime()
-    end
-    
-end
-
 function Alien:Reset()
 
     Player.Reset(self)

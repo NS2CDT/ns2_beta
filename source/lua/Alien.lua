@@ -656,6 +656,19 @@ function Alien:GetIsEnzymed()
     return self.enzymed
 end
 
+-- @return true if enzyme was cleared
+function Alien:ClearEnzyme()
+    local rval = (self.enzymed == true)
+
+    if Server then
+        self.timeWhenEnzymeExpires = Shared.GetTime() -- Expires now
+    end
+
+    self.enzymed = false
+
+    return rval
+end
+
 function Alien:OnUpdateAnimationInput(modelMixin)
 
     Player.OnUpdateAnimationInput(self, modelMixin)
