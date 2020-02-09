@@ -23,6 +23,7 @@ function HiveVisionMixin:__initmixin()
         self.hiveSightVisible = false
         self.nextFriendlyHiveVisionCheck = 0
         self.timeHiveVisionChanged = 0
+        self.healthOutlined = false
     end
 
 end
@@ -72,12 +73,30 @@ if Client then
     end
 
     function HiveVisionMixin:OnUpdate(deltaTime)   
+
         PROFILE("HiveVisionMixin:OnUpdate")
         -- Determine if the entity should be visible on hive sight
-        local parasited = HasMixin(self, "ParasiteAble") and self:GetIsParasited()
+        local parasited, healthOutlined = false, false
+
+        if HasMixin(self, "ParasiteAble") then
+            parasited, healthOutlined = self:GetIsParasited()
+        end
+
         local visible = parasited
         local player = Client.GetLocalPlayer()
         local now = Shared.GetTime()
+        local recentHPChange = false
+
+        if HasMixin(self, "Combat") and self.timeHiveVisionChanged < self:GetTimeLastDamageTaken() then
+            recentHPChange = true
+        end
+        if HasMixin(self, "Combat") and self.timeHiveVisionChanged < self.timeLastHealed then
+            recentHPChange = true
+        end
+        if healthOutlined ~= self.healthOutlined then
+            recentHPChange = true
+        end
+
         
         if Client.GetLocalClientTeamNumber() == kSpectatorIndex
               and self:isa("Alien") 
@@ -111,14 +130,37 @@ if Client then
         end
         
         -- Update the visibility status.
-        if visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now then
+        if (parasited and recentHPChange) or (visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now)
+        then
         
             local model = self:GetRenderModel()
             if model ~= nil then
             
                 if visible then
                     if parasited then
-                        HiveVision_AddModel( model, kHiveVisionOutlineColor.Yellow )
+
+
+                        local outlineColor = nil
+
+                        if healthOutlined then
+                            local eHP = self:GetHealth() + self:GetArmor() * kHealthPointsPerArmor
+
+                            -- { [0]='Yellow', 'Green', 'KharaaOrange', 'DarkGreen' 
+                            if eHP >= 75*4 then -- 4+ bites, green outline
+                                outlineColor = kHiveVisionOutlineColor.Green
+                            elseif eHP >= 75*3 then -- 3 bites, yellow
+                                outlineColor = kHiveVisionOutlineColor.Yellow
+                            else -- 2 bites or less, red/orange
+                                outlineColor = kHiveVisionOutlineColor.KharaaOrange
+                            end
+
+                        else
+                            outlineColor = kHiveVisionOutlineColor.Green
+                        end
+
+                        self.healthOutlined = healthOutlined
+                        HiveVision_AddModel( model,  outlineColor)
+
                     elseif self:isa("Gorge") then
                         HiveVision_AddModel( model, kHiveVisionOutlineColor.DarkGreen )
                     else
