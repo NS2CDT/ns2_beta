@@ -62,11 +62,11 @@ kRecyclePaybackScalar = 0.75
 
 kCarapaceHealReductionPerLevel = 0.0
 
-kSkulkArmorFullyUpgradedAmount = 25
-kGorgeArmorFullyUpgradedAmount = 100
-kLerkArmorFullyUpgradedAmount = 50
-kFadeArmorFullyUpgradedAmount = 120
-kOnosArmorFullyUpgradedAmount = 650
+kSkulkArmorFullyUpgradedAmount = 20
+kGorgeArmorFullyUpgradedAmount = 90
+kLerkArmorFullyUpgradedAmount = 45
+kFadeArmorFullyUpgradedAmount = 110
+kOnosArmorFullyUpgradedAmount = 600
 
 kBalanceOffInfestationHurtPercentPerSecond = 0.02
 kMinOffInfestationHurtPerSecond = 20
