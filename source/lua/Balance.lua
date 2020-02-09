@@ -731,8 +731,8 @@ kPlayerHallucinationNumFraction = 0.34
 kHallucinationCloudCooldown = 3
 kDrifterAbilityCooldown = 0
 kHallucinationCloudAbilityCooldown = 12
-kMucousMembraneAbilityCooldown = 1
-kEnzymeCloudAbilityCooldown = 1
+kMucousMembraneAbilityCooldown = 12
+kEnzymeCloudAbilityCooldown = 12
 
 kNutrientMistCost = 2
 kNutrientMistCooldown = 2
