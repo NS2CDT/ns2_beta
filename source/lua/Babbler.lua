@@ -19,7 +19,6 @@ Script.Load("lua/PathingMixin.lua")
 Script.Load("lua/PhysicsGroups.lua")
 Script.Load("lua/CloakableMixin.lua")
 Script.Load("lua/DetectableMixin.lua")
-Script.Load("lua/BiomassHealthMixin.lua")
 
 kBabblerMoveType = enum({ 'None', 'Move', 'Cling', 'Attack', 'Wag' })
 kBabblerMoveTypeStr = { 'None', 'Move', 'Cling', 'Attack', 'Wag' }
@@ -123,7 +122,6 @@ function Babbler:OnCreate()
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, CloakableMixin)
     InitMixin(self, DetectableMixin)
-    InitMixin(self, BiomassHealthMixin)
 
     self.variant = kGorgeVariant.normal
 
@@ -1488,10 +1486,6 @@ end
 
 function Babbler:GetFov()
     return Babbler.kFov
-end
-
-function Babbler:GetHealthPerBioMass()
-    return kBabblerHealthPerBioMass
 end
 
 function Babbler:GetSpeedScalar()
