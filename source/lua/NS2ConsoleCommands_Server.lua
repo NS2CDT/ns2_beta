@@ -865,6 +865,19 @@ local function OnCommandEnzyme(client)
     
 end
 
+local function OnCommandMucous(client)
+
+    if Shared.GetCheatsEnabled() then
+
+        local player = client:GetControllingPlayer()
+        if player and HasMixin(player, "Mucousable") then
+            player:SetMucousShield()
+        end
+
+    end
+
+end
+
 local function OnCommandUmbra(client)
 
     if Shared.GetCheatsEnabled() then
@@ -1676,6 +1689,7 @@ Event.Hook("Console_stun", OnCommandStun)
 Event.Hook("Console_spit", OnCommandSpit)
 Event.Hook("Console_push", OnCommandPush)
 Event.Hook("Console_enzyme", OnCommandEnzyme)
+Event.Hook("Console_mucous", OnCommandMucous)
 Event.Hook("Console_umbra", OnCommandUmbra)
 Event.Hook("Console_deployarcs", OnCommandDeployARCs)
 Event.Hook("Console_undeployarcs", OnCommandUndeployARCs)
