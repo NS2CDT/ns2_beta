@@ -29,7 +29,6 @@ class 'Railgun' (Entity)
 Railgun.kMapName = "railgun"
 
 Railgun.kRange = 400
-Railgun.kBulletSize = 0.3
 
 -- Time between shooting and being able to start charging again.
 Railgun.kCooldownTime = 0.3
@@ -53,6 +52,11 @@ Railgun.kTapShotDamageType = kDamageType.Normal
 Railgun.kChargedShotDamageType = kDamageType.Heavy
 
 Railgun.kChargedShotChargeThreshold = 0.75 -- shot is "charged" when @ 75% charge or higher.
+
+-- The shot will have a bigger hitbox if it is loaded
+Railgun.kChargedShotThreshold = 0.75
+Railgun.kChargedShotBulletSize = 0.15
+Railgun.kUnChargedShotBulletSize = 0.075
 
 Railgun.kFireAnimationLength = 1.5 -- from art asset.
 
@@ -230,6 +234,11 @@ local function ExecuteShot(self, startPoint, endPoint, player)
     
     local chargeDuration = Shared.GetTime() - self.timeChargeStarted
     local chargeFraction = Clamp(chargeDuration / Railgun.kChargeTimeForMaxPower, 0, 1)
+
+    local threshold = Railgun.kChargedShotThreshold
+    local chargedSize = Railgun.kChargedShotBulletSize
+    local regularSize = Railgun.kUnChargedShotBulletSize
+    local bulletSize = (chargeFraction >= threshold and chargedSize or regularSize)
     
     local damage = chargeFraction * (Railgun.kMaxPowerDamage - Railgun.kMinPowerDamage) + Railgun.kMinPowerDamage
     local chargedShot
@@ -241,7 +250,7 @@ local function ExecuteShot(self, startPoint, endPoint, player)
         chargedShot = false
     end
     
-    local extents = GetDirectedExtentsForDiameter(direction, Railgun.kBulletSize)
+    local extents = GetDirectedExtentsForDiameter(direction, bulletSize)
     local maxTargetsHit = chargedShot and 20 or 1
     if trace.fraction < 1 then
         
@@ -500,7 +509,7 @@ if Client then
             local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterAllButIsa("Tunnel"))
             local direction = (endPoint - startPoint):GetUnit()
             
-            local extents = GetDirectedExtentsForDiameter(direction, Railgun.kBulletSize)
+            local extents = GetDirectedExtentsForDiameter(direction, Railgun.kChargedShotBulletSize)
             
             self.railgunTargetId = nil
             
