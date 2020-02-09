@@ -1308,7 +1308,7 @@ function BuildTechData()
             [kTechDataId] = kTechId.HeavyMachineGun,
             [kTechDataMaxHealth] = kMarineWeaponHealth,
             [kTechDataTooltipInfo] = "HEAVY_MACHINE_GUN_TOOLTIP",
-            [kTechDataPointValue] = kHeavyMachineGunPointValue,
+            [kTechDataPointValue] = kHeavyMachineGunValue,
             [kTechDataMapName] = HeavyMachineGun.kMapName,
             [kTechDataDisplayName] = "HEAVY_MACHINE_GUN",
             [kTechDataModel] = HeavyMachineGun.kModelName,

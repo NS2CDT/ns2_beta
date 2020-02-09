@@ -10,6 +10,7 @@ Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/Weapons/ClientWeaponEffectsMixin.lua")
 Script.Load("lua/HMGVariantMixin.lua")
+Script.Load("lua/PointGiverMixin.lua")
 
 class 'HeavyMachineGun' (ClipWeapon)
 
