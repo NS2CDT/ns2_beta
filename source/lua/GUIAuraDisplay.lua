@@ -127,7 +127,8 @@ function GUIAuraDisplay:Update(deltaTime)
         local icon = self.icons[i]
         
         local healthScalar = enemy:GetHealthScalar()        
-        local color = Color(1, healthScalar, 0, 1)
+        -- local color = Color(1, healthScalar, 0, 1)
+        local color = Color(1, 1, 0, 1) -- Do not reveal health informations
         
         local offset = enemy:isa("Exo") and kExoHeartOffset or kHeartOffset
         
