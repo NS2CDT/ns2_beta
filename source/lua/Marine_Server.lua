@@ -71,12 +71,18 @@ end
 
 function Marine:SetPoisoned(attacker, wasGlancingHit)
     
+    -- A normal poison overides a glancing poison, but not the other way around
+    if self.poisonWasGlancingHit == false and self.poisoned then
+        -- just add another bool for this so we don't screw up any mods depending on .poisoned being a
+        -- boolean value.
+        self.poisonWasGlancingHit = false
+    else
+        self.poisonWasGlancingHit = (wasGlancingHit == true) -- nil --> false
+    end
+
     self.poisoned = true
     self.timePoisoned = Shared.GetTime()
     
-    -- just add another bool for this so we don't screw up any mods depending on .poisoned being a
-    -- boolean value.
-    self.poisonWasGlancingHit = (wasGlancingHit == true) -- nil --> false
     
     if attacker then
         self.lastPoisonAttackerId = attacker:GetId()
