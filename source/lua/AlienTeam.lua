@@ -16,6 +16,7 @@ Script.Load("lua/PlayingTeam.lua")
 class 'AlienTeam' (PlayingTeam)
 
 -- Innate alien regeneration
+AlienTeam.kAutoHealMaxHPFraction = 0.30
 AlienTeam.kAutoHealInterval = 2
 AlienTeam.kStructureAutoHealInterval = 0.5
 AlienTeam.kAutoHealUpdateNum = 20 -- number of structures to update per autoheal update
