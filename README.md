@@ -50,6 +50,20 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Damage type is now "heavy" (double damage to armor).
             - Damage: 10 -> 6
             - Overheat animation sped up such that the time out of combat now matches up exactly with the heat meter for that weapon (before, the overheat animation would finish well-after the heat meter was empty).
+    - Powerpoints
+        - Now all powerpoints start socketed but unbuild by default. The
+        powerpoint in the Marine base gets build and the one in the Alien main
+        base gets destroyed on round start.
+        - Powerpoints that have no health are not highlighted for either team and
+        can't be damaged.
+        - Powerpoints that haven't been build yet don't
+        affect the location's light state.
+        - The construction progress of a powerpoint is synchronized with their
+        hit points. This means when an enemy damages an unbuild powerpoint by 1%
+        hp it also looses 1% construction progress.
+        - Marines receive no automated order to construct a powerpoint unless
+        there is a structure or blueprint inside the given location that requires power.
+
     - Misc
         - Marine dropped weapon decay timer is now 16 seconds (down from 25)
         - Nanoshield duration is now 3 seconds when used on players (down from 5) 

@@ -80,7 +80,8 @@ Client.PrecacheLocalSound(kDeadSound)
 gPlayingDeadMontage = nil
 
 function Player:GetShowUnitStatusForOverride(forEntity)
-    return not GetAreEnemies(self, forEntity) or (forEntity:GetOrigin() - self:GetOrigin()):GetLengthSquared() < (20*20)
+    return self:GetIsAlive() and not GetAreEnemies(self, forEntity) or
+            (forEntity:GetOrigin() - self:GetOrigin()):GetLengthSquared() < (20*20)
 end
 
 function PlayerUI_GetWorldMessages()
@@ -384,7 +385,6 @@ function PlayerUI_GetPositionalInfo(player, unit)
         end
 
         healthBarOrigin = origin + healthOffsetDirection * healthBarOffset
-        local worldOrigin = Vector(origin)
         origin = Client.WorldToScreen(origin)
         healthBarOrigin = Client.WorldToScreen(healthBarOrigin)
     end
@@ -395,7 +395,7 @@ end
 
 -- Return true if the unit will show status info to the player
 function PlayerUI_ShowsUnitStatusInfo(player, unit)
-    return UnitIsSelectedByLocalCommander(player,unit) or unit == player:GetCrossHairTarget() or player:GetHasMarkedTarget(unit)
+    return UnitIsSelectedByLocalCommander(player, unit) or unit == player:GetCrossHairTarget() or player:GetHasMarkedTarget(unit)
 end
 
 function PlayerUI_GetStatusInfoForUnit(player, unit)
@@ -461,7 +461,8 @@ function PlayerUI_GetStatusInfoForUnit(player, unit)
 
             end
 
-            if player:GetHasMarkedTarget(unit) and unit ~= player:GetCrossHairTarget() then
+            local showsUnitStatusInfo = PlayerUI_ShowsUnitStatusInfo(player, unit)
+            if not showsUnitStatusInfo then
                 description = ""
                 action = ""
                 hint = ""
@@ -494,8 +495,7 @@ function PlayerUI_GetStatusInfoForUnit(player, unit)
             if HasMixin(unit, "Maturity") and not areEnemies then
                 maturityFraction = unit:GetMaturityFraction()
             end
-
-            local crossHairTarget = visibleToPlayer and PlayerUI_ShowsUnitStatusInfo(player, unit)
+            local crossHairTarget = visibleToPlayer and showsUnitStatusInfo
 
             local status = unit:GetUnitStatus(player)
             unitState = {
@@ -4003,7 +4003,11 @@ end
 local function GetDamageEffectType(self)
 
     if self:isa("Marine") then
+        if self.marineType == kMarineVariantBaseType.bigmac then
+            return kDamageEffectType.Oil
+        else
         return kDamageEffectType.Blood
+        end
     elseif self:isa("Alien") then
         return kDamageEffectType.AlienBlood
     elseif self:isa("Exo") then
