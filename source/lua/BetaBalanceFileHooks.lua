@@ -1,5 +1,3 @@
-ModLoader.SetupFileHook("lua/NS2Utility.lua", "lua/BetaBalanceNS2Utility.lua", "post")
-
 if Locale then
     local sntl_strings = {
         ["FOCUS"] = "Blight",

@@ -46,19 +46,15 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Overheat animation sped up such that the time out of combat now matches up exactly with the heat meter for that weapon (before, the overheat animation would finish well-after the heat meter was empty).
     - Misc
         - Marine dropped weapon decay timer is now 16 seconds (down from 25)
-        - Nanoshield duration is now 3 seconds when used on players (down from 5) -Nanoshield used on structures remains unchanged at 5           seconds.
+        - Nanoshield duration is now 3 seconds when used on players (down from 5) 
+        - Nanoshield used on structures remains unchanged at 5 seconds.
 - Alien
-    - Glancing hits
-        - Skulk bite, lerk bite, fade swipe, fade stab, and onos gore now have an expanded cone around their normal attack-cone which provides a "glancing hit" if the regular hit misses.
-        - Glancing hits do reduced damage.
-        - Glancing hits play a different damage sound (metal instead of flesh)
-        - Glancing hits play a different hit sound (the lower-damage hitsound)
         
     - Skulk
         - Reduced bite cone to 0.8 x 1.0 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
-        - Skulks now only recieve a speed boost from a consecutive jump.
+        - Skulks now only receive a speed boost from a consecutive jump.
         
     - Gorge
         - Heal spray
