@@ -17,6 +17,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No Damage Falloff.
     - HMG
         - Reload time is now 3.5 seconds (down from 5 seconds)
+    - Flamethrower
+        - Removed energy damage (1 energy per hit)
     - Mines
         - Mines can now be properly killed during their arming period when first deployed. In this case, they do not explode or deal               damage.
         - Marines now keep unused mines when they die and receive them back when they respawn (like hand grenades).

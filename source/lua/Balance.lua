@@ -291,7 +291,6 @@ kFlameRadius = 1.8
 kFlamethrowerDamage = 12
 kFlamethrowerDamageRadius = kFlameRadius
 kFlamethrowerConeWidth = 0.3
-kFlameThrowerEnergyDamage = 1
 kFlamethrowerDamageType = kDamageType.Flame
 kFlamethrowerClipSize = 50
 kFlamethrowerRange = 9

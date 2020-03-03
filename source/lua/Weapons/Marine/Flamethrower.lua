@@ -307,10 +307,6 @@ function Flamethrower:ApplyConeDamage(player)
                 ent:SetOnFire(player, self)
             end
 
-            if ent.GetEnergy and ent.SetEnergy then
-                ent:SetEnergy(ent:GetEnergy() - kFlameThrowerEnergyDamage)
-            end
-
         end
 
     end
