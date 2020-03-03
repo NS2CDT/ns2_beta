@@ -130,7 +130,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Fades can now blink, jump and move freely while performing stab.
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
         
-    Drifter abilities
+    - Drifter abilities
         - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
         
     - Misc
