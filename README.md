@@ -81,8 +81,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No longer displays any health information (marker will always be yellow)
         - Focus
             - Replaced with new Blight upgrade (experimental):
-                - With Blight each attack adds a parasite outline to your target that's colored based on your target's hp
-                - The timeout for that outline is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
+                - With Blight each attack parasites the target
+                - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
 
     - Carapace
         - Skulk gain max 10 extra armor with 3 shells (instead of 15)

@@ -76,14 +76,15 @@ function ParasiteMixin:SetParasited( fromPlayer, durationOverride, showHealthOut
                 end
                 
             end
-            
+
+            local now = Shared.GetTime()
             local parasiteTimeChanged = false
-            
+
             if durationOverride ~= nil and type(durationOverride) == "number" then
                 
                 durationOverride = Clamp( durationOverride, 0, kParasiteDuration )
                 
-                if self.parasited and self.timeParasited + durationOverride >= self.parasiteDuration + self.timeParasited then
+                if self.parasited and now + durationOverride >= self.parasiteDuration + self.timeParasited then
                     
                     self.parasiteDuration = durationOverride
                     parasiteTimeChanged = true
@@ -103,7 +104,7 @@ function ParasiteMixin:SetParasited( fromPlayer, durationOverride, showHealthOut
             end
             
             if parasiteTimeChanged then
-                self.timeParasited = Shared.GetTime()
+                self.timeParasited = now
             end
             
             self.parasited = true
