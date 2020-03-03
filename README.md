@@ -1,5 +1,5 @@
 # NS2 Balance Beta
-**SteamWorks Mod ID**: *718da717*
+**SteamWorks Mod ID**: *77FAFE74*
 
 This mod contains various balance changes based on various ideas of the NS2 balance team.
 
