@@ -1,6 +1,6 @@
 Log("Loading BetaBalanceNewsFeed.lua for NS2 Balance Beta mod.")
 
-local kBetaBalanceWebpageURL = "https://rantology.github.io/"
+local kBetaBalanceWebpageURL = "https://ns2cdt.github.io/ns2_beta/"
 
 local ged = GetGlobalEventDispatcher()
 ged:HookEvent(ged, "OnMainMenuCreated", function()
