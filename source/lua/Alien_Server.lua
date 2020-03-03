@@ -105,7 +105,7 @@ function Alien:UpdateAutoHeal()
             healRate = healRate * modifier
         end
 
-        self:AddHealth(healRate, false, false, not hasRegenUpgrade, nil, true)
+        self:AddHealth(healRate, false, false, not hasRegenUpgrade, self, true)
         self.timeLastAlienAutoHeal = Shared.GetTime()
     
     end 

@@ -142,7 +142,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
                         local maxHealth = attacker:GetMaxHealth()
                         local leechedHealth =  maxHealth * vampirismLevel * scalar * focusBonus
-                        attacker:AddHealth( leechedHealth, true, kAlienVampirismNotHealArmor, false, nil, kHealthPointsPerArmor)
+                        attacker:AddHealth( leechedHealth, true, kAlienVampirismNotHealArmor, false, attacker)
 
                     end
                 end

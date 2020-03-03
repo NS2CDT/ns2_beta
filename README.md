@@ -71,7 +71,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Alien
 
     - Innate Regeneration
-        - The innate regeneration of aliens stops as soon as they are above 30 % of their max hp. 
+        - The innate regeneration of aliens stops as soon as they are above 30 % of their max hp.
+        
+    - Fixed Healing Soft clamp
+        - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
 
     - Upgrades
         - Vampirism

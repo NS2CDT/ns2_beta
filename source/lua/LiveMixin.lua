@@ -483,25 +483,50 @@ function LiveMixin:AddArmor(armor, playSound, hideEffect, healer )
     return total
 end
 
-function LiveMixin:ClampHealing( healAmount, excludeArmor )
+-- Reduce all healing for aliens that goes beyond a relative cap
+-- defined by kHealingClampMaxHPAmount and kHealingClampInterval.
+function LiveMixin:ClampHealing( healAmount, healer )
+    -- Don't clamp system healing (growth/spawning)
+    if not healer then return healAmount end
 
-    if healAmount > 0 and self.timeLastHealed + Shared.GetTime() <= kHealingClampInterval then
-        local maxEHP = 0
+    -- Only clamp healing for aliens
+    local isAlien = HasMixin( self, "Team") and self:GetTeamType() == kAlienTeamType
+    if not isAlien then return healAmount end
 
-        if excludeArmor then
-            maxEHP = self:GetMaxHealth()
-        else
-            maxEHP = self:GetMaxHealth() + self:GetMaxArmor() * kHealthPointsPerArmor
-        end
+    local now = Shared.GetTime()
 
-        local clampedPerEffectiveHP = maxEHP * kHealingClampMaxHPAmount --cap at X% of total HP
-        if healAmount > clampedPerEffectiveHP then
-            healAmount = healAmount * kHealingClampReductionScalar --Reduce "extra" healing (beyond cap) to Y% of amount
-        end
+    -- Init history
+    if not self.healHistory then
+        self.healHistory = {
+            lastUpdate = now,
+            healingReceived = 0
+        }
     end
 
-    return healAmount
+    local ehpMax = self:GetMaxHealth() + self:GetMaxArmor() * kHealthPointsPerArmor
+    local ehpSoftCap = ehpMax * kHealingClampMaxHPAmount / kHealingClampInterval -- Maximum amount of ehp that can be received un-taxed
 
+    -- Amortize for time past since last heal
+    local timeDiff = now - self.healHistory.lastUpdate
+    if timeDiff > 0 then
+        self.healHistory.healingReceived = math.max( self.healHistory.healingReceived - timeDiff * ehpSoftCap, 0)
+    end
+
+    -- Amount of ehp that can be added before we start getting taxed.
+    local ehpRemainUntilCap = math.max(ehpSoftCap - self.healHistory.healingReceived, 0)
+
+    -- Split heal amount into two sums: amount that pushes us up to the cap (if enough), and amount over the cap.
+    local nonTaxableHealAmount = math.min(healAmount, ehpRemainUntilCap)
+    local taxableHealAmount = healAmount - nonTaxableHealAmount
+    assert(nonTaxableHealAmount >= 0)
+    assert(taxableHealAmount >= 0)
+
+    healAmount = nonTaxableHealAmount + taxableHealAmount * kHealingClampReductionScalar
+
+    self.healHistory.healingReceived = self.healHistory.healingReceived + healAmount
+    self.healHistory.lastUpdate = now
+
+    return healAmount
 end
 
 -- Return the amount of health we added
@@ -533,15 +558,9 @@ function LiveMixin:AddHealth(health, playSound, noArmor, hideEffect, healer, use
 
     if self:AmountDamaged(useEHP) > 0 then
 
-        if HasMixin( self, "Team") then
-            if self:GetTeamType() == kAlienTeamType then
-                health = self:ClampHealing( health, noArmor )
-            end
-        end
-
         -- Add health first, then armor if we're full
         local healthAdded = math.min(health, self:GetMaxHealth() - self:GetHealth())
-        self:SetHealth(math.min(math.max(0, self:GetHealth() + healthAdded), self:GetMaxHealth()))
+        self:SetHealth(self:GetHealth() + self:ClampHealing(healthAdded, healer))
 
         local healthToAddToArmor = 0
         if not noArmor then
@@ -553,7 +572,8 @@ function LiveMixin:AddHealth(health, playSound, noArmor, hideEffect, healer, use
             end
             
             if healthToAddToArmor > 0 then
-                self:SetArmor(math.min(math.max(0, self:GetArmor() + healthToAddToArmor * kArmorHealScalar ), self:GetMaxArmor()), hideEffect)
+                healthToAddToArmor = healthToAddToArmor * kArmorHealScalar
+                self:SetArmor(self:GetArmor() + self:ClampHealing(healthToAddToArmor, healer), hideEffect)
             end
 
         end
