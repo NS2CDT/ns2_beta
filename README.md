@@ -37,7 +37,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Exosuits now "self-repair" when out of combat at a rate of 10 armor/second.
         - Alien Vampirism no longer has any effect when used against exos.
         - Railgun
-            - Both railguns can fire simultaneously now.
+            - Both railguns can now fire simultaneously.
             - Full-charge duration is now 1 second
             - Cooldown between shots is now 0.3 seconds.
             - Anything short of a full-charge shot no longer penetrates targets.
@@ -50,18 +50,18 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Damage type is now "heavy" (double damage to armor).
             - Damage: 10 -> 6
             - Overheat animation sped up such that the time out of combat now matches up exactly with the heat meter for that weapon (before, the overheat animation would finish well-after the heat meter was empty).
-    - Powerpoints
-        - Now all powerpoints start socketed but unbuild by default. The
-        powerpoint in the Marine base gets build and the one in the Alien main
-        base gets destroyed on round start.
-        - Powerpoints that have no health are not highlighted for either team and
+    - Powernodes
+        - All Powernodes now start socketed but unbuilt. The
+        Powernodes in the Marine Base start built and Alien Hive
+        start destroyed upon round start.
+        - Powernodes that have no health are not highlighted for either team and
         can't be damaged.
-        - Powerpoints that haven't been build yet don't
+        - Powernodes that haven't been build yet don't
         affect the location's light state.
-        - The construction progress of a powerpoint is synchronized with their
-        hit points. This means when an enemy damages an unbuild powerpoint by 1%
+        - The construction progress of a Powernode is synchronized with their
+        hit points. This means when an enemy damages an unbuild Powernode by 1%
         hp it also looses 1% construction progress.
-        - Marines receive no automated order to construct a powerpoint unless
+        - Marines receive no automated order to construct a Powernode unless
         there is a structure or blueprint inside the given location that requires power.
 
     - Misc
@@ -87,8 +87,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Aura
             - No longer displays any health information (marker will always be yellow)
         - Focus
-            - Replaced with new Blight upgrade (experimental):
-                - With Blight each attack parasites the target
+            - Replaced with new upgrade: Blight (experimental):
+                - With Blight each primary attack parasites the target
                 - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
 
     - Carapace
@@ -131,10 +131,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
         
     - Drifter abilities
-        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
+        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations) 
         
     - Misc
         - Maturity information is now visible in the nameplate for alien structures.
         - Crag, Shade, and Shift supply cost: 25 -> 20.
         - Added score points for destroying a dropped HMG with Bile Bomb.
-        - Onos taunt is now using the charge sound (instead of the stomp sound)
+        - Onos taunt now uses the charge sound (instead of the stomp sound)
