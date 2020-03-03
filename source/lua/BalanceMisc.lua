@@ -268,13 +268,13 @@ kOnosCarapaceSpeedReduction = 0 --0.12
 -- how much of the health points vamparism restores with each sucessfull attack
 kBiteLeapVampirismScalar = 0.0466
 kParasiteVampirismScalar = 0
-kSpitVampirismScalar = 0.0267
+kSpitVampirismScalar = 0.01833
 kHealSprayVampirismScalar = 0
-kLerkBiteVampirismScalar = 0.0267
+kLerkBiteVampirismScalar = 0.01833
 kSpikesVampirismScalar = 0
-kSwipeVampirismScalar = 0.0333
-kStabVampirismScalar = 0.0667
-kGoreVampirismScalar = 0.0183
+kSwipeVampirismScalar = 0.0222
+kStabVampirismScalar = 0.0444
+kGoreVampirismScalar = 0.01166
 
 -- Carries the umbra cloud for x additional seconds
 kUmbraRetainTime = 2.5
