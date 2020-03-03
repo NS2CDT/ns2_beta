@@ -104,7 +104,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Projectile size is now 60mm (up from 45mm)
     - Fade
         - Stab
-            - Stab now deals 2x damage to structures (equivilent to skulk structure DPS).
+            - Decrease base damage to 120 (from 160)
+            - Stab now deals 2x damage to structures (equivalent to skulk structure DPS).
             - Fades can now blink, jump and move freely while performing stab.
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
         
