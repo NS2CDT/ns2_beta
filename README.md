@@ -27,6 +27,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Mines now award 5 score points when killed by an alien.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
+        - Pulse grenade
+            - Hit targets don't receive boni from mucous or enzyme while being electrified
     - Exosuit
         - Reduced opacity of "scanlines" UI texture to be less obstructive (25% of original value).
         - Exos are now free to fire their weapons while thrusters are being used.
@@ -42,6 +44,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Shots with 75% power and above now convert to "heavy" damage type (double damage to armor), 74% power and below charge                   shots are regular damage.
             - Distortion tracer effect and steam effects no longer play if the shot didn't deal heavy damage (75% charge).
             - Damage ramps up from 25 to 50 as you charge.
+            - Decreased projectile size of uncharged (below 75 % charge) shots to 0.075 (from 0.3)
+            - Decreased projectile size of charged (above 75% charge) shots to 0.15 (from 0.3)
         - Minigun
             - Damage type is now "heavy" (double damage to armor).
             - Damage: 10 -> 6
@@ -49,8 +53,29 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Misc
         - Marine dropped weapon decay timer is now 16 seconds (down from 25)
         - Nanoshield duration is now 3 seconds when used on players (down from 5) 
-        - Nanoshield used on structures remains unchanged at 5 seconds.
+        - Nanoshield used on structures remains unchanged at 5 seconds
 - Alien
+
+    - Innate Regeneration
+        - The innate regeneration of aliens stops as soon as they are above 30 % of their max hp. 
+
+    - Upgrades
+        - Vampirism
+            - Skulks now recover 14% health per bite (down from 20%)
+            - Vampirism no longer has any effect when used against Exosuits.
+        - Aura
+            - No longer displays any health information (marker will always be yellow)
+        - Focus
+            - Replaced with new Blight upgrade (experimental):
+                - With Blight each attack adds a parasite outline to your target that's colored based on your target's hp
+                - The timeout for that outline is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
+
+    - Carapace
+        - Skulk gain max 10 extra armor with 3 shells (instead of 15)
+        - Gorges gain max 15 extra armor with 3 shells (instead of 25)
+        - Lerks gain max 15 extra armor with 3 shells (instead of 20)
+        - Fades gain max 30 extra armor with 3 shells (instead of 40)
+        - Onos gain max 150 extra armor with 3 shells (instead of 200)
         
     - Skulk
         - Reduced bite cone to 0.8 x 1.0 (down from 1.2 x 1.2)
@@ -62,7 +87,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.
         - Hydra
-            - Hydras are now extremely accurate. Accuracy tapers off starting at 8 meters up to the maximum degredation                               at 12 meters. Inaccuracy ramps between 0 and 8 degrees.
+            - Hydras are now extremely accurate. Accuracy tapers off starting at 8 meters up to the maximum degredation at 12 meters. Inaccuracy ramps between 0 and 8 degrees.
             - Hydras can now shoot back from the last spot they were hit, so if you can hit them, they can hit you.
             - Damage reduced to 5 (down from 15)
         - Web
@@ -72,16 +97,22 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Webs now turn invisible, only fading into view at 5 meters or closer.
             - No longer parasite marines.
             - No longer appears in the kill-feed.
+        - Babbler
+            - Do not gain hp with each biomass anymore (they received 1.5 hp for each biomass)
     - Lerk
-        - Projectile size is now 60mm (up from 45mm)
+        - Spike
+            - Projectile size is now 60mm (up from 45mm)
     - Fade
         - Stab
             - Stab now deals 2x damage to structures (equivilent to skulk structure DPS).
             - Fades can now blink, jump and move freely while performing stab.
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
-    - Vampirism
-        - Skulks now recover 14% health per bite (down from 20%)
-        - Vampirism no longer has any effect when used against Exosuits.
+        
+    Drifter abilities
+        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
+        
     - Misc
         - Maturity information is now visible in the nameplate for alien structures.
         - Crag, Shade, and Shift supply cost: 25 -> 20.
+        - Added score points for destroying a dropped HMG with Bile Bomb.
+        - Onos taunt is now using the charge sound (instead of the stomp sound)
