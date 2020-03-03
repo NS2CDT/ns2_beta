@@ -28,7 +28,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
-            - Hit targets don't receive boni from mucous or enzyme while being electrified
+            - "Electrified" effect now also nullifies and prevents targets from benefiting from drifter Enzyme and Mucous abilities
     - Exosuit
         - Reduced opacity of "scanlines" UI texture to be less obstructive (25% of original value).
         - Exos are now free to fire their weapons while thrusters are being used.
