@@ -142,7 +142,8 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
                         local maxHealth = attacker:GetMaxHealth()
                         local leechedHealth =  maxHealth * vampirismLevel * scalar * focusBonus
-                        attacker:AddHealth( leechedHealth, true, kAlienVampirismNotHealArmor, false, attacker)
+
+                        attacker:AddOverShield(leechedHealth)
 
                     end
                 end
@@ -307,6 +308,10 @@ local function ApplyTargetModifiers(target, attacker, doer, damage, armorFractio
     if target.ComputeDamageOverrideMixin then
         damage = target:ComputeDamageOverrideMixin(attacker, damage, damageType, hitPoint)
     end
+    if target.ShieldComputeDamageOverrideMixin then
+        damage = target:ShieldComputeDamageOverrideMixin(attacker, damage, damageType, hitPoint)
+    end
+
     
     if target.GetArmorUseFractionOverride then
         armorFractionUsed = target:GetArmorUseFractionOverride(damageType, armorFractionUsed, hitPoint)
