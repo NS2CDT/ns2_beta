@@ -5,7 +5,17 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-
+## Recent Changes
+- 05/03/2020
+    - Fixed mouse not getting enabled by the overhead spectator mode
+    - Alien spawn room starts with auxiliary lights instead of being blacked out
+    - Fixed cluster grenade burn damage numbers being displayed to the target
+    - Reworked Vampirism
+        - Now each hit with your primary attack charges hp shield
+        - The shields will last for a maximum time of 5 seconds after your last hit. However it will start decaying after 0.5 seconds
+        - The maximum shield amount is 1.5 times the value of the charge of a single hit with 3 shells.
+        - The shield does stack with mucous and babblers
+    
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
 - Marine
@@ -78,12 +88,12 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
     - Upgrades
         - Vampirism
-            - Skulks now recover 14% health per bite with 3 shells (down from 20%)
-            - Gorges now recover 5.5% health per bite with 3 shells (down from 8%)
-            - Lerks now recover 5.5% health per bite with 3 shells (down from 8%)
-            - Fades now recover 6.66% health per swipe with 3 shells (down from 10%)
-            - Oni now recover 4% health per bite with 3 shells (down from 5.5%)
-            - Vampirism no longer has any effect when used against Exosuits.
+            - Now each hit with your primary attack charges hp shield
+            - The shields will last for a maximum time of 5 seconds after your last hit. However it will start decaying after 0.5 seconds
+            - The maximum shield amount is 1.5 times the value of the charge of a single hit with 3 shells.
+            - The shield does stack with mucous and babblers
+            - Skulks only charge 14% health per bite (decreased from 20%)
+            - Vampirism no longer has any effect when used against Exosuits
         - Aura
             - No longer displays any health information (marker will always be yellow)
         - Focus

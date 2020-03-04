@@ -33,6 +33,7 @@ Script.Load("lua/DetectableMixin.lua")
 Script.Load("lua/RagdollMixin.lua")
 Script.Load("lua/StormCloudMixin.lua")
 Script.Load("lua/MucousableMixin.lua")
+Script.Load("lua/ShieldableMixin.lua")
 Script.Load("lua/BiomassHealthMixin.lua")
 
 PrecacheAsset("cinematics/vfx_materials/decals/alien_blood.surface_shader")
@@ -128,6 +129,7 @@ AddMixinNetworkVars(DetectableMixin, networkVars)
 AddMixinNetworkVars(StormCloudMixin, networkVars)
 AddMixinNetworkVars(ScoringMixin, networkVars)
 AddMixinNetworkVars(MucousableMixin, networkVars)
+AddMixinNetworkVars(ShieldableMixin, networkVars)
 
 function Alien:OnCreate()
 
@@ -145,6 +147,7 @@ function Alien:OnCreate()
     InitMixin(self, RagdollMixin)
     InitMixin(self, StormCloudMixin)
     InitMixin(self, MucousableMixin)
+    InitMixin(self, ShieldableMixin)
     InitMixin(self, BiomassHealthMixin)
         
     InitMixin(self, ScoringMixin, { kMaxScore = kMaxScore })

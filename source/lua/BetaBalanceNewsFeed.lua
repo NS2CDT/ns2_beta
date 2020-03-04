@@ -1,10 +1,7 @@
 Log("Loading BetaBalanceNewsFeed.lua for NS2 Balance Beta mod.")
 
 local kBetaBalanceWebpageURL = "https://ns2cdt.github.io/ns2_beta/"
-
-local ged = GetGlobalEventDispatcher()
-ged:HookEvent(ged, "OnMainMenuCreated", function()
-
+local function AddNewsFeed()
     local navBar = GetNavBar()
     if navBar then
         local newsFeed = navBar.newsFeed
@@ -31,11 +28,18 @@ ged:HookEvent(ged, "OnMainMenuCreated", function()
     else
         Log("Main menu nav bar not loaded!  Cannot add beta balance changelog to newsfeed.")
     end
-    
+
+end
+
+local oldCreateMainMenu = CreateMainMenu
+function CreateMainMenu()
+    oldCreateMainMenu()
+
+    AddNewsFeed()
+
     -- Open the menu to show the popup immediately.
     GetMainMenu():Open()
-
-end)
+end
 
 function DisplayBetaBalanceChangelog()
     Client.ShowWebpage(kBetaBalanceWebpageURL)

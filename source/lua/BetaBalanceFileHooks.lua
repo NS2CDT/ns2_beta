@@ -1,3 +1,5 @@
+ModLoader.SetupFileHook("lua/menu2/GUIMainMenu.lua", "lua/BetaBalanceNewsFeed.lua", "post")
+
 if Locale then
     local sntl_strings = {
         ["FOCUS"] = "Blight",

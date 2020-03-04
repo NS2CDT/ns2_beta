@@ -324,6 +324,10 @@ function PlayerUI_GetHasMucousShield()
         if player.GetHasBabblerShield then
             result = result or player:GetHasBabblerShield()
         end
+
+        if HasMixin(player, "Shieldable") then
+            result = result or player:GetHasOverShield()
+        end
     end
 
     return result
@@ -352,6 +356,14 @@ function PlayerUI_GetMucousShieldHP()
         end
     end
 
+    if HasMixin(player, "Shieldable") then
+        local shield = math.ceil(player:GetOverShieldAmount())
+        if shield > 0 then
+            health = health + shield
+            maxHealth = maxHealth + player:GetMaxOverShieldAmount()
+        end
+    end
+
     return health, maxHealth
 end
 
@@ -366,14 +378,19 @@ end
 function PlayerUI_GetMucousShieldTimeRemaining()
 
     local player = Client.GetLocalPlayer()
-    if player and player.GetShieldTimeRemaining then
+    local fraction = 0
 
-        local fraction = player:GetShieldTimeRemaining()
-        return fraction
+    if player then
+        if player.GetShieldTimeRemaining then
+            fraction = math.max(player:GetShieldTimeRemaining(), fraction)
+        end
 
+        if HasMixin(player, "Shieldable") then
+            fraction = math.max(player:GetOverShieldTimeRemaining(), fraction)
+        end
     end
 
-    return 0
+    return fraction
 
 end
 

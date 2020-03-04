@@ -376,7 +376,7 @@ function GetPlayerFromUserId(userId)
     
 end
 
-function DestroyPowerForLocation(locationName)
+function DestroyPowerForLocation(locationName, instantAxillaryLights)
     local powerPoint = GetPowerPointForLocation(locationName)
     if not powerPoint then return end
 
@@ -385,6 +385,11 @@ function DestroyPowerForLocation(locationName)
     end
 
     powerPoint:Kill()
+
+    if instantAxillaryLights then
+        -- Hack to skip directly to axillary lights
+        powerPoint.timeOfLightModeChange = 0
+    end
 end
 
 function SocketPowerForLocation(locationName)
