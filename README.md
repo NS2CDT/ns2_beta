@@ -9,6 +9,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - XX/03/2020
     - Fixed mouse not getting enabled by the overhead spectator mode
     - Alien spawn room starts with auxiliary lights instead of being blacked out
+    - Fixed cluster grenade burn damage numbers being displayed to the target
 
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.

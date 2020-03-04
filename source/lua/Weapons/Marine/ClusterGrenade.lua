@@ -36,7 +36,7 @@ local kClusterGrenadeFragmentPoints =
     Vector(-0.1, 0.12, -0.1),
     Vector(0.1, 0.12, -0.1),
     Vector(-0.1, 0.12, 0.1),
-    
+
     Vector(-0.0, 0.12, 0.1),
     Vector(-0.1, 0.12, 0.0),
     Vector(0.1, 0.12, 0.0),
@@ -47,15 +47,15 @@ function ClusterGrenade:CreateFragments()
 
     local origin = self:GetOrigin()
     local player = self:GetOwner()
-        
+
     for i = 1, #kClusterGrenadeFragmentPoints do
-    
+
         local creationPoint = origin + kClusterGrenadeFragmentPoints[i]
         local fragment = CreateEntity(ClusterFragment.kMapName, creationPoint, self:GetTeamNumber())
-        
+
         local startVelocity = GetNormalizedVector(creationPoint - origin) * (3 + math.random() * 6) + Vector(0, 4 * math.random(), 0)
         fragment:Setup(player, startVelocity, true, nil, self)
-    
+
     end
 
 end
@@ -63,17 +63,17 @@ end
 function ClusterGrenade:OnCreate()
 
     PredictedProjectile.OnCreate(self)
-    
+
     InitMixin(self, BaseModelMixin)
     InitMixin(self, ModelMixin)
     InitMixin(self, DamageMixin)
-    
+
     if Server then
-    
+
         self:AddTimedCallback(ClusterGrenade.TimedDetonateCallback, kLifeTime)
-        
+
     end
-    
+
 end
 
 function ClusterGrenade:ProcessHit(targetHit, surface)
@@ -102,7 +102,7 @@ function ClusterGrenade:ProcessNearMiss( targetHit, endPoint )
 end
 
 if Server then
-    
+
     function ClusterGrenade:TimedDetonateCallback()
         self:Detonate()
     end
@@ -146,8 +146,8 @@ if Server then
         local owner = self:GetOwner()
         for i = 1, #ents do
             local ent = ents[i]
-            if HasMixin(ent, "Fire") and GetAreEnemies(self, ent) then
-                ent:SetOnFire(ent, owner)
+            if HasMixin(ent, "Fire") and GetAreEnemies(owner, ent) then
+                ent:SetOnFire(owner, self)
             end
         end
     end
@@ -168,21 +168,21 @@ if Server then
         end
 
         RadiusDamage(hitEntities, self:GetOrigin(), kClusterGrenadeDamageRadius, kClusterGrenadeDamage, self)
-        
+
         local surface = GetSurfaceFromEntity(targetHit)
 
         local params = { surface = surface }
         if not targetHit then
             params[kEffectHostCoords] = Coords.GetLookIn( self:GetOrigin(), self:GetCoords().zAxis)
         end
-        
+
         self:TriggerEffects("cluster_grenade_explode", params)
         CreateExplosionDecals(self)
         TriggerCameraShake(self, kGrenadeMinShakeIntensity, kGrenadeMaxShakeIntensity, kGrenadeCameraShakeDistance)
-        
+
         DestroyEntity(self)
 
-end
+    end
 
 end
 
@@ -201,17 +201,17 @@ ClusterFragment.kMapName = "clusterfragment"
 function ClusterFragment:OnCreate()
 
     Projectile.OnCreate(self)
-    
+
     InitMixin(self, BaseModelMixin)
     InitMixin(self, ModelMixin)
     InitMixin(self, DamageMixin)
-    
+
     if Server then
         self:AddTimedCallback(ClusterFragment.TimedDetonateCallback, math.random() * 1 + 0.5)
     elseif Client then
         self:AddTimedCallback(ClusterFragment.CreateResidue, 0.06)
     end
-    
+
 end
 
 function ClusterFragment:GetProjectileModel()
@@ -239,14 +239,14 @@ if Server then
         end
 
         RadiusDamage(hitEntities, self:GetOrigin(), kClusterFragmentDamageRadius, kClusterFragmentDamage, self)
-        
+
         local surface = GetSurfaceFromEntity(targetHit)
 
         local params = { surface = surface }
         if not targetHit then
             params[kEffectHostCoords] = Coords.GetLookIn( self:GetOrigin(), self:GetCoords().zAxis)
         end
-        
+
         self:TriggerEffects("cluster_fragment_explode", params)
         CreateExplosionDecals(self)
         DestroyEntity(self)
