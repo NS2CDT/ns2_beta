@@ -308,6 +308,7 @@ local function ApplyTargetModifiers(target, attacker, doer, damage, armorFractio
     if target.ComputeDamageOverrideMixin then
         damage = target:ComputeDamageOverrideMixin(attacker, damage, damageType, hitPoint)
     end
+
     if target.ShieldComputeDamageOverrideMixin then
         damage = target:ShieldComputeDamageOverrideMixin(attacker, damage, damageType, hitPoint)
     end

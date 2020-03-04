@@ -2,12 +2,13 @@
 -- lua\ShieldableMixin.lua
 --
 
+-- Todo: Rename
 ShieldableMixin = CreateMixin( Shieldable )
 ShieldableMixin.type = "Shieldable"
 
 kOverShieldMaxCapRatio = 1.5
 kOverShieldDuration = 0.5
-kOverShieldDecayDuration = 4
+kOverShieldDecayDuration = 4.5
 
 -- Arbitrary, but in fact it's the same value as the max mucous shield amount
 local kMaxShield = 250
@@ -56,30 +57,38 @@ function ShieldableMixin:GetOverShieldAmount()
     return self.overShieldRemaining
 end
 
+-- Todo: Create getter in each class
+local kShieldClassNameScalars
 function ShieldableMixin:GetMaxOverShieldAmount()
+    if not kShieldClassNameScalars then
+        kShieldClassNameScalars = {
+            [Skulk.kMapName] = kBiteLeapVampirismScalar,
+            [Gorge.kMapName] = kSpitVampirismScalar,
+            [Lerk.kMapName] = kLerkBiteVampirismScalar,
+            [Fade.kMapName] = kSwipeVampirismScalar,
+            [Onos.kMapName] = kGoreVampirismScalar
+        }
+    end
 
     local maxRatio = kOverShieldMaxCapRatio
     local maxHealth = self:GetMaxHealth()
-    local kShieldClassNameMap = {
-        [Skulk.kMapName] = kBiteLeapVampirismScalar * maxHealth * maxRatio,
-        [Gorge.kMapName] = kSpitVampirismScalar * maxHealth * maxRatio,
-        [Lerk.kMapName] = kLerkBiteVampirismScalar * maxHealth * maxRatio,
-        [Fade.kMapName] = kSwipeVampirismScalar * maxHealth * maxRatio,
-        [Onos.kMapName] = kGoreVampirismScalar * maxHealth * maxRatio
-    }
+    local className = self:GetMapName()
+    local scalar = kShieldClassNameScalars[className] * 3 or 0 -- * 3 to get scalar for 3 shells
 
-    return kShieldClassNameMap[self:GetMapName()] or 0
+    return maxRatio * maxHealth * scalar
 end
 
 function ShieldableMixin:GetOverShieldPercentage()
     return (self:GetOverShieldAmount() / self:GetMaxOverShieldAmount())
 end
 
-
--- Overshield duration and decay duration
--- @return totalDuration, fullDuration, DecayDuration
+-- Overshield total duration
 function ShieldableMixin:GetOverShieldDuration()
-    return (kOverShieldDuration + kOverShieldDecayDuration), kOverShieldDuration, kOverShieldDecayDuration
+    return kOverShieldDuration + kOverShieldDecayDuration -- Ghoul: static? If so create new constant
+end
+
+function ShieldableMixin:GetOverShieldDecayDuration()
+    return kOverShieldDecayDuration
 end
 
 function ShieldableMixin:GetOverShieldTimeRemaining()
@@ -87,7 +96,7 @@ function ShieldableMixin:GetOverShieldTimeRemaining()
     local overShieldDuration = self:GetOverShieldDuration()
 
     if self.overShielded and self.lastOverShield > 0 then
-        percentLeft = Clamp( math.abs( (self.lastOverShield + overShieldDuration) - Shared.GetTime() ) / overShieldDuration, 0.0, 1.0 )
+        percentLeft = Clamp( (self.lastOverShield + overShieldDuration - Shared.GetTime()) / overShieldDuration, 0.0, 1.0 )
     end
 
     return percentLeft
@@ -102,49 +111,44 @@ function ShieldableMixin:ShieldComputeDamageOverrideMixin(attacker, damage, dama
             damage = math.max(damage - self.overShieldRemaining, 0)
             self.overShieldRemaining = 0
         end
+
         if self.overShieldRemaining == 0 then
             self.overShielded = false
         end
     end
+
     return damage
 end
 
+-- Apply shield decay
 local function SharedUpdate(self)
     if Server then
+        self.overShielded = self.overShieldRemaining > 0
 
-        local overShieldDuration = self:GetOverShieldDuration()
-
-        self.overShielded = self.lastOverShield + overShieldDuration >= Shared.GetTime() and self.overShieldRemaining > 0
-        if not self.overShielded and self.overShieldRemaining > 0 then
-            self.overShieldRemaining = 0
+        if not self.overShielded then -- No shield left. Nothing to do
+            return
         end
 
-        if self.overShielded and self.overShieldRemaining > 0 then
-            local decayStartTime = self.lastOverShield + kOverShieldDuration
-            local decayEndTime = decayStartTime + kOverShieldDecayDuration
-            local decayRatio = 1--(Shared.GetTime() - self.lastOverShield)
-
-            local now = Shared.GetTime()
-            if now > decayStartTime then
-
-                local decayAmount = 0--(self.overShieldStartAmount * decayRatio)
-                local elapsed = now - self.lastDecayTime
-                local _, fullDuration, decayDuration = self:GetOverShieldDuration()
-                local decayPerSecond = self.overShieldStartAmount / decayDuration
-                decayAmount = elapsed * decayPerSecond
-
-                self.overShieldRemaining = self.overShieldRemaining - decayAmount
-            end
-
-            self.lastDecayTime = now
+        local now = Shared:GetTime()
+        if now < self.decayStart then -- decay hasn't started. Nothing to do yet
+            return
         end
+
+        -- Apply decay for time passed
+        local elapsed = now - self.lastDecayTime
+        local decayDuration = self:GetOverShieldDecayDuration()
+        local decayPerSecond = self.overShieldStartAmount / decayDuration
+        local decayAmount = elapsed * decayPerSecond
+
+        self.overShieldRemaining = math.max(self.overShieldRemaining - decayAmount, 0) -- Todo: Check for float pointer precession issues
+        self.lastDecayTime = now
 
 
     end
 end
 
 function ShieldableMixin:OnProcessMove(input)
-    SharedUpdate(self)
+    SharedUpdate(self) -- why local? Todo: Look into using move delta for time diff to support artificial time speed
 end
 
 if Server then
@@ -156,6 +160,10 @@ if Server then
         self.overShieldRemaining = Clamp(self.overShieldRemaining + shieldAmount, 0, self:GetMaxOverShieldAmount())
         self.overShieldStartAmount = self.overShieldRemaining
         self.lastOverShield = time
+
+        -- Reset decay timers Todo: Make method
+        self.decayStart = self.lastOverShield + kOverShieldDuration
+        self.lastDecayTime = self.decayStart
     end
 
 end
