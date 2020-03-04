@@ -83,11 +83,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
     - Upgrades
         - Vampirism
-            - Skulks now recover 14% health per bite with 3 shells (down from 20%)
-            - Gorges now recover 5.5% health per bite with 3 shells (down from 8%)
-            - Lerks now recover 5.5% health per bite with 3 shells (down from 8%)
-            - Fades now recover 6.66% health per swipe with 3 shells (down from 10%)
-            - Oni now recover 4% health per bite with 3 shells (down from 5.5%)
+            - Skulks now recover 14% health per bite (down from 20%)
             - Vampirism no longer has any effect when used against Exosuits.
         - Aura
             - No longer displays any health information (marker will always be yellow)
