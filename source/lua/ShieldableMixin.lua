@@ -5,6 +5,7 @@
 ShieldableMixin = CreateMixin( Shieldable )
 ShieldableMixin.type = "Shieldable"
 
+kOverShieldMaxCapRatio = 1.5
 kOverShieldDuration = 0.5
 kOverShieldDecayDuration = 4
 
@@ -57,7 +58,7 @@ end
 
 function ShieldableMixin:GetMaxOverShieldAmount()
 
-    local maxRatio = 15
+    local maxRatio = kOverShieldMaxCapRatio
     local maxHealth = self:GetMaxHealth()
     local kShieldClassNameMap = {
         [Skulk.kMapName] = kBiteLeapVampirismScalar * maxHealth * maxRatio,
