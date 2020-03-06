@@ -6,15 +6,8 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
-- 05/03/2020
-    - Fixed mouse not getting enabled by the overhead spectator mode
-    - Alien spawn room starts with auxiliary lights instead of being blacked out
-    - Fixed cluster grenade burn damage numbers being displayed to the target
-    - Reworked Vampirism
-        - Now each hit with your primary attack charges hp shield
-        - The shields will last for a maximum time of 5 seconds after your last hit. However it will start decaying after 0.5 seconds
-        - The maximum shield amount is 1.5 times the value of the charge of a single hit with 3 shells.
-        - The shield does stack with mucous and babblers
+- 06/03/2020
+    - Fixed the blight icon
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
@@ -78,6 +71,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Marine dropped weapon decay timer is now 16 seconds (down from 25)
         - Nanoshield duration is now 3 seconds when used on players (down from 5) 
         - Nanoshield used on structures remains unchanged at 5 seconds
+        - Fixed cluster grenade burn damage numbers being displayed to the target
 - Alien
 
     - Innate Regeneration
