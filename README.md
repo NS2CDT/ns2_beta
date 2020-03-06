@@ -10,10 +10,11 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Fixed the blight icon
     - Open the changelog only after joining the server if there have been new changes
     - Use the Steam/Shine's overlay to display the changelog. It's easier to read that way
-    
+    - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
+- (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
 - Marine
     - Shotgun
         - Reverted to build 326-behavior.
