@@ -36,13 +36,15 @@ function CreateMainMenu()
     oldCreateMainMenu()
 
     AddNewsFeed()
-
-    -- Open the menu to show the popup immediately.
-    GetMainMenu():Open()
 end
 
-function DisplayBetaBalanceChangelog()
-    Client.ShowWebpage(kBetaBalanceWebpageURL)
+local function showChangeLog()
+    if Shine then
+        Shine:OpenWebpage(kBetaBalanceWebpageURL, "Beta Balance Changelog")
+    elseif Client.GetIsSteamOverlayEnabled() then
+        Client.ShowWebpage(kBetaBalanceWebpageURL)
+    else
+        Print("Couldn't open changelog because no web view (steam overlay) is available")
+    end
 end
-
-Event.Hook("Console_changelog", DisplayBetaBalanceChangelog)
+Event.Hook("Console_changelog", showChangeLog)

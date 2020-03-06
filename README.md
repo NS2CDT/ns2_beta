@@ -8,6 +8,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## Recent Changes
 - 06/03/2020
     - Fixed the blight icon
+    - Open the changelog only after joining the server if there have been new changes
+    - Use the Steam/Shine's overlay to display the changelog. It's easier to read that way
+    
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
