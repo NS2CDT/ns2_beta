@@ -9,6 +9,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - 08/03/2020
     - Fixed that healspray increase maturity for unbuilt structures
     - Decreased healspray gestate boost by 50%. Each healspray now decreases gestate time by 0.5 second (instead of 1 second).
+    - Decreased HMG clip size to 100 (from 125)
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
@@ -22,6 +23,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No Damage Falloff.
     - HMG
         - Reload time is now 3.5 seconds (down from 5 seconds)
+        - Decreased clip size to 100 (from 125)
     - Flamethrower
         - Removed energy damage (1 energy per hit)
     - Mines

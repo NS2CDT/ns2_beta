@@ -239,7 +239,7 @@ kHeavyMachineGunCost = 20
 
 kHeavyMachineGunDamage = 8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 125
+kHeavyMachineGunClipSize = 100
 kHeavyMachineGunClipNum = 4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
