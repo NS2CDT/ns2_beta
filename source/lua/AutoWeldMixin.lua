@@ -11,7 +11,7 @@
 AutoWeldMixin = CreateMixin(AutoWeldMixin)
 AutoWeldMixin.type = "AutoWeld"
 
-AutoWeldMixin.kWeldArmorPerSecond = 10
+AutoWeldMixin.kWeldArmorPerSecond = 8
 AutoWeldMixin.kWeldInterval = 0.2 -- weld hits 5x per second.
 
 AutoWeldMixin.expectedMixins =

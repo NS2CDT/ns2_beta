@@ -7,9 +7,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
 - 08/03/2020
-    - Fixed that healspray increase maturity for unbuilt structures
-    - Decreased healspray gestate boost by 50%. Each healspray now decreases gestate time by 0.5 second (instead of 1 second).
+    - Fixed that heal spray increase maturity for unbuilt structures
+    - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
     - Decreased HMG clip size to 100 (from 125)
+    - Decreased Exosuit self repair rate to 8 armor/second (from 10)
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
@@ -43,14 +44,14 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Exos are now free to fire their weapons while thrusters are being used.
         - Thrusters can now be toggled on and off freely without waiting for maximum charge between use.
             - Thruster fuel now has a 0.75 second cooldown before recharging after last use.
-        - Exosuits now "self-repair" when out of combat at a rate of 10 armor/second.
+        - Exosuits now "self-repair" when out of combat at a rate of 8 armor/second.
         - Alien Vampirism no longer has any effect when used against exos.
         - Railgun
             - Both railguns can now fire simultaneously.
             - Full-charge duration is now 1 second
             - Cooldown between shots is now 0.3 seconds.
             - Anything short of a full-charge shot no longer penetrates targets.
-            - Shots with 75% power and above now convert to "heavy" damage type (double damage to armor), 74% power and below charge                   shots are regular damage.
+            - Shots with 75% power and above now convert to "heavy" damage type (double damage to armor), 74% power and below charge shots are regular damage.
             - Distortion tracer effect and steam effects no longer play if the shot didn't deal heavy damage (75% charge).
             - Damage ramps up from 25 to 50 as you charge.
             - Decreased projectile size of uncharged (below 75 % charge) shots to 0.075 (from 0.3)
