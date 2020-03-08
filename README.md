@@ -16,6 +16,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Decreased Exosuit self repair rate to 8 armor/second (from 10)
     - Decreased Ink Cloud cooldown to 15 seconds (from 16).
     - Decreased weight of Mines and Hand Grenades to 0 (from 0.1). So they no longer affect marine's speed.
+    - Increased Skulk bite cone to to 0.8x1.2  (from 0.8x1.0).
     
 ## Full Changelog:
 
@@ -108,7 +109,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
                 - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
         
     - Skulk
-        - Reduced bite cone to 0.8 x 1.0 (down from 1.2 x 1.2)
+        - Reduced bite cone to 0.8 x 1.2 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
         - Skulks now only receive a speed boost from a consecutive jump.

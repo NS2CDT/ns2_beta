@@ -112,7 +112,7 @@ end
 
 function BiteLeap:GetMeleeBase()
     -- Width of box, height of box
-    return 0.8, 1.0
+    return 0.8, 1.2
 end
 
 function BiteLeap:GetMeleeOffset()
