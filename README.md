@@ -7,16 +7,21 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
 - 08/03/2020
-    - Revert Hydra changes for now. There will be another iteration of hydra changes.
+    - Reverted innate regen limitation.
+    - Reverted Carapace changes.
+    - Reverted Hydra changes for now. There will be another iteration of hydra changes.
     - Fixed that heal spray increase maturity for unbuilt structures
     - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
     - Decreased HMG clip size to 100 (from 125)
     - Decreased Exosuit self repair rate to 8 armor/second (from 10)
     - Decreased Ink Cloud cooldown to 15 seconds (from 16).
+    - Decreased weight of Mines and Hand Grenades to 0 (from 0.1). So they no longer affect marine's speed.
     
 ## Full Changelog:
+
 - Added a "changelog" console command to show this webpage.
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
+
 - Marine
     - Shotgun
         - Reverted to build 326-behavior.
@@ -41,6 +46,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
             - "Electrified" effect now also nullifies and prevents targets from benefiting from drifter Enzyme and Mucous abilities
+        - Decreased weight to 0 (from 0.1) so hand grenades do not affect the marine's speed.
     - Exosuit
         - Reduced opacity of "scanlines" UI texture to be less obstructive (25% of original value).
         - Exos are now free to fire their weapons while thrusters are being used.
@@ -82,9 +88,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Nanoshield used on structures remains unchanged at 5 seconds
         - Fixed cluster grenade burn damage numbers being displayed to the target
 - Alien
-
-    - Innate Regeneration
-        - The innate regeneration of aliens stops as soon as they are above 30 % of their max hp.
         
     - Fixed Healing Soft clamp
         - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
@@ -103,13 +106,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Replaced with new upgrade: Blight (experimental):
                 - With Blight each primary attack parasites the target
                 - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
-
-    - Carapace
-        - Skulk gain max 10 extra armor with 3 shells (instead of 15)
-        - Gorges gain max 15 extra armor with 3 shells (instead of 25)
-        - Lerks gain max 15 extra armor with 3 shells (instead of 20)
-        - Fades gain max 30 extra armor with 3 shells (instead of 40)
-        - Onos gain max 150 extra armor with 3 shells (instead of 200)
         
     - Skulk
         - Reduced bite cone to 0.8 x 1.0 (down from 1.2 x 1.2)
