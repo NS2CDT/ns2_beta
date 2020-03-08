@@ -6,11 +6,9 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
-- 06/03/2020
-    - Fixed the blight icon
-    - Open the changelog only after joining the server if there have been new changes
-    - Use the Steam/Shine's overlay to display the changelog. It's easier to read that way
-    - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
+- 08/03/2020
+    - Fixed that healspray increase maturity for unbuilt structures
+    - Decreased healspray gestate boost by 50%. Each healspray now decreases gestate time by 0.5 second (instead of 1 second).
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.

@@ -32,7 +32,7 @@ HealSprayMixin.kAmountHealedForPoints = 400
 HealSprayMixin.kMaturityTimeSkipped = 1
 
 -- Whenever an embryo is heal-sprayed, skip this amount of seconds of evolution time.
-HealSprayMixin.kEvolutionTimeAdded = 1
+HealSprayMixin.kEvolutionTimeAdded = 0.5
 
 -- HealSprayMixin:GetHasSecondary should completely override any existing
 -- GetHasSecondary function defined in the object.
@@ -163,7 +163,7 @@ local function HealEntity(_, player, targetEntity)
     end
     
     -- If the entity has maturity, take off some of the remaining maturity time.
-    if Server and HasMixin(targetEntity, "Maturity") then
+    if Server and HasMixin(targetEntity, "Maturity") and targetEntity:GetIsBuilt() then
         targetEntity:AddMaturity(HealSprayMixin.kMaturityTimeSkipped)
     end
     
