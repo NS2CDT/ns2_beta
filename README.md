@@ -17,11 +17,13 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Decreased Ink Cloud cooldown to 15 seconds (from 16).
     - Decreased weight of Mines and Hand Grenades to 0 (from 0.1). So they no longer affect marine's speed.
     - Increased Skulk bite cone to to 0.8x1.2  (from 0.8x1.0).
+    - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
     
 ## Full Changelog:
 
 - Added a "changelog" console command to show this webpage.
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
+- Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
 
 - Marine
     - Shotgun

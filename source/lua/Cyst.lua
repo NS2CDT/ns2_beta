@@ -244,7 +244,7 @@ function Cyst:GetShowSensorBlip()
 end
 
 function Cyst:GetSpawnBlockDuration()
-    return 7
+    return 1
 end
 
 --

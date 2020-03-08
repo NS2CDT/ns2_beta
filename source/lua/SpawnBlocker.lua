@@ -12,7 +12,7 @@ class 'SpawnBlocker' (Entity)
 
 SpawnBlocker.kMapName = "spawnblocker"
 
-local kDefaultBlockDuration = 5
+local kDefaultBlockDuration = 1
 
 local kBlockerCinematics =
 {
