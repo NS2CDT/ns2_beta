@@ -28,6 +28,7 @@ Script.Load("lua/ParasiteMixin.lua")
 Script.Load("lua/MarineOutlineMixin.lua")
 Script.Load("lua/PointGiverMixin.lua")
 Script.Load("lua/Ragdoll.lua")
+Script.Load("lua/MapBlipMixin.lua")
 
 class 'Mine' (ScriptActor)
 
@@ -209,7 +210,8 @@ function Mine:OnInitialized()
     ScriptActor.OnInitialized(self)
     
     if Server then
-        
+
+        InitMixin(self, MapBlipMixin)
         InitMixin(self, InfestationTrackerMixin)
         
         self.active = false
@@ -372,6 +374,14 @@ function Mine:ComputeDamageOverride(attacker, damage, damageType, hitPoint)
     
     return damage
     
+end
+
+function Mine:GetShowSensorBlip()
+    return false
+end
+
+function Mine:GetMapBlipType()
+    return kMinimapBlipType.SensorBlip -- Todo: Add mine blip type
 end
 
 Shared.LinkClassToMap("Mine", Mine.kMapName, networkVars)

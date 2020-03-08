@@ -32,6 +32,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Change hit points to 30 health and 9 armor (from 40 health and 5 armor). Tip: With crush it takes only 4 parasites (instead of 5) to destroy a mine.
         - Lerk spikes deal 2x damage to mines (Damage: 5 -> 10).
         - Mines now award 5 score points when killed by an alien.
+        - Display Mines at the minimap for Marines.
         - Decrease weight to 0 (from 0.1). So that mines don't slow down Marines.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
