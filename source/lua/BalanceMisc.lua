@@ -299,8 +299,8 @@ kShotgunWeight = 0.14
 kJetpackWeightLiftForce = 0.13 --How much weight the jetpack lifts
 kMinWeightJetpackFuelFactor = 0.8 --Min factor that gets applied on fuel usage of jetpack
 
-kHandGrenadeWeight = 0.1
-kLayMineWeight = 0.10
+kHandGrenadeWeight = 0.0
+kLayMineWeight = 0.0
 
 kClawWeight = 0.01
 kMinigunWeight = 0.06
