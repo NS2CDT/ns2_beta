@@ -29,9 +29,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Mines
         - Mines can now be properly killed during their arming period when first deployed. In this case, they do not explode or deal               damage.
         - Marines now keep unused mines when they die and receive them back when they respawn (like hand grenades).
-        - Health changed to 40 (up from 30)
+        - Change hit points to 30 health and 9 armor (from 40 health and 5 armor). Tip: With crush it takes only 4 parasites (instead of 5) to destroy a mine.
         - Lerk spikes deal 2x damage to mines (Damage: 5 -> 10).
         - Mines now award 5 score points when killed by an alien.
+        - Decrease weight to 0 (from 0.1). So that mines don't slow down Marines.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
