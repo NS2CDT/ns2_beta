@@ -89,12 +89,6 @@ function Alien:UpdateAutoHeal()
             healRate = Clamp(kAlienRegenerationPercentage * maxHealth, kAlienMinRegeneration, kAlienMaxRegeneration) * (shellLevel/3)
         else
             healRate = Clamp(kAlienInnateRegenerationPercentage * maxHealth, kAlienMinInnateRegeneration, kAlienMaxInnateRegeneration) 
-
-            -- Disable innate regen above a certain amount of HP
-            if self:GetHealthFraction() > AlienTeam.kAutoHealMaxHPFraction then
-                healRate = 0
-            end
-
         end
         
         if self:GetIsUnderFire() then
