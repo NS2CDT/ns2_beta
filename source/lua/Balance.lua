@@ -779,7 +779,7 @@ kCragHealWaveCost = 3
 kHealWaveCooldown = 6
 kMatureCragMaxEnergy = 150
 
-kHydraDamage = 5
+kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal
 
 kWhipInitialEnergy = 25  kWhipMaxEnergy = 100

@@ -7,6 +7,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
 - 08/03/2020
+    - Revert Hydra changes for now. There will be another iteration of hydra changes.
     - Fixed that heal spray increase maturity for unbuilt structures
     - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
     - Decreased HMG clip size to 100 (from 125)
@@ -119,10 +120,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Gorge
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.
-        - Hydra
-            - Hydras are now extremely accurate. Accuracy tapers off starting at 8 meters up to the maximum degredation at 12 meters. Inaccuracy ramps between 0 and 8 degrees.
-            - Hydras can now shoot back from the last spot they were hit, so if you can hit them, they can hit you.
-            - Damage reduced to 5 (down from 15)
         - Web
             - Gorges can finish placing webs from much further away.  Starting placement range is unchanged.
             - Now break on contact.
