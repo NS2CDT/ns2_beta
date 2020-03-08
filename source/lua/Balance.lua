@@ -805,7 +805,7 @@ kEchoHarvesterCost = 2
 
 kShadeInitialEnergy = 25  kShadeMaxEnergy = 100
 kShadeInkCost = 3
-kShadeInkCooldown = 16
+kShadeInkCooldown = 15
 kShadeInkDuration = 6.3
 kMatureShadeMaxEnergy = 150
 

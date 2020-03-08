@@ -11,6 +11,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
     - Decreased HMG clip size to 100 (from 125)
     - Decreased Exosuit self repair rate to 8 armor/second (from 10)
+    - Decreased Ink Cloud cooldown to 15 seconds (from 16).
     
 ## Full Changelog:
 - Added a "changelog" console command to show this webpage.
@@ -142,7 +143,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
         
     - Drifter abilities
-        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations) 
+        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
+        
+    - Ink Cloud
+        - Decreased cooldown to 15 seconds (from 16).
         
     - Misc
         - Maturity information is now visible in the nameplate for alien structures.
