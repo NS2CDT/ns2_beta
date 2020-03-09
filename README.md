@@ -6,15 +6,25 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
-- 06/03/2020
-    - Fixed the blight icon
-    - Open the changelog only after joining the server if there have been new changes
-    - Use the Steam/Shine's overlay to display the changelog. It's easier to read that way
-    - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
+- 08/03/2020
+    - Reverted innate regen limitation.
+    - Reverted Carapace changes.
+    - Reverted Hydra changes for now. There will be another iteration of hydra changes.
+    - Fixed that heal spray increase maturity for unbuilt structures
+    - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
+    - Decreased HMG clip size to 100 (from 125)
+    - Decreased Exosuit self repair rate to 8 armor/second (from 10)
+    - Decreased Ink Cloud cooldown to 15 seconds (from 16).
+    - Decreased weight of Mines and Hand Grenades to 0 (from 0.1). So they no longer affect marine's speed.
+    - Increased Skulk bite cone to to 0.8x1.2  (from 0.8x1.0).
+    - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
     
 ## Full Changelog:
+
 - Added a "changelog" console command to show this webpage.
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
+- Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
+
 - Marine
     - Shotgun
         - Reverted to build 326-behavior.
@@ -24,31 +34,35 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No Damage Falloff.
     - HMG
         - Reload time is now 3.5 seconds (down from 5 seconds)
+        - Decreased clip size to 100 (from 125)
     - Flamethrower
         - Removed energy damage (1 energy per hit)
     - Mines
         - Mines can now be properly killed during their arming period when first deployed. In this case, they do not explode or deal               damage.
         - Marines now keep unused mines when they die and receive them back when they respawn (like hand grenades).
-        - Health changed to 40 (up from 30)
+        - Change hit points to 30 health and 9 armor (from 40 health and 5 armor). Tip: With crush it takes only 4 parasites (instead of 5) to destroy a mine.
         - Lerk spikes deal 2x damage to mines (Damage: 5 -> 10).
         - Mines now award 5 score points when killed by an alien.
+        - Display Mines at the minimap for Marines.
+        - Decrease weight to 0 (from 0.1). So that mines don't slow down Marines.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
             - "Electrified" effect now also nullifies and prevents targets from benefiting from drifter Enzyme and Mucous abilities
+        - Decreased weight to 0 (from 0.1) so hand grenades do not affect the marine's speed.
     - Exosuit
         - Reduced opacity of "scanlines" UI texture to be less obstructive (25% of original value).
         - Exos are now free to fire their weapons while thrusters are being used.
         - Thrusters can now be toggled on and off freely without waiting for maximum charge between use.
             - Thruster fuel now has a 0.75 second cooldown before recharging after last use.
-        - Exosuits now "self-repair" when out of combat at a rate of 10 armor/second.
+        - Exosuits now "self-repair" when out of combat at a rate of 8 armor/second.
         - Alien Vampirism no longer has any effect when used against exos.
         - Railgun
             - Both railguns can now fire simultaneously.
             - Full-charge duration is now 1 second
             - Cooldown between shots is now 0.3 seconds.
             - Anything short of a full-charge shot no longer penetrates targets.
-            - Shots with 75% power and above now convert to "heavy" damage type (double damage to armor), 74% power and below charge                   shots are regular damage.
+            - Shots with 75% power and above now convert to "heavy" damage type (double damage to armor), 74% power and below charge shots are regular damage.
             - Distortion tracer effect and steam effects no longer play if the shot didn't deal heavy damage (75% charge).
             - Damage ramps up from 25 to 50 as you charge.
             - Decreased projectile size of uncharged (below 75 % charge) shots to 0.075 (from 0.3)
@@ -77,9 +91,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Nanoshield used on structures remains unchanged at 5 seconds
         - Fixed cluster grenade burn damage numbers being displayed to the target
 - Alien
-
-    - Innate Regeneration
-        - The innate regeneration of aliens stops as soon as they are above 30 % of their max hp.
         
     - Fixed Healing Soft clamp
         - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
@@ -98,16 +109,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Replaced with new upgrade: Blight (experimental):
                 - With Blight each primary attack parasites the target
                 - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
-
-    - Carapace
-        - Skulk gain max 10 extra armor with 3 shells (instead of 15)
-        - Gorges gain max 15 extra armor with 3 shells (instead of 25)
-        - Lerks gain max 15 extra armor with 3 shells (instead of 20)
-        - Fades gain max 30 extra armor with 3 shells (instead of 40)
-        - Onos gain max 150 extra armor with 3 shells (instead of 200)
         
     - Skulk
-        - Reduced bite cone to 0.8 x 1.0 (down from 1.2 x 1.2)
+        - Reduced bite cone to 0.8 x 1.2 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
         - Skulks now only receive a speed boost from a consecutive jump.
@@ -115,10 +119,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Gorge
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.
-        - Hydra
-            - Hydras are now extremely accurate. Accuracy tapers off starting at 8 meters up to the maximum degredation at 12 meters. Inaccuracy ramps between 0 and 8 degrees.
-            - Hydras can now shoot back from the last spot they were hit, so if you can hit them, they can hit you.
-            - Damage reduced to 5 (down from 15)
         - Web
             - Gorges can finish placing webs from much further away.  Starting placement range is unchanged.
             - Now break on contact.
@@ -139,7 +139,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
         
     - Drifter abilities
-        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations) 
+        - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
+        
+    - Ink Cloud
+        - Decreased cooldown to 15 seconds (from 16).
         
     - Misc
         - Maturity information is now visible in the nameplate for alien structures.

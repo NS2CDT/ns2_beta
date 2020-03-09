@@ -239,7 +239,7 @@ kHeavyMachineGunCost = 20
 
 kHeavyMachineGunDamage = 8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 125
+kHeavyMachineGunClipSize = 100
 kHeavyMachineGunClipNum = 4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
@@ -779,7 +779,7 @@ kCragHealWaveCost = 3
 kHealWaveCooldown = 6
 kMatureCragMaxEnergy = 150
 
-kHydraDamage = 5
+kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal
 
 kWhipInitialEnergy = 25  kWhipMaxEnergy = 100
@@ -805,7 +805,7 @@ kEchoHarvesterCost = 2
 
 kShadeInitialEnergy = 25  kShadeMaxEnergy = 100
 kShadeInkCost = 3
-kShadeInkCooldown = 16
+kShadeInkCooldown = 15
 kShadeInkDuration = 6.3
 kMatureShadeMaxEnergy = 150
 
