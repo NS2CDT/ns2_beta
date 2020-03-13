@@ -357,7 +357,7 @@ function Cyst:ServerUpdate()
         self.nextUpdate = self.nextUpdate + Cyst.kThinkTime
 
         -- Take damage if not connected
-        if not self.connected and not self:GetIsCatalysted() then
+        if not self.connected and not self:GetIsCatalysted() and self:GetCreationTime() > 1.0 then
             self:TriggerDamage()
         end
 
