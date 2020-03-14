@@ -104,9 +104,9 @@ MenuData.Config.OptionsMenu.General = MenuData.CreateDefaultOptionsLayout
             class = OP_TT_Checkbox,
             params =
             {
-                optionPath = "drawDamage",
+                optionPath = "showDamage",
                 optionType = "bool",
-                default = false,
+                default = true,
                 tooltip = Locale.ResolveString("OPTION_DRAW_DAMAGE"),
             },
             
