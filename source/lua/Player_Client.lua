@@ -447,7 +447,7 @@ function PlayerUI_GetStatusInfoForUnit(player, unit)
             local statusFraction = unit:GetUnitStatusFraction(player)
             local description = unit:GetUnitName(player)
             local action = unit:GetActionName(player)
-            local hint = unit:GetUnitHint(player)
+            local hint = unit:GetUnitHint2(player)
 
             local visibleToPlayer = true
             local isPlayer = unit:isa("Player")

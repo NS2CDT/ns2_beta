@@ -126,7 +126,7 @@ function UnitStatusMixin:GetUnitStatusFraction(forEntity)
 
 end
 
-function UnitStatusMixin:GetUnitHint(forEntity)
+function UnitStatusMixin:GetUnitHint2(forEntity)
 
     if HasMixin(self, "Tech") then
     
