@@ -6,6 +6,11 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
+- 14/03/2020
+    - Fixed some cysts instantly dying when placed
+    - Fixed a compatibility issue with ns2+ causing script errors
+    - Added a script error reporter
+    
 - 08/03/2020
     - Reverted innate regen limitation.
     - Reverted Carapace changes.
