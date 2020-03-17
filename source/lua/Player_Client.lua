@@ -4023,7 +4023,7 @@ end
 
 function Player:AddTakeDamageIndicator(damagePosition)
 
-    if self:GetShowDamageArrows() then
+    if self:GetShowDamageArrows() and self.damageIndicators then
         table.insert(self.damageIndicators, { damagePosition.x, damagePosition.z, Shared.GetTime() })
     end
 
