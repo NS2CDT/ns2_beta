@@ -80,8 +80,13 @@ Client.PrecacheLocalSound(kDeadSound)
 gPlayingDeadMontage = nil
 
 function Player:GetShowUnitStatusForOverride(forEntity)
-    return self:GetIsAlive() and not GetAreEnemies(self, forEntity) or
-            (forEntity:GetOrigin() - self:GetOrigin()):GetLengthSquared() < (20*20)
+    -- Don't show status for dead unit
+    if not self:GetIsAlive() then
+        return false
+    end
+
+    -- Only display status for enemies if player is in 20 m range of entity
+    return not GetAreEnemies(self, forEntity) or (forEntity:GetOrigin() - self:GetOrigin()):GetLengthSquared() < 20 * 20
 end
 
 function PlayerUI_GetWorldMessages()
