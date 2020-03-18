@@ -10,7 +10,6 @@ Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/Weapons/ClientWeaponEffectsMixin.lua")
 Script.Load("lua/HMGVariantMixin.lua")
-Script.Load("lua/PointGiverMixin.lua")
 
 class 'HeavyMachineGun' (ClipWeapon)
 
@@ -471,11 +470,11 @@ if Client then
         --]]
         Shared.PlaySound(self, kEndSounds[math.floor((self.soundType-1)/3)+1])
 
-        if self.muzzleCinematic and self.muzzleCinematic ~= Entity.invalidId then
+        if self.muzzleCinematic and IsValid(self.muzzleCinematic) then
             self.muzzleCinematic:SetIsVisible(false)
         end
 
-        if self.shellsCinematic and self.shellsCinematic ~= Entity.invalidId then
+        if self.shellsCinematic and IsValid(self.shellsCinematic) then
             self.shellsCinematic:SetIsActive(false)
         end
 

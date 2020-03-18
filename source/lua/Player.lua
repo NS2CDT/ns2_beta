@@ -2378,15 +2378,14 @@ function Player:OnUpdateAnimationInput(modelMixin)
 
         if weapon.OverrideWeaponName then
             activeWeapon = weapon:OverrideWeaponName()
-        else
+        elseif weapon.GetMapName then
             activeWeapon = weapon:GetMapName()
         end
 
     end
 
     modelMixin:SetAnimationInput("weapon", activeWeapon)
-
-    local weapon = self:GetActiveWeapon()
+    weapon = self:GetActiveWeapon() -- animation may have changed active weapon
     if weapon ~= nil and weapon.OnUpdateAnimationInput then
         weapon:OnUpdateAnimationInput(modelMixin)
     end

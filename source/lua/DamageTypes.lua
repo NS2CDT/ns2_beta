@@ -166,7 +166,9 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
         parasiteDuration = (parasiteDuration / 3) * veilLevel
 
-        target:SetParasited(attacker, parasiteDuration, showHealthOutline)
+        if target.SetParasited then
+            target:SetParasited(attacker, parasiteDuration, showHealthOutline)
+        end
     end
     
     --!!!Note: if more than damage and armor fraction modified, be certain the calling-point of this function is updated

@@ -6,6 +6,11 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
+- 18/03/2020
+    - Lerk Spike now penetrates soft targets (MACs)
+    - Fixed dead players displaying nameplate
+    - Fixed various script errors
+
 - 14/03/2020
     - Fixed some cysts instantly dying when placed
     - Fixed a compatibility issue with ns2+ causing script errors
@@ -136,6 +141,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Lerk
         - Spike
             - Projectile size is now 60mm (up from 45mm)
+            - Now penetrates soft targets (MACs)
     - Fade
         - Stab
             - Decrease base damage to 120 (from 160)
