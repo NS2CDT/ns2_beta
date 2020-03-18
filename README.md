@@ -6,8 +6,10 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
-- XX/03/2020
+- 18/03/2020
     - Lerk Spike now penetrates soft targets (MACs)
+    - Fixed dead players displaying nameplate
+    - Fixed various script errors
 
 - 14/03/2020
     - Fixed some cysts instantly dying when placed
