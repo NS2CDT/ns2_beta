@@ -405,6 +405,10 @@ kWebBuildCost = 0
 kWebbedDuration = 5
 kWebbedParasiteDuration = 10
 kWebSlowVelocityScalar = 0.34 --Note: Exos override this
+kWebMaxCharges = 3
+kWebSecondsPerCharge = 10
+kWebHealthPerCharge = 13
+kWebChargeScaleFactor = 0.47 -- Percent to "thicken" webs by per charge.
 
 kLerkBiteDamage = 60
 kBitePoisonDamage = 6 -- per second

@@ -40,7 +40,8 @@ local kEnemyDetectInterval = 0.2
 local networkVars =
 {
     length = "float",
-    variant = "enum kGorgeVariant"
+    variant = "enum kGorgeVariant",
+    chargeScalingFactor = "float (0 to 3 by 0.01)"
 }
 
 Web.kZeroVisDistance = 7.5
@@ -69,12 +70,41 @@ function Web:SpaceClearForEntity(_)
     return true
 end
 
+function Web:OnAdjustModelCoords(modelCoords)
+
+    local result = modelCoords
+
+    if result then
+        result.xAxis = result.xAxis * self.chargeScalingFactor
+        result.yAxis = result.yAxis * self.chargeScalingFactor
+    end
+
+    return result
+
+end
+
 local function CheckWebablesInRange(self)
 
     local webables = GetEntitiesWithMixinForTeamWithinRange("Webable", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), self.checkRadius)
     self.enemiesInRange = #webables > 0
 
     return true
+
+end
+
+local function AddWebCharge(self)
+
+    self.numCharges = self.numCharges + 1
+
+    self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
+    self:SetHealth(self:GetHealth() + kWebHealthPerCharge)
+
+    self.chargeScalingFactor = self.chargeScalingFactor + kWebChargeScaleFactor
+    self:SetCoords(self:GetCoords())
+
+    if self.numCharges < kWebMaxCharges then
+        self:AddTimedCallback(AddWebCharge, kWebSecondsPerCharge)
+    end
 
 end
 
@@ -100,11 +130,14 @@ function Web:OnCreate()
         InitMixin(self, OwnerMixin)
         
         self:AddTimedCallback(CheckWebablesInRange, 0.3) --FIXME Should be moved to trigger or collision as this prevents melee capsule trace from hitting webs
-        
+        self:AddTimedCallback(AddWebCharge, kWebSecondsPerCharge)
+
         self.triggerSpawnEffect = false
         
     end
-    
+
+    self.numCharges = 0
+    self.chargeScalingFactor = 1.0
     self.variant = kGorgeVariant.normal
 
     self:SetUpdates(true, kDefaultUpdateRate)
