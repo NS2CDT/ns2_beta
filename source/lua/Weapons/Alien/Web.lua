@@ -44,8 +44,8 @@ local networkVars =
     chargeScalingFactor = "float (0 to 3 by 0.01)"
 }
 
-Web.kZeroVisDistance = 7.5
-Web.kFullVisDistance = 5.0
+Web.kZeroVisDistance = 12.5
+Web.kFullVisDistance = 10.0
 Web.kDistortionIntensity = 0.0625
 
 local kWebDistortMaterial = PrecacheAsset("models/alien/gorge/web_distort.material")
