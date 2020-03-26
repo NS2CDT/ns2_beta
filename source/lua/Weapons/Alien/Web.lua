@@ -47,6 +47,7 @@ local networkVars =
 Web.kZeroVisDistance = 12.5
 Web.kFullVisDistance = 10.0
 Web.kDistortionIntensity = 0.0625
+Web.ChargeScaleAdditive = 0.47 -- Percent to "thicken" webs by per charge.
 
 local kWebDistortMaterial = PrecacheAsset("models/alien/gorge/web_distort.material")
 
@@ -99,7 +100,7 @@ local function AddWebCharge(self)
     self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
     self:SetHealth(self:GetHealth() + kWebHealthPerCharge)
 
-    self.chargeScalingFactor = self.chargeScalingFactor + kWebChargeScaleFactor
+    self.chargeScalingFactor = self.chargeScalingFactor + Web.ChargeScaleAdditive
     self:SetCoords(self:GetCoords())
 
     if self.numCharges < kWebMaxCharges then
