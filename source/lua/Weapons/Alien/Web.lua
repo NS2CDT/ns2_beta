@@ -103,9 +103,7 @@ local function AddWebCharge(self)
     self.chargeScalingFactor = self.chargeScalingFactor + Web.ChargeScaleAdditive
     self:SetCoords(self:GetCoords())
 
-    if self.numCharges < kWebMaxCharges then
-        self:AddTimedCallback(AddWebCharge, kWebSecondsPerCharge)
-    end
+    return self.numCharges < kWebMaxCharges
 
 end
 
