@@ -100,10 +100,6 @@ function BlightMixin:TransferBlight(from)
 
 end
 
-function BlightMixin:OnDestroy()
-    -- TODO(Salads): BlightMixin:OnDestroy() needed?
-end
-
 if Server then
 
     function BlightMixin:OnKill()
