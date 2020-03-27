@@ -42,6 +42,8 @@ Script.Load("lua/CombatMixin.lua")
 Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/InfestationTrackerMixin.lua")
 Script.Load("lua/SupplyUserMixin.lua")
+Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 local kSpinUpSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/sentry_spin_up")
 local kSpinDownSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/sentry_spin_down")
@@ -130,6 +132,7 @@ AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(GhostStructureMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 
 function Sentry:OnCreate()
 
@@ -159,7 +162,8 @@ function Sentry:OnCreate()
     InitMixin(self, DissolveMixin)
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, ParasiteMixin)    
-    
+    InitMixin(self, BlightMixin)
+
     if Client then
         InitMixin(self, CommanderGlowMixin)
     end

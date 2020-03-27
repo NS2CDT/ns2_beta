@@ -48,6 +48,7 @@ Script.Load("lua/Weapons/PredictedProjectile.lua")
 Script.Load("lua/MarineVariantMixin.lua")
 Script.Load("lua/MarineOutlineMixin.lua")
 Script.Load("lua/RegenerationMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 if Client then
     Script.Load("lua/TeamMessageMixin.lua")
@@ -189,6 +190,7 @@ AddMixinNetworkVars(PhaseGateUserMixin, networkVars)
 AddMixinNetworkVars(MarineVariantMixin, networkVars)
 AddMixinNetworkVars(ScoringMixin, networkVars)
 AddMixinNetworkVars(RegenerationMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 
 function Marine:OnCreate()
 
@@ -208,6 +210,7 @@ function Marine:OnCreate()
     InitMixin(self, DissolveMixin)
     InitMixin(self, LOSMixin)
     InitMixin(self, ParasiteMixin)
+    InitMixin(self, BlightMixin)
     InitMixin(self, RagdollMixin)
     InitMixin(self, WebableMixin)
     InitMixin(self, CorrodeMixin)

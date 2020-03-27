@@ -23,6 +23,7 @@ Script.Load("lua/ParasiteMixin.lua")
 Script.Load("lua/HiveVisionMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/MarineStructureVariantMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 
 class 'CommandStation' (CommandStructure)
@@ -52,6 +53,7 @@ AddMixinNetworkVars(NanoShieldMixin, networkVars)
 AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(GhostStructureMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 AddMixinNetworkVars(HiveVisionMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(MarineStructureVariantMixin, networkVars)
@@ -64,6 +66,7 @@ function CommandStation:OnCreate()
     InitMixin(self, CorrodeMixin)
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, ParasiteMixin)
+    InitMixin(self, BlightMixin)
     InitMixin(self, DissolveMixin)
 
 end

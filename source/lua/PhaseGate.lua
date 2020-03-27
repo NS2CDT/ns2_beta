@@ -37,6 +37,7 @@ Script.Load("lua/MinimapConnectionMixin.lua")
 Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 local kAnimationGraph = PrecacheAsset("models/marine/phase_gate/phase_gate.animation_graph")
 --local kPhaseSound = PrecacheAsset("sound/NS2.fev/marine/structures/phase_gate_teleport")
@@ -148,6 +149,7 @@ AddMixinNetworkVars(GhostStructureMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 
 function PhaseGate:OnCreate()
 
@@ -175,7 +177,8 @@ function PhaseGate:OnCreate()
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, PowerConsumerMixin)
     InitMixin(self, ParasiteMixin)
-    
+    InitMixin(self, BlightMixin)
+
     if Client then
         InitMixin(self, CommanderGlowMixin)
     end

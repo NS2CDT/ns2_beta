@@ -35,6 +35,7 @@ Script.Load("lua/InfestationTrackerMixin.lua")
 Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 class 'Armory' (ScriptActor)
 
@@ -102,6 +103,7 @@ AddMixinNetworkVars(GhostStructureMixin, networkVars)
 AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 
 function Armory:OnCreate()
 
@@ -129,6 +131,7 @@ function Armory:OnCreate()
     InitMixin(self, CombatMixin)
     InitMixin(self, PowerConsumerMixin)
     InitMixin(self, ParasiteMixin)
+    InitMixin(self, BlightMixin)
 
     if Client then
         InitMixin(self, CommanderGlowMixin)

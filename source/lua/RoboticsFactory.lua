@@ -36,6 +36,7 @@ Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/InfestationTrackerMixin.lua")
 Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 Script.Load("lua/HiveVisionMixin.lua")
 
 class 'RoboticsFactory' (ScriptActor)
@@ -80,6 +81,7 @@ AddMixinNetworkVars(PowerConsumerMixin, networkVars)
 AddMixinNetworkVars(GhostStructureMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 AddMixinNetworkVars(HiveVisionMixin, networkVars)
 
 function RoboticsFactory:OnCreate()
@@ -109,7 +111,8 @@ function RoboticsFactory:OnCreate()
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, PowerConsumerMixin)
     InitMixin(self, ParasiteMixin)
-    
+    InitMixin(self, BlightMixin)
+
     if Client then
         InitMixin(self, CommanderGlowMixin)
     end

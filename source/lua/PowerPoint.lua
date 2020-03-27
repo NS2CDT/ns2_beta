@@ -38,6 +38,7 @@ Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/BlightMixin.lua")
 
 local kDefaultUpdateRange = 100
 
@@ -153,6 +154,7 @@ AddMixinNetworkVars(PowerSourceMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(BlightMixin, networkVars)
 
 local function SetupWithInitialSettings(self)
 
@@ -202,7 +204,8 @@ function PowerPoint:OnCreate()
     InitMixin(self, NanoShieldMixin)
     InitMixin(self, WeldableMixin)
     InitMixin(self, ParasiteMixin)
-    
+    InitMixin(self, BlightMixin)
+
     if Client then
         InitMixin(self, CommanderGlowMixin)
     end
