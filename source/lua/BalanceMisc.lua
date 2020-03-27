@@ -70,6 +70,8 @@ kSpitFocusDamageBonusAtMax = 0
 
 kBlightParasitePlayersDurationAtMax = 15
 kBlightParasiteStructuresDurationAtMax = 45
+kBlightStructureDurationPerChamber = 15
+kBlightPlayerDurationPerChamber = 5
 
 kHydrasPerHive = 3
 kClogsPerHive = 10
