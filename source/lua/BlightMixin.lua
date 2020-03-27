@@ -79,9 +79,8 @@ function BlightMixin:SetBlighted( duration )
 
             if blightTimeChanged then
                 self.timeBlighted = Shared.GetTime()
+                self.blighted = true
             end
-
-            self.blighted = true
 
         end
 
