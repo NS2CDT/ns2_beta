@@ -101,7 +101,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
-    local isAffectedByFocus = doer.GetIsAffectedByFocus and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByFocus()
+    local isAffectedByBlight = doer.GetIsAffectedByBlight and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByBlight()
 
     if isAffectedByCrush then --Crush
         local crushLevel = attacker:GetSpurLevel()
@@ -136,7 +136,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
                         end
                         
                         local focusBonus = 1
-                        if isAffectedByFocus then
+                        if isAffectedByBlight then
                             focusBonus = 1 + doer:GetFocusAttackCooldown()
                         end
 
@@ -153,7 +153,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
     end
 
     --Focus
-    if isAffectedByFocus then
+    if isAffectedByBlight then
         local veilLevel = attacker:GetVeilLevel()
         local damageBonus = doer:GetMaxFocusBonusDamage()
         damage = damage * (1 + (veilLevel/3) * damageBonus) --1.0, 1.333, 1.666, 2

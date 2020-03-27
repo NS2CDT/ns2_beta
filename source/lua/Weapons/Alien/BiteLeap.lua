@@ -119,7 +119,7 @@ function BiteLeap:GetMeleeOffset()
     return 0.0
 end
 
-function BiteLeap:GetIsAffectedByFocus()
+function BiteLeap:GetIsAffectedByBlight()
     return self.primaryAttacking
 end
 

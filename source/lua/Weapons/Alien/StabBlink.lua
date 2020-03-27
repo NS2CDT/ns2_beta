@@ -121,7 +121,7 @@ function StabBlink:GetIsStabbing()
     return self.stabbing == true
 end
 
-function StabBlink:GetIsAffectedByFocus()
+function StabBlink:GetIsAffectedByBlight()
     return self.primaryAttacking
 end
 
