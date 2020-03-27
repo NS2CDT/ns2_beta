@@ -25,7 +25,6 @@ ParasiteMixin.optionalCallbacks =
 ParasiteMixin.networkVars =
 {
     parasited = "boolean",
-    healthOutlinedUntil = "time",
     timeParasited = "private time",
     parasiteDuration = "private float (0 to 999 by 0.1)" --TODO Move to MAX global var?
 }
@@ -35,7 +34,6 @@ function ParasiteMixin:__initmixin()
     PROFILE("ParasiteMixin:__initmixin")
     
     self.timeParasited = 0
-    self.healthOutlinedUntil = 0
     self.parasiteDuration = 0
     self.parasited = false
     
@@ -61,7 +59,7 @@ function ParasiteMixin:GetParasitePercentageRemaining()
 
 end
 
-function ParasiteMixin:SetParasited( fromPlayer, durationOverride, showHealthOutline )
+function ParasiteMixin:SetParasited( fromPlayer, durationOverride )
 
     if Server then
 
@@ -76,15 +74,14 @@ function ParasiteMixin:SetParasited( fromPlayer, durationOverride, showHealthOut
                 end
                 
             end
-
-            local now = Shared.GetTime()
+            
             local parasiteTimeChanged = false
-
+            
             if durationOverride ~= nil and type(durationOverride) == "number" then
                 
                 durationOverride = Clamp( durationOverride, 0, kParasiteDuration )
                 
-                if self.parasited and now + durationOverride >= self.parasiteDuration + self.timeParasited then
+                if self.parasited and self.timeParasited + durationOverride >= self.parasiteDuration + self.timeParasited then
                     
                     self.parasiteDuration = durationOverride
                     parasiteTimeChanged = true
@@ -104,15 +101,10 @@ function ParasiteMixin:SetParasited( fromPlayer, durationOverride, showHealthOut
             end
             
             if parasiteTimeChanged then
-                self.timeParasited = now
+                self.timeParasited = Shared.GetTime()
             end
             
             self.parasited = true
-
-            if showHealthOutline then
-                self.healthOutlinedUntil = math.max(self.healthOutlinedUntil, Shared.GetTime() + durationOverride)
-            end
-            -- Log("Showing HP for %s seconds", tostring(self.healthOutlinedUntil - Shared.GetTime()))
             
         end
     
@@ -125,7 +117,6 @@ function ParasiteMixin:TransferParasite(from)
     self.parasiteDuration = from.parasiteDuration
     self.timeParasited = from.timeParasited
     self.parasited = from.parasited
-    self.healthOutlinedUntil = from.healthOutlinedUntil
     
     if self.OnParasited and not self.parasited then
         self:OnParasited()
@@ -155,7 +146,6 @@ end
 
 function ParasiteMixin:RemoveParasite()
     self.parasited = false
-    self.healthOutlinedUntil = 0
 end
 
 local function SharedUpdate(self)
