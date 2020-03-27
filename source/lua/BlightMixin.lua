@@ -23,7 +23,7 @@ BlightMixin.networkVars =
 {
     blighted = "boolean",
     timeBlighted = "private time",
-    blightDuration = "private float (0 to 60 by 0.1)"
+    blightDuration = "private float (0 to 45 by 0.1)"
 }
 
 function BlightMixin:__initmixin()
