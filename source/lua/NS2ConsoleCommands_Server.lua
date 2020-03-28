@@ -305,7 +305,7 @@ local function OnCommandBlight(client, duration)
 
         local player = client:GetControllingPlayer()
 
-        if HasMixin(player, "Blightable") then
+        if HasMixin(player, "BlightAble") then
 
             if player:GetIsBlighted() and duration == nil then
                 player:RemoveBlight()

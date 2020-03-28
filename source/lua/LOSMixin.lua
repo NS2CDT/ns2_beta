@@ -234,7 +234,7 @@ if Server then
             seen = GetIsParasited(self)
         end
 
-        if not seen and HasMixin(self, "Blightable") then
+        if not seen and HasMixin(self, "BlightAble") then
             seen = self:GetIsBlighted()
         end
         

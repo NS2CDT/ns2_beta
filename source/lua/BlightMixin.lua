@@ -9,7 +9,7 @@ Log("Loading new BlightMixin.lua for NS2 Balance Beta mod.")
 -- ========= For more information, visit us at http://www.unknownworlds.com =====================
 
 BlightMixin = CreateMixin( BlightMixin )
-BlightMixin.type = "Blightable"
+BlightMixin.type = "BlightAble"
 
 BlightMixin.expectedMixins =
 {
