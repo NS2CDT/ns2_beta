@@ -23,7 +23,6 @@ function HiveVisionMixin:__initmixin()
         self.hiveSightVisible = false
         self.nextFriendlyHiveVisionCheck = 0
         self.timeHiveVisionChanged = 0
-        self.healthOutlined = false
     end
 
 end
@@ -76,27 +75,19 @@ if Client then
 
         PROFILE("HiveVisionMixin:OnUpdate")
         -- Determine if the entity should be visible on hive sight
-        local parasited, healthOutlined = false, false
+        local parasited = HasMixin(self, "ParasiteAble") and self:GetIsParasited()
+        local blighted = HasMixin(self, "BlightAble") and self:GetIsBlighted()
 
-        if HasMixin(self, "ParasiteAble") then
-            parasited, healthOutlined = self:GetIsParasited()
-        end
-
-        local visible = parasited
+        local visible = parasited or blighted
         local player = Client.GetLocalPlayer()
         local now = Shared.GetTime()
         local recentHPChange = false
 
-        if HasMixin(self, "Combat") and self.timeHiveVisionChanged < self:GetTimeLastDamageTaken() then
-            recentHPChange = true
+        if HasMixin(self, "Combat") then
+            if self.timeHiveVisionChanged < self:GetTimeLastDamageTaken() or self.timeHiveVisionChanged < self.timeLastHealed then
+                recentHPChange = true
+            end
         end
-        if HasMixin(self, "Combat") and self.timeHiveVisionChanged < self.timeLastHealed then
-            recentHPChange = true
-        end
-        if healthOutlined ~= self.healthOutlined then
-            recentHPChange = true
-        end
-
         
         if Client.GetLocalClientTeamNumber() == kSpectatorIndex
               and self:isa("Alien") 
@@ -116,56 +107,57 @@ if Client then
         end
         
         -- check the distance here as well. seems that the render mask is not correct for newly created models or models which get destroyed in the same frame
-        local playerCanSeeHiveVision = player ~= nil and (player:GetOrigin() - self:GetOrigin()):GetLength() <= GetMaxDistanceFor(player) and (player:isa("Alien") or player:isa("AlienCommander") or player:isa("AlienSpectator"))
+        local friendlyAlien = player ~= nil and (player:isa("Alien") or player:isa("AlienCommander") or player:isa("AlienSpectator")) and (player:GetOrigin() - self:GetOrigin()):GetLength() <= GetMaxDistanceFor(player)
+        friendlyAlien = friendlyAlien and self:isa("Player") and player ~= self and GetAreFriends(self, player)
 
-        if not visible and playerCanSeeHiveVision and self:isa("Player") then
-        
+        if friendlyAlien then
             -- Make friendly players always show up - even if not obscured
-            visible = player ~= self and GetAreFriends(self, player)
-            
+            visible = friendlyAlien
         end
-        
-        if visible and not playerCanSeeHiveVision then
-            visible = false
-        end
-        
+
         -- Update the visibility status.
-        if (parasited and recentHPChange) or (visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now)
-        then
+        if ((recentHPChange and not friendlyAlien) or (visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now)) then
         
             local model = self:GetRenderModel()
             if model ~= nil then
-            
+
                 if visible then
-                    if parasited then
 
+                    local outlineColor = nil
 
-                        local outlineColor = nil
+                    if friendlyAlien then
 
-                        if healthOutlined then
-                            local eHP = self:GetHealth() + self:GetArmor() * kHealthPointsPerArmor
+                        if self:isa("Gorge") then
+                            outlineColor = kHiveVisionOutlineColor.DarkGreen -- Friendly Gorge
+                        else
+                            outlineColor = kHiveVisionOutlineColor.Green -- Other friendly aliens
+                        end
+                    else -- Enemy Marine players/structures
 
-                            -- { [0]='Yellow', 'Green', 'KharaaOrange', 'DarkGreen' 
-                            if eHP >= 75*4 then -- 4+ bites, green outline
+                        if blighted then
+
+                            local eHP
+                            if self:GetIgnoreHealth() then
+                                eHP = self:GetArmor() * kHealthPointsPerArmor
+                            else
+                                eHP = self:GetHealth() + self:GetArmor() * kHealthPointsPerArmor
+                            end
+
+                            local bitesLeft = math.floor((eHP / 75) + 1) -- .01 over 1 bite still needs 2 bites.
+
+                            if bitesLeft >= 4 then -- 4+ bites, green outline
                                 outlineColor = kHiveVisionOutlineColor.Green
-                            elseif eHP >= 75*3 then -- 3 bites, yellow
+                            elseif bitesLeft >= 3 then -- 3 bites, yellow
                                 outlineColor = kHiveVisionOutlineColor.Yellow
                             else -- 2 bites or less, red/orange
                                 outlineColor = kHiveVisionOutlineColor.KharaaOrange
                             end
-
-                        else
+                        elseif parasited then
                             outlineColor = kHiveVisionOutlineColor.Green
                         end
-
-                        self.healthOutlined = healthOutlined
-                        HiveVision_AddModel( model,  outlineColor)
-
-                    elseif self:isa("Gorge") then
-                        HiveVision_AddModel( model, kHiveVisionOutlineColor.DarkGreen )
-                    else
-                        HiveVision_AddModel( model, kHiveVisionOutlineColor.Green )
                     end
+
+                    HiveVision_AddModel( model,  outlineColor)
                     --DebugPrint("%s add model", self:GetClassName())
                 else
                     HiveVision_RemoveModel( model )
