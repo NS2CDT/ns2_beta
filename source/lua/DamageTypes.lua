@@ -101,7 +101,9 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
-    local isAffectedByBlight = doer.GetIsAffectedByBlight and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByBlight()
+    local isAffectedByBlight = doer.GetIsAffectedByBlight and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByBlight() and GetAreEnemies(target, attacker)
+
+    -- TODO(Salads): Rename kTechID.Focus to our new Blight.
 
     if isAffectedByCrush then --Crush
         local crushLevel = attacker:GetSpurLevel()
@@ -149,26 +151,26 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
                 end
             end
         end
+
+        -- Blight
+        if isAffectedByBlight then
+
+            local veilLevel = attacker:GetVeilLevel()
+
+            local parasiteDuration
+            if not target:isa("Player") then
+                parasiteDuration = kBlightStructureDurationPerChamber
+            else
+                parasiteDuration = kBlightPlayerDurationPerChamber
+            end
+
+            parasiteDuration = parasiteDuration * veilLevel
+
+            if target.SetBlighted and parasiteDuration > 0 then
+                target:SetBlighted(parasiteDuration)
+            end
+        end
         
-    end
-
-    --Focus
-    if isAffectedByBlight then
-        local veilLevel = attacker:GetVeilLevel()
-        local damageBonus = doer:GetMaxFocusBonusDamage()
-        damage = damage * (1 + (veilLevel/3) * damageBonus) --1.0, 1.333, 1.666, 2
-
-        local showHealthOutline = true
-        local parasiteDuration = kBlightParasitePlayersDurationAtMax
-        if not target:isa("Player") then
-            parasiteDuration = kBlightParasiteStructuresDurationAtMax
-        end
-
-        parasiteDuration = (parasiteDuration / 3) * veilLevel
-
-        if target.SetParasited then
-            target:SetParasited(attacker, parasiteDuration, showHealthOutline)
-        end
     end
     
     --!!!Note: if more than damage and armor fraction modified, be certain the calling-point of this function is updated
