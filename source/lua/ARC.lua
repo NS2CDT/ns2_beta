@@ -1,3 +1,5 @@
+Log("Loading modified Arc.lua for NS2 Balance Beta mod.")
+
 -- ======= Copyright (c) 2003-2012, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\ARC.lua

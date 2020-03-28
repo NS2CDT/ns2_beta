@@ -1,3 +1,5 @@
+Log("Loading new BlightMixin.lua for NS2 Balance Beta mod.")
+
 -- ======= Copyright (c) 2003-2020, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\BlightMixin.lua

@@ -1,3 +1,5 @@
+Log("Loading modified PhaseGate.lua for NS2 Balance Beta mod.")
+
 -- ======= Copyright (c) 2003-2011, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\PhaseGate.lua

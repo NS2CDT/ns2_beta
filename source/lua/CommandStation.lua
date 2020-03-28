@@ -1,3 +1,5 @@
+Log("Loading modified CommandStation.lua for NS2 Balance Beta mod.")
+
 -- ======= Copyright (c) 2003-2011, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\CommandStation.lua
