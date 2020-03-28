@@ -250,6 +250,7 @@ if Server then
                 exoPlayer:SetArmor(self:GetArmor())
                 exoPlayer:SetFlashlightOn(self:GetFlashlightOn())
                 exoPlayer:TransferParasite(self)
+                exoPlayer:TransferBlight(self)
     
                 -- Set the auto-weld cooldown of the player exo to match the cooldown of the dropped
                 -- exo.

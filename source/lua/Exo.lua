@@ -800,6 +800,7 @@ if Server then
             exosuit:SetExoVariant(self:GetExoVariant())
             exosuit:SetFlashlightOn(self:GetFlashlightOn())
             exosuit:TransferParasite(self)
+            exosuit:TransferBlight(self)
             
             -- Set the auto-weld cooldown of the dropped exo to match the cooldown if we weren't
             -- ejecting just now.
