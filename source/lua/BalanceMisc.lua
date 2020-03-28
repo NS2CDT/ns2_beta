@@ -68,8 +68,6 @@ kStabFocusDamageBonusAtMax = kFocusDamageBonusAtMax -- anticipating this will ne
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0
 
-kBlightParasitePlayersDurationAtMax = 15
-kBlightParasiteStructuresDurationAtMax = 45
 kBlightStructureDurationPerChamber = 15
 kBlightPlayerDurationPerChamber = 5
 
