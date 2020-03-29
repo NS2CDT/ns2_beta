@@ -1,3 +1,5 @@
+Log("Loading modified GUIPlayerStatus.lua for NS2 Balance Beta mod.")
+
 -- ======= Copyright (c) 2003-2018, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\GUIPlayerStatus.lua
