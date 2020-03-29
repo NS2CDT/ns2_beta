@@ -616,7 +616,9 @@ function GUIMarineHUD:Update(deltaTime)
         NanoShieldTime = PlayerUI_GetNanoShieldTimeRemaining(),
         CatPackState = PlayerUI_GetPlayerCatPackState(),
         CatPackTime = PlayerUI_GetCatPackTimeRemaining(),
-        Corroded = PlayerUI_GetIsCorroded()
+        Corroded = PlayerUI_GetIsCorroded(),
+        BlightState = PlayerUI_GetPlayerBlightState(),
+        BlightTime = PlayerUI_GetPlayerBlightTimeRemaining()
     }
 
     self.statusDisplays:Update(deltaTime, playerStatusIcons)
