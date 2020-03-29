@@ -101,7 +101,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
-    local isAffectedByBlight = doer.GetIsAffectedByBlight and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByBlight() and GetAreEnemies(target, attacker)
+    local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and doer.GetIsAffectedByBlight and doer:GetIsAffectedByBlight() and GetAreEnemies(target, attacker)
 
     -- TODO(Salads): Rename kTechID.Focus to our new Blight.
 
@@ -157,17 +157,17 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
             local veilLevel = attacker:GetVeilLevel()
 
-            local parasiteDuration
+            local blightDuration
             if not target:isa("Player") then
-                parasiteDuration = kBlightStructureDurationPerChamber
+                blightDuration = kBlightPrimaryPlayerDurationPerChamber
             else
-                parasiteDuration = kBlightPlayerDurationPerChamber
+                blightDuration = kBlightPrimaryStructureDurationPerChamber
             end
 
-            parasiteDuration = parasiteDuration * veilLevel
+            blightDuration = blightDuration * veilLevel
 
-            if target.SetBlighted and parasiteDuration > 0 then
-                target:SetBlighted(parasiteDuration)
+            if target.SetBlighted and blightDuration > 0 then
+                target:SetBlighted(blightDuration)
             end
         end
         
