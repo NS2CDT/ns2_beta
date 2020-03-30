@@ -108,6 +108,18 @@ function Shockwave:OnCreate()
     
 end
 
+function Shockwave:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetWeaponTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function Shockwave:GetWeaponTechId()
+    return kTechId.Shockwave
+end
+
 local function DestroyShockwave(self)
 
     if Server then
