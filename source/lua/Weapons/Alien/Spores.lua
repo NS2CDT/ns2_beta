@@ -125,6 +125,14 @@ function Spores:GetDeathIconIndex()
     return kDeathMessageIcon.Spikes
 end
 
+function Spores:GetBlightCategory( fromTechId ) -- Spores primary attack is done with SporeCloud.
+    if fromTechId == self:GetSecondaryTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
 function Spores:GetSecondaryTechId()
     return kTechId.Spikes
 end
