@@ -95,13 +95,16 @@ end
 
 --Utility function to apply chamber-upgraded modifications to alien damage
 --Note: this should _always_ be called BEFORE damage-type specific modifications are done (i.e. Light vs Normal vs Structural, etc)
-function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, armorFractionUsed, _, damageType )
+function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, armorFractionUsed, _, damageType, hitPoint, weapon )
 
     if not doer then return damage, armorFractionUsed end
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
     local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and doer.GetIsAffectedByBlight and doer:GetIsAffectedByBlight() and GetAreEnemies(target, attacker)
+
+    local blightCategory = doer.GetBlightCategory and doer:GetBlightCategory(weapon) or kBlightCategory.None
+    local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and blightCategory ~= kBlightCategory.None and GetAreEnemies(target, attacker)
 
     -- TODO(Salads): Rename kTechID.Focus to our new Blight.
 
@@ -155,13 +158,27 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
         -- Blight
         if isAffectedByBlight then
 
+            local blightDuration = 0
+            local isTargetPlayer = target:isa("Player")
             local veilLevel = attacker:GetVeilLevel()
 
-            local blightDuration
-            if not target:isa("Player") then
-                blightDuration = kBlightPrimaryPlayerDurationPerChamber
-            else
-                blightDuration = kBlightPrimaryStructureDurationPerChamber
+
+            if blightCategory == kBlightCategory.Primary then
+
+                if isTargetPlayer then
+                    blightDuration = kBlightPrimaryPlayerDurationPerChamber
+                else
+                    blightDuration = kBlightPrimaryStructureDurationPerChamber
+                end
+
+            elseif blightCategory == kBlightCategory.Secondary then
+
+                if isTargetPlayer then
+                    blightDuration = kBlightSecondaryPlayerDurationPerChamber
+                else
+                    blightDuration = kBlightSecondaryStructureDurationPerChamber
+                end
+
             end
 
             blightDuration = blightDuration * veilLevel
