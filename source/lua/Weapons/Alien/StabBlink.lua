@@ -65,6 +65,18 @@ function StabBlink:GetDeathIconIndex()
     return kDeathMessageIcon.Stab
 end
 
+function StabBlink:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function StabBlink:GetTechId()
+    return kTechId.Stab
+end
+
 function StabBlink:GetSecondaryTechId()
     return kTechId.Blink
 end
