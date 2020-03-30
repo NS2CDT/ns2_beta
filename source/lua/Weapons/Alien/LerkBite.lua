@@ -73,6 +73,20 @@ function LerkBite:GetHUDSlot()
     return 1
 end
 
+function LerkBite:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    elseif fromTechId == self:GetSecondaryTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function LerkBite:GetTechId()
+    return kTechId.LerkBite
+end
+
 function LerkBite:GetSecondaryTechId()
     return kTechId.Spikes
 end
