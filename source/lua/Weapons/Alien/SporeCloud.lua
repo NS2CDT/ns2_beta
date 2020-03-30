@@ -143,6 +143,14 @@ function SporeCloud:GetDamageRadius()
     return scalar * kSporesDustCloudRadius
 end
 
+function SporeCloud:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
 function SporeCloud:GetTechId()
 	return kTechId.Spores
 end
