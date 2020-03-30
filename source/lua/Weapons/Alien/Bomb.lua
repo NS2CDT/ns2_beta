@@ -46,6 +46,18 @@ function Bomb:OnCreate()
 
 end
 
+function Bomb:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetWeaponTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function Bomb:GetWeaponTechId()
+    return kTechId.BileBomb
+end
+
 function Bomb:GetDeathIconIndex()
     return 
 end
@@ -60,7 +72,7 @@ if Server then
     function Bomb:ProcessHit(targetHit, surface, normal)        
         
         local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin() + normal * 0.2, self:GetTeamNumber())
-		dotMarker:SetTechId(kTechId.BileBomb)
+		dotMarker:SetTechId(self:GetWeaponTechId())
 		dotMarker:SetDamageType(kBileBombDamageType)        
         dotMarker:SetLifeTime(kBileBombDuration)
         dotMarker:SetDamage(kBileBombDamage)
@@ -72,6 +84,13 @@ if Server then
         dotMarker:SetIsAffectedByCrush(true)
         dotMarker:SetOwner(self:GetOwner())
         dotMarker:SetFallOffFunc(SineFalloff)
+        dotMarker.GetBlightCategory = function ( self, fromTechId )
+            if fromTechId == self:GetTechId() then
+                return kBlightCategory.Secondary
+            else
+                return kBlightCategory.None
+            end
+        end
         
         dotMarker:TriggerEffects("bilebomb_hit")
 
