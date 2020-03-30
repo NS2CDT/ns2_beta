@@ -50,6 +50,18 @@ function Parasite:GetDeathIconIndex()
     return kDeathMessageIcon.Parasite
 end
 
+function Parasite:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function Parasite:GetTechId()
+    return kTechId.Parasite
+end
+
 function Parasite:GetSecondaryTechId()
     return kTechId.Leap
 end
