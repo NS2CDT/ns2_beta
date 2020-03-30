@@ -91,6 +91,18 @@ function Gore:OnCreate()
     
 end
 
+function Gore:GetBlightCategory( fromTechId ) -- Secondary spawns a "owned" entity "Shockwave"
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function Gore:GetTechId()
+    return kTechId.Gore
+end
+
 function Gore:GetDeathIconIndex()
     return kDeathMessageIcon.Gore
 end
