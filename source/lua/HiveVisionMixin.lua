@@ -23,6 +23,8 @@ function HiveVisionMixin:__initmixin()
         self.hiveSightVisible = false
         self.nextFriendlyHiveVisionCheck = 0
         self.timeHiveVisionChanged = 0
+        self.lastParasited = false
+        self.lastBlighted = false
     end
 
 end
@@ -116,7 +118,10 @@ if Client then
         end
 
         -- Update the visibility status.
-        if ((recentHPChange and not friendlyAlien) or (visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now)) then
+        if ((recentHPChange and not friendlyAlien) or
+                (self.lastParasited ~= parasited) or
+                (self.lastBlighted ~= blighted) or
+                (visible ~= self.hiveSightVisible and self.timeHiveVisionChanged + 1 < now)) then
         
             local model = self:GetRenderModel()
             if model ~= nil then
@@ -166,6 +171,8 @@ if Client then
                    
                 self.hiveSightVisible = visible    
                 self.timeHiveVisionChanged = now
+                self.lastParasited = parasited
+                self.lastBlighted = blighted
                 
             end
             
