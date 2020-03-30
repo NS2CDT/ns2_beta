@@ -50,6 +50,14 @@ function Spit:GetVampiricLeechScalar()
     return kSpitVampirismScalar
 end
 
+function Spit:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetWeaponTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+end
+
 function Spit:GetWeaponTechId()
     return kTechId.Spit
 end
