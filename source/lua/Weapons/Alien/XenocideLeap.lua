@@ -69,6 +69,18 @@ local function CleanUI(self)
     end
     
 end
+
+function XenocideLeap:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function XenocideLeap:GetTechId()
+    return kTechId.Xenocide
+end
     
 function XenocideLeap:OnDestroy()
 
