@@ -133,10 +133,6 @@ function BiteLeap:GetMeleeOffset()
     return 0.0
 end
 
-function BiteLeap:GetIsAffectedByBlight()
-    return self.primaryAttacking
-end
-
 function BiteLeap:GetAttackAnimationDuration()
     return self.kAttackDuration
 end

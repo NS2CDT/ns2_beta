@@ -133,10 +133,6 @@ function StabBlink:GetIsStabbing()
     return self.stabbing == true
 end
 
-function StabBlink:GetIsAffectedByBlight()
-    return self.primaryAttacking
-end
-
 function StabBlink:GetMaxFocusBonusDamage()
     return kStabFocusDamageBonusAtMax
 end

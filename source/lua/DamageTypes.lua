@@ -101,7 +101,6 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
-    local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and doer.GetIsAffectedByBlight and doer:GetIsAffectedByBlight() and GetAreEnemies(target, attacker)
 
     local blightCategory = doer.GetBlightCategory and doer:GetBlightCategory(weapon) or kBlightCategory.None
     local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and blightCategory ~= kBlightCategory.None and GetAreEnemies(target, attacker)
