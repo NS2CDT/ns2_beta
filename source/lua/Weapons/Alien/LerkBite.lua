@@ -143,10 +143,6 @@ function LerkBite:GetMeleeOffset()
     return 0.0
 end
 
-function LerkBite:GetIsAffectedByFocus()
-    return self.primaryAttacking
-end
-
 function LerkBite:GetAttackAnimationDuration()
     return self.kAttackDuration
 end

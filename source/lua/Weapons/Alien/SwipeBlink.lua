@@ -115,10 +115,6 @@ function SwipeBlink:OnHolster(player)
     
 end
 
-function SwipeBlink:GetIsAffectedByFocus()
-    return self.primaryAttacking
-end
-
 function SwipeBlink:GetAttackAnimationDuration()
     return kAttackDuration
 end

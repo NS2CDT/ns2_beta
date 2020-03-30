@@ -140,10 +140,6 @@ function Gore:GetMeleeBase()
     return 1, 1.4
 end
 
-function Gore:GetIsAffectedByFocus()
-    return true
-end
-
 function Gore:Attack(player)
     
     local now = Shared.GetTime()

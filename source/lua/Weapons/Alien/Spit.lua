@@ -62,10 +62,6 @@ function Spit:GetWeaponTechId()
     return kTechId.Spit
 end
 
-function Spit:GetIsAffectedByFocus()
-    return true
-end
-
 function Spit:GetMaxFocusBonusDamage()
     return kSpitFocusDamageBonusAtMax
 end
