@@ -67,6 +67,18 @@ function SwipeBlink:GetVampiricLeechScalar()
     return kSwipeVampirismScalar
 end
 
+function SwipeBlink:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+end
+
+function SwipeBlink:GetTechId()
+    return kTechId.Swipe
+end
+
 function SwipeBlink:GetSecondaryTechId()
     return kTechId.Blink
 end
