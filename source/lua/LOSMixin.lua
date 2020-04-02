@@ -225,13 +225,17 @@ if Server then
     end
     
     local function UpdateSelfSighted(self)
-    
+
         -- Marines are seen if parasited or on infestation.
         -- Soon make this something other Mixins can hook into instead of hardcoding GameEffects here.
         local seen = false
-        
+
         if HasMixin(self, "GameEffects") then
-            seen = GetIsParasited(self) --TODO Fix this as the kGameEffect.Parasite is not used in server context
+            seen = GetIsParasited(self)
+        end
+
+        if not seen and HasMixin(self, "BlightAble") then
+            seen = self:GetIsBlighted()
         end
         
         local lastViewer = self:GetLastViewer()
@@ -361,6 +365,18 @@ if Server then
             
         end
         
+    end
+
+    function LOSMixin:OnBlighted()
+        if not self.dirtyLOS then
+            self.updateLOS = true
+        end
+    end
+
+    function LOSMixin:OnBlightRemoved()
+        if not self.dirtyLOS then
+            self.updateLOS = true
+        end
     end
     
     function LOSMixin:OnParasited()

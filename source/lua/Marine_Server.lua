@@ -127,6 +127,8 @@ function Marine:CopyPlayerDataFrom(player)
             self:TransferParasite( { parasited = player.prevParasited, timeParasited = player.prevParasitedTime } )
         end
 
+        self:TransferBlight(player)
+
     end
 
 end

@@ -68,8 +68,12 @@ kStabFocusDamageBonusAtMax = kFocusDamageBonusAtMax -- anticipating this will ne
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0
 
-kBlightParasitePlayersDurationAtMax = 15
-kBlightParasiteStructuresDurationAtMax = 45
+kBlightCategory = enum({'None', 'Primary', 'Secondary'})
+kBlightPrimaryPlayerDurationPerChamber = 5
+kBlightPrimaryStructureDurationPerChamber = 15
+kBlightSecondaryPlayerDurationPerChamber = 1
+kBlightSecondaryStructureDurationPerChamber = 3
+
 
 kHydrasPerHive = 3
 kClogsPerHive = 10

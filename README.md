@@ -6,6 +6,22 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
+- 31/03/2020
+    - Blight now has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
+        - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
+            - Skulk : bite
+            - Gorge: Spit
+            - Lerk: Bite
+            - Fade: Swipe, Stab
+            - Onos: Gore
+        -Secondary Abilities: (1 second per veil for players, 3 seconds per veil for structures)
+            - Skulk: Parasite, Xenocide
+            - Gorge: Bilebomb
+            - Lerk: Spikes, Spores
+            - Fade: None
+            - Onos: Stomp
+    - Blight will outline the target based on their health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
+    - Added a Player Status icon for blight.
 - 18/03/2020
     - Lerk Spike now penetrates soft targets (MACs)
     - Fixed dead players displaying nameplate
@@ -117,9 +133,21 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No longer displays any health information (marker will always be yellow)
         - Focus
             - Replaced with new upgrade: Blight (experimental):
-                - With Blight each primary attack parasites the target
-                - The timeout for that parasite is 5/10/15 seconds on players and 15/30/45 seconds on structures for 1/2/3 Veils
-        
+                - With Blight each attack now outlines the target much like a parasite.
+                    - Highlight color is based on enemy health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
+                - Blight has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
+                    - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
+                        - Skulk : bite
+                        - Gorge: Spit
+                        - Lerk: Bite
+                        - Fade: Swipe, Stab
+                        - Onos: Gore
+                    -Secondary Abilities: (1 second per veil for players, 3 seconds per veil for structures)
+                        - Skulk: Parasite, Xenocide
+                        - Gorge: Bilebomb
+                        - Lerk: Spikes, Spores
+                        - Fade: None
+                        - Onos: Stomp
     - Skulk
         - Reduced bite cone to 0.8 x 1.2 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
