@@ -402,9 +402,12 @@ kBileBombSplashRadius = 6
 kBileBombDotInterval = 0.4
 
 kWebBuildCost = 0
-kWebbedDuration = 2.5
+kWebbedDuration = 5
 kWebbedParasiteDuration = 10
 kWebSlowVelocityScalar = 0.34 --Note: Exos override this
+kWebMaxCharges = 3
+kWebSecondsPerCharge = 10
+kWebHealthPerCharge = 13
 
 kLerkBiteDamage = 60
 kBitePoisonDamage = 6 -- per second

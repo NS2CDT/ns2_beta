@@ -75,6 +75,20 @@ function BiteLeap:GetHUDSlot()
     return 1
 end
 
+function BiteLeap:GetBlightCategory( fromTechId )
+
+    if fromTechId == self:GetTechId() then
+        return kBlightCategory.Primary
+    else
+        return kBlightCategory.None
+    end
+
+end
+
+function BiteLeap:GetTechId()
+    return kTechId.Bite
+end
+
 function BiteLeap:GetSecondaryTechId()
     return kTechId.Leap
 end
@@ -117,10 +131,6 @@ end
 
 function BiteLeap:GetMeleeOffset()
     return 0.0
-end
-
-function BiteLeap:GetIsAffectedByFocus()
-    return self.primaryAttacking
 end
 
 function BiteLeap:GetAttackAnimationDuration()

@@ -95,13 +95,17 @@ end
 
 --Utility function to apply chamber-upgraded modifications to alien damage
 --Note: this should _always_ be called BEFORE damage-type specific modifications are done (i.e. Light vs Normal vs Structural, etc)
-function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, armorFractionUsed, _, damageType )
+function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, armorFractionUsed, _, damageType, hitPoint, weapon )
 
     if not doer then return damage, armorFractionUsed end
 
     local isAffectedByCrush = doer.GetIsAffectedByCrush and attacker:GetHasUpgrade( kTechId.Crush ) and doer:GetIsAffectedByCrush()
     local isAffectedByVampirism = doer.GetVampiricLeechScalar and attacker:GetHasUpgrade( kTechId.Vampirism )
-    local isAffectedByFocus = doer.GetIsAffectedByFocus and attacker:GetHasUpgrade( kTechId.Focus ) and doer:GetIsAffectedByFocus()
+
+    local blightCategory = doer.GetBlightCategory and doer:GetBlightCategory(weapon) or kBlightCategory.None
+    local isAffectedByBlight = attacker:GetHasUpgrade( kTechId.Focus ) and blightCategory ~= kBlightCategory.None and GetAreEnemies(target, attacker)
+
+    -- TODO(Salads): Rename kTechID.Focus to our new Blight.
 
     if isAffectedByCrush then --Crush
         local crushLevel = attacker:GetSpurLevel()
@@ -136,7 +140,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
                         end
                         
                         local focusBonus = 1
-                        if isAffectedByFocus then
+                        if isAffectedByBlight then
                             focusBonus = 1 + doer:GetFocusAttackCooldown()
                         end
 
@@ -149,26 +153,40 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
                 end
             end
         end
+
+        -- Blight
+        if isAffectedByBlight then
+
+            local blightDuration = 0
+            local isTargetPlayer = target:isa("Player")
+            local veilLevel = attacker:GetVeilLevel()
+
+
+            if blightCategory == kBlightCategory.Primary then
+
+                if isTargetPlayer then
+                    blightDuration = kBlightPrimaryPlayerDurationPerChamber
+                else
+                    blightDuration = kBlightPrimaryStructureDurationPerChamber
+                end
+
+            elseif blightCategory == kBlightCategory.Secondary then
+
+                if isTargetPlayer then
+                    blightDuration = kBlightSecondaryPlayerDurationPerChamber
+                else
+                    blightDuration = kBlightSecondaryStructureDurationPerChamber
+                end
+
+            end
+
+            blightDuration = blightDuration * veilLevel
+
+            if target.SetBlighted and blightDuration > 0 then
+                target:SetBlighted(blightDuration)
+            end
+        end
         
-    end
-
-    --Focus
-    if isAffectedByFocus then
-        local veilLevel = attacker:GetVeilLevel()
-        local damageBonus = doer:GetMaxFocusBonusDamage()
-        damage = damage * (1 + (veilLevel/3) * damageBonus) --1.0, 1.333, 1.666, 2
-
-        local showHealthOutline = true
-        local parasiteDuration = kBlightParasitePlayersDurationAtMax
-        if not target:isa("Player") then
-            parasiteDuration = kBlightParasiteStructuresDurationAtMax
-        end
-
-        parasiteDuration = (parasiteDuration / 3) * veilLevel
-
-        if target.SetParasited then
-            target:SetParasited(attacker, parasiteDuration, showHealthOutline)
-        end
     end
     
     --!!!Note: if more than damage and armor fraction modified, be certain the calling-point of this function is updated
