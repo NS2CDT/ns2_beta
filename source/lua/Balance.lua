@@ -319,7 +319,7 @@ kMACAttackDamageType = kDamageType.Normal
 kMACAttackFireDelay = 0.6
 
 
-kMineDamage = 150
+kMineDamage = 130
 kMineDamageType = kDamageType.Normal
 
 kSentryAttackDamageType = kDamageType.Normal

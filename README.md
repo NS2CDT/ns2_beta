@@ -30,6 +30,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Onos: Stomp
     - Blight will outline the target based on their health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
     - Added a Player Status icon for blight.
+    - Decreased mine damage to 130 (from 150)
+
 - 18/03/2020
     - Lerk Spike now penetrates soft targets (MACs)
     - Fixed dead players displaying nameplate
@@ -39,19 +41,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Fixed some cysts instantly dying when placed
     - Fixed a compatibility issue with ns2+ causing script errors
     - Added a script error reporter
-    
-- 08/03/2020
-    - Reverted innate regen limitation.
-    - Reverted Carapace changes.
-    - Reverted Hydra changes for now. There will be another iteration of hydra changes.
-    - Fixed that heal spray increase maturity for unbuilt structures
-    - Decreased heal spray gestate boost by 50%. Each heal spray now decreases gestate time by 0.5 second (instead of 1 second).
-    - Decreased HMG clip size to 100 (from 125)
-    - Decreased Exosuit self repair rate to 8 armor/second (from 10)
-    - Decreased Ink Cloud cooldown to 15 seconds (from 16).
-    - Decreased weight of Mines and Hand Grenades to 0 (from 0.1). So they no longer affect marine's speed.
-    - Increased Skulk bite cone to to 0.8x1.2  (from 0.8x1.0).
-    - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
     
 ## Full Changelog:
 
@@ -72,7 +61,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Flamethrower
         - Removed energy damage (1 energy per hit)
     - Mines
-        - Mines can now be properly killed during their arming period when first deployed. In this case, they do not explode or deal               damage.
+        - Decreased damage to 130 (from 150)
+        - Mines can now be properly killed during their arming period when first deployed. In this case, they do not explode or deal damage.
         - Marines now keep unused mines when they die and receive them back when they respawn (like hand grenades).
         - Change hit points to 30 health and 9 armor (from 40 health and 5 armor). Tip: With crush it takes only 4 parasites (instead of 5) to destroy a mine.
         - Lerk spikes deal 2x damage to mines (Damage: 5 -> 10).
