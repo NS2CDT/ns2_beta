@@ -20,7 +20,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Lerk: Spikes, Spores
             - Fade: None
             - Onos: Stomp
-    - Added a Player Status icon for blight
+    - Blight will outline the target based on their health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
+    - Added a Player Status icon for blight.
 - 18/03/2020
     - Lerk Spike now penetrates soft targets (MACs)
     - Fixed dead players displaying nameplate
@@ -132,7 +133,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - No longer displays any health information (marker will always be yellow)
         - Focus
             - Replaced with new upgrade: Blight (experimental):
-                - With Blight each attacks now parasite the target.
+                - With Blight each attack now outlines the target much like a parasite.
+                    - Highlight color is based on enemy health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
                 - Blight has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
                     - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
                         - Skulk : bite
