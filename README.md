@@ -7,6 +7,14 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent Changes
 - 31/03/2020
+    - Gorge webs now have a "hardening" mechanic.
+        - 10 seconds per charge.
+        - 3 charges max.
+        - 13 hp per charge, in addition to the base health.
+    - Gorge webs now only placeable on the ground from one endpoint. (fix "duct tape" webs)
+    - Gorge Webs now fade into view at 10 meters (up from 5)
+    - Gorge web ghost model stalk now stays visible even when placement is invalid. (Will turn red instead)
+    - Gorge web snare duration is now 5 seconds (from 2.5)
     - Blight now has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
         - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
             - Skulk : bite
@@ -158,10 +166,12 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.
         - Web
+            - Web GhostModel stalk will now stay visible even if the palcement is invalid. (Will be colored red)
+            - Webs are now only placeable on the ground from one endpoint. (to fix "duct tape" webs)
             - Gorges can finish placing webs from much further away.  Starting placement range is unchanged.
             - Now break on contact.
-            - Snare now reduces movement speed by 66% and tapers off gradually over 2.5 seconds (up from 1.5 seconds)
-            - Webs now turn invisible, only fading into view at 5 meters or closer.
+            - Snare now reduces movement speed by 66% and tapers off gradually over 5 seconds (up from 2.5 seconds)
+            - Webs now turn invisible, only fading into view at 10 meters or closer.
             - No longer parasite marines.
             - No longer appears in the kill-feed.
         - Babbler
