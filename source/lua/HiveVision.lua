@@ -12,7 +12,7 @@ local _maxDistance      = 30
 local _maxDistance_Commander = 60
 local _enabled          = true
 
-kHiveVisionOutlineColor = enum { [0]='Yellow', 'Green', 'KharaaOrange', 'DarkGreen' }
+kHiveVisionOutlineColor = enum { [0]='Yellow', 'Green', 'KharaaOrange', 'DarkGreen', 'White' }
 kHiveVisionOutlineColorCount = #kHiveVisionOutlineColor+1
 
 function HiveVision_Initialize()

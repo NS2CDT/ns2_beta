@@ -158,7 +158,7 @@ if Client then
                                 outlineColor = kHiveVisionOutlineColor.KharaaOrange
                             end
                         elseif parasited then
-                            outlineColor = kHiveVisionOutlineColor.Green
+                            outlineColor = kHiveVisionOutlineColor.White
                         end
                     end
 
