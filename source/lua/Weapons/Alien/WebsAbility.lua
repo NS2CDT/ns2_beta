@@ -14,6 +14,7 @@ local kMapOrigin = Vector(0,0,0)
 
 WebsAbility.kFirstDropRange = kGorgeCreateDistance
 WebsAbility.kSecondDropRange = WebsAbility.kFirstDropRange * 3
+WebsAbility.kGroundedMinDistance = 0.3
 
 function WebsAbility:GetEnergyCost()
     return kDropStructureEnergyCost
@@ -53,7 +54,6 @@ end
 
 function WebsAbility:GetIsPositionValid(displayOrigin, player, normal, lastClickedPosition, entity)
 
-    
     local direction = player:GetViewCoords().zAxis
     local startPoint = displayOrigin + normal * 0.1
     local valid = lastClickedPosition == nil
@@ -63,10 +63,21 @@ function WebsAbility:GetIsPositionValid(displayOrigin, player, normal, lastClick
     
         -- check if we can create a web between the 2 point
         local webTrace = Shared.TraceRay(lastClickedPosition, startPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterAll())
+
         if webTrace.fraction >= 0.99 then
-            valid = true
+
+            local startGroundPos = GetGroundAtPosition(startPoint, EntityFilterAll(), PhysicsMask.Bullets)
+            local endGroundPos = GetGroundAtPosition(lastClickedPosition, EntityFilterAll(), PhysicsMask.Bullets)
+            local hasGroundedEndpoint = (startPoint.y - startGroundPos.y) <= WebsAbility.kGroundedMinDistance
+
+            if hasGroundedEndpoint then
+                valid = (lastClickedPosition.y - endGroundPos.y) > WebsAbility.kGroundedMinDistance
+            else
+                valid = true
+            end
+
         end
-    
+
     end
 
     return valid and (not entity or entity:isa("Tunnel") or entity:isa("Infestation")) and lastClickedPosition ~= kMapOrigin
