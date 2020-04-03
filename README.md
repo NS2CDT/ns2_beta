@@ -5,7 +5,12 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-## Recent Changes
+## Recent 
+- 4/2/2020
+    - Added 3 new colors to be used with Blight.
+    - New Colors used are based on player or structure health, respectively.
+        - For players, Blue >= 4 bites, Yellow = 3 bites, Red < 2 Bites
+        - For Structures, Blue >= 66% eHP, Yellow >= 33% eHP, Red < 33% eHP
 - 31/03/2020
     - Gorge webs now have a "hardening" mechanic.
         - 10 seconds per charge.
@@ -132,7 +137,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Focus
             - Replaced with new upgrade: Blight (experimental):
                 - With Blight each attack now outlines the target much like a parasite.
-                    - Highlight color is based on enemy health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
+                    - Highlight color is based on enemy health, Depending if the target is a structure or player.
+                        - For players, Blue >= 4 bites, Yellow = 3 bites, Red <= 2 Bites
+                        - For Structures, Blue >= 66% eHP+, Yellow >= 33% eHP+, Red < 33% eHP
                 - Blight has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
                     - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
                         - Skulk : bite
