@@ -90,7 +90,11 @@ if Client then
                 recentHPChange = true
             end
         end
-        
+
+        if blighted and self.timeHiveVisionChanged < self.timeBlighted then
+            recentHPChange = true
+        end
+
         if Client.GetLocalClientTeamNumber() == kSpectatorIndex
               and self:isa("Alien") 
               and Client.GetOutlinePlayers()
