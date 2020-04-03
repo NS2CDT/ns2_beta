@@ -5,13 +5,17 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-## Recent 
-- 4/2/2020
+## Recent
+
+- 04/04/2020
+    - Fixed blight not working with bile bomb on marines without armor.
+    - Fixed Exo HUD script errors.    
+- 03/04/2020
     - Added 3 new colors to be used with Blight.
     - New Colors used are based on player or structure health, respectively.
         - For players, Blue >= 4 bites, Yellow = 3 bites, Red < 2 Bites
         - For Structures, Blue >= 66% eHP, Yellow >= 33% eHP, Red < 33% eHP
-- 31/03/2020
+- 02/04/2020
     - Gorge webs now have a "hardening" mechanic.
         - 10 seconds per charge.
         - 3 charges max.
@@ -36,16 +40,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Blight will outline the target based on their health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
     - Added a Player Status icon for blight.
     - Decreased mine damage to 130 (from 150)
-
-- 18/03/2020
-    - Lerk Spike now penetrates soft targets (MACs)
-    - Fixed dead players displaying nameplate
-    - Fixed various script errors
-
-- 14/03/2020
-    - Fixed some cysts instantly dying when placed
-    - Fixed a compatibility issue with ns2+ causing script errors
-    - Added a script error reporter
     
 ## Full Changelog:
 
