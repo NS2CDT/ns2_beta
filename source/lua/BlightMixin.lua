@@ -24,7 +24,7 @@ BlightMixin.optionalCallbacks =
 BlightMixin.networkVars =
 {
     blighted = "boolean",
-    timeBlighted = "private time",
+    timeBlighted = "time",
     blightDuration = "private float (0 to 45 by 0.1)"
 }
 
