@@ -5,8 +5,11 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
-## Recent 
-- 4/2/2020
+## Recent
+- 04/04/2020
+    - Fixed commanders forced to repress the grid key for dual action items.
+        - A commander can now keep the medpack key pressed, and drop one medpack for each subsequent mouse click.
+- 02/04/2020
     - Added 3 new colors to be used with Blight.
     - New Colors used are based on player or structure health, respectively.
         - For players, Blue >= 4 bites, Yellow = 3 bites, Red < 2 Bites
@@ -52,6 +55,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Added a "changelog" console command to show this webpage.
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
 - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
+- Fixed commanders forced to repress the grid key for dual action items
 
 - Marine
     - Shotgun

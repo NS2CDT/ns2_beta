@@ -87,11 +87,14 @@ kGridHotkeys =
                 
                 -- Check if a new hotkey was pressed. Don't allow the last
                 -- key pressed unless it has been released first.
-                if hotkey ~= nil and input.hotkey == hotkey and self.lastHotkeyIndex ~= index then
+                if hotkey ~= nil and input.hotkey == hotkey
+                then
                     
                     self:SetHotkeyHit(index)
                     self.lastHotkeyIndex = index
-                    CommanderUI_OnButtonClicked()
+                    if self.lastHotkeyIndex ~= index then
+                        CommanderUI_OnButtonClicked()
+                    end
                     
                     break
                     
