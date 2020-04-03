@@ -142,20 +142,34 @@ if Client then
                         if blighted then
 
                             local eHP
+                            local maxEHP
+
                             if self:GetIgnoreHealth() then
                                 eHP = self:GetArmor() * kHealthPointsPerArmor
+                                maxEHP = self:GetMaxArmor() * kHealthPointsPerArmor
                             else
                                 eHP = self:GetHealth() + self:GetArmor() * kHealthPointsPerArmor
+                                maxEHP = self:GetMaxHealth() + self:GetMaxArmor() * kHealthPointsPerArmor
                             end
 
-                            local bitesLeft = math.floor((eHP / 75) + 1) -- .01 over 1 bite still needs 2 bites.
-
-                            if bitesLeft >= 4 then -- 4+ bites, green outline
-                                outlineColor = kHiveVisionOutlineColor.Green
-                            elseif bitesLeft >= 3 then -- 3 bites, yellow
-                                outlineColor = kHiveVisionOutlineColor.Yellow
-                            else -- 2 bites or less, red/orange
-                                outlineColor = kHiveVisionOutlineColor.KharaaOrange
+                            local isPlayer = self:isa("Player")
+                            if isPlayer then
+                                if eHP > 225 then
+                                    outlineColor = kHiveVisionOutlineColor.Blue
+                                elseif eHP > 150 then
+                                    outlineColor = kHiveVisionOutlineColor.Yellow
+                                else
+                                    outlineColor = kHiveVisionOutlineColor.Red
+                                end
+                            else
+                                local eHPFrac = eHP / maxEHP
+                                if eHPFrac > 0.66 then
+                                    outlineColor = kHiveVisionOutlineColor.Blue
+                                elseif eHPFrac > 0.33 then
+                                    outlineColor = kHiveVisionOutlineColor.Yellow
+                                else
+                                    outlineColor = kHiveVisionOutlineColor.Red
+                                end
                             end
                         elseif parasited then
                             outlineColor = kHiveVisionOutlineColor.White
