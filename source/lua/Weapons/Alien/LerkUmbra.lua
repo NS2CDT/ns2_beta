@@ -88,6 +88,14 @@ function LerkUmbra:GetDeathIconIndex()
     return kDeathMessageIcon.Spikes
 end
 
+function LerkUmbra:GetBlightCategory( fromTechId )
+    if fromTechId == self:GetSecondaryTechId() then
+        return kBlightCategory.Secondary
+    else
+        return kBlightCategory.None
+    end
+end
+
 function LerkUmbra:GetSecondaryTechId()
     return kTechId.Spikes
 end
