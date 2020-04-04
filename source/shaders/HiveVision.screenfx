@@ -1,8 +1,7 @@
 resources =
     [
         { name="downsample"                 format="R8G8B8A8"        x_scale=0.5 y_scale=0.5 ping_pong=true }
-        { name="outlinemask"                 file_name="*hive_vision"                    }
-        { name="noise"                      file_name="ui/ui_hive_vision_smoke.dds"     }
+        { name="outlinemask"                file_name="*hive_vision"                    }
     ]
     
 settings =
@@ -49,7 +48,6 @@ layers =
                     inputTexture            = "source_buffer"
                     inputTexture1           = { resource="downsample" linear=true }
                     inputTexture2           = "outlinemask"
-                    noiseTexture            = { resource="noise" wrap=true }
                     depthTexture            = { resource="depthTexture" linear=true }
             }
         }

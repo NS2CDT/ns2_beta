@@ -20,7 +20,6 @@ struct PS_INPUT
 sampler2D     inputTexture;
 sampler2D     inputTexture1;
 sampler2D     inputTexture2;
-sampler2D     noiseTexture;
 sampler2D     depthTexture;
     
 /**
@@ -54,12 +53,9 @@ float4 FinalCompositePS(PS_INPUT input) : COLOR0
     if (glow.a > 0)
     {
         float4 mask = tex2D( inputTexture2, input.texCoord);
-        float fadeout=clamp(pow(2.0,-depth.r*.55), 0.3, 1);
-
-        float4 smoke = tex2D(noiseTexture, input.texCoord * 10 + time * 0.12);
         
-         float opacity = 1 - mask.a;
-        result += glow * smoke * opacity * 3 * fadeout;
+        float opacity = 1 - mask.a;
+        result += opacity * glow * 1.8;
     }
 
     return result;
