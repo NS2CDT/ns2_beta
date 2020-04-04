@@ -52,7 +52,7 @@ end
 
 function Parasite:GetBlightCategory( fromTechId )
     if fromTechId == self:GetTechId() then
-        return kBlightCategory.Primary
+        return kBlightCategory.Secondary
     else
         return kBlightCategory.None
     end
