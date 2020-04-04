@@ -10,6 +10,7 @@
 		<input name="hiddenAmount" type="float">0.0</input>
 		<input name="emissiveAmount" type="float">1.0</input>
         <input name="highlight" type="float">0.0</input>
+		<input name="outline" type="float">0.0</input>
 	</inputs>
 	
 	<params>
@@ -70,7 +71,7 @@
 			}
 			
 			material.id = 1*highlightId;    // for alien vision
-			
+			material.outline = outline;
 		}
 	]]>
 	</code>
