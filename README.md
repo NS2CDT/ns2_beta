@@ -9,7 +9,12 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 - 04/04/2020
     - Fixed blight not working with bile bomb on marines without armor.
-    - Fixed Exo HUD script errors.    
+    - Fixed Exo HUD script errors.
+    - Fixed Lerk spikes for Umbra not applying Blight
+    - Fixed skulk parasite applying wrong duration of Blight.
+    - Updated Blight highlight colors.
+    - Tweaked Blight highlight shader to be more visible.
+    - Fixed Powernode not dispalying the correct outline while blighted.
 - 03/04/2020
     - Added 3 new colors to be used with Blight.
     - New Colors used are based on player or structure health, respectively.
