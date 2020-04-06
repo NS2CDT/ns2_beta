@@ -15,6 +15,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Updated Blight highlight colors.
     - Tweaked Blight highlight shader to be more visible.
     - Fixed Powernode not dispalying the correct outline while blighted.
+    - Fixed commanders forced to repress the grid key for dual action items.
+        - A commander can now keep the medpack key pressed, and drop one medpack for each subsequent mouse click.
 - 03/04/2020
     - Added 3 new colors to be used with Blight.
     - New Colors used are based on player or structure health, respectively.
@@ -51,6 +53,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Added a "changelog" console command to show this webpage.
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
 - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
+- Fixed commanders forced to repress the grid key for dual action items
 
 - Marine
     - Shotgun
