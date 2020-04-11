@@ -44,8 +44,8 @@ local networkVars =
     chargeScalingFactor = "float (0 to 3 by 0.01)"
 }
 
-Web.kZeroVisDistance = 12.5
-Web.kFullVisDistance = 10.0
+Web.kZeroVisDistance = 8.5
+Web.kFullVisDistance = 6.5
 Web.kDistortionIntensity = 0.0625
 Web.ChargeScaleAdditive = 0.47 -- Percent to "thicken" webs by per charge.
 
