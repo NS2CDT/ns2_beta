@@ -10,6 +10,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Reverted Blight and Aura changes.
 - 11/04/2020
     - Reverted Skulk bite cone changes for now (A/B test)
+- 10/04/2020
+    - Decreased Gorge web full visibility distance to 6.5 meters.
 - 04/04/2020
     - Fixed commanders forced to repress the grid key for dual action items.
         - A commander can now keep the medpack key pressed, and drop one medpack for each subsequent mouse click.
