@@ -7,6 +7,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
 
+- 11/04/2020
+    - Reverted Skulk bite cone changes for now (A/B test)
+
 - 04/04/2020
     - Fixed blight not working with bile bomb on marines without armor.
     - Fixed Exo HUD script errors.
@@ -156,7 +159,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
                         - Fade: None
                         - Onos: Stomp
     - Skulk
-        - Reduced bite cone to 0.8 x 1.2 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
         - Skulks now only receive a speed boost from a consecutive jump.
