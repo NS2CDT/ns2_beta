@@ -7,6 +7,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
 
+- 11/04/2020
+    - Reverted Skulk bite cone changes for now (A/B test)
+
 - 04/04/2020
     - Fixed blight not working with bile bomb on marines without armor.
     - Fixed Exo HUD script errors.
@@ -17,6 +20,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Fixed Powernode not dispalying the correct outline while blighted.
     - Fixed commanders forced to repress the grid key for dual action items.
         - A commander can now keep the medpack key pressed, and drop one medpack for each subsequent mouse click.
+    - Fixed scan not having a visual range displayed
 - 03/04/2020
     - Added 3 new colors to be used with Blight.
     - New Colors used are based on player or structure health, respectively.
@@ -54,6 +58,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - (Experimental) The health and armor status (hp bar) is now hidden for enemy players for all field players. We recommend to enable damage numbers
 - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
 - Fixed commanders forced to repress the grid key for dual action items
+- Fixed scan not having a visual range displayed
 
 - Marine
     - Shotgun
@@ -156,7 +161,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
                         - Fade: None
                         - Onos: Stomp
     - Skulk
-        - Reduced bite cone to 0.8 x 1.2 (down from 1.2 x 1.2)
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
         - Skulks now only receive a speed boost from a consecutive jump.

@@ -734,6 +734,8 @@ function BuildTechData()
             [kTechDataDisplayName] = "SCAN",
             [kTechDataHotkey] = Move.S,
             [kTechDataCostKey] = kObservatoryScanCost,
+            [kVisualRange] = kScanRadius,
+            [kTechDataModel] = BoneWall.kModelName,
             [kTechDataTooltipInfo] = "SCAN_TOOLTIP",
         },
 
