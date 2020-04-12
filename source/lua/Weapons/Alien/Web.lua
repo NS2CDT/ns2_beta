@@ -368,8 +368,8 @@ local function CheckForIntersection(self, fromPlayer)
 
             --DebugPrint("horizontalDistance %s  verticalDistance %s", ToString(horizontalDistance), ToString(verticalDistance))
 
-            if horizontalOk and verticalOk then
-              
+            if horizontalOk and verticalOk and HasMixin(fromPlayer, "Webable") and not fromPlayer:GetIsWebbed() then
+
                 fromPlayer:SetWebbed(kWebbedDuration)
 
                 if Server then
@@ -383,9 +383,10 @@ local function CheckForIntersection(self, fromPlayer)
         end
     
     elseif Server then
-    
+
         local trace = Shared.TraceRay(self:GetOrigin(), self.endPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterNonWebables())
-        if trace.entity and not trace.entity:isa("Player") then
+        if trace.entity and not trace.entity:isa("Player") and not trace.entity:GetIsWebbed() then
+
             trace.entity:SetWebbed(kWebbedDuration)
 
             if not RemoveCharge(self) then
