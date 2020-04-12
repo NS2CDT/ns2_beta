@@ -331,10 +331,10 @@ local function GetDistance(self, fromPlayer)
 
 end
 
-local function RemoveCharge(self)
+local function RemoveWebCharge(self)
 
     self.numCharges = self.numCharges - 1
-    self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
+    self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
     self:SetHealth(self:GetHealth())
 
     return self.numCharges > 0
@@ -374,7 +374,7 @@ local function CheckForIntersection(self, fromPlayer)
 
                 if Server then
 
-                    if not RemoveCharge(self) then
+                    if not RemoveWebCharge(self) then
                         self:Kill(nil, nil, self:GetOrigin())
                     end
                 end
@@ -389,7 +389,7 @@ local function CheckForIntersection(self, fromPlayer)
 
             trace.entity:SetWebbed(kWebbedDuration)
 
-            if not RemoveCharge(self) then
+            if not RemoveWebCharge(self) then
                 self:Kill(nil, nil, self:GetOrigin())
             end
         end    
