@@ -103,6 +103,8 @@ local function AddWebCharge(self)
     self.chargeScalingFactor = self.chargeScalingFactor + Web.ChargeScaleAdditive
     self:SetCoords(self:GetCoords())
 
+    self:TriggerWebSpawnEffects()
+
     return self.numCharges < kWebMaxCharges
 
 end
@@ -392,7 +394,7 @@ end
 
 if Server then
 
-    local function TriggerWebSpawnEffects(self)
+    function Web:TriggerWebSpawnEffects()
 
         local startPoint = self:GetOrigin()
         local zAxis = -self:GetCoords().zAxis
@@ -419,7 +421,7 @@ if Server then
         end
         
         if not self.triggerSpawnEffect then
-            TriggerWebSpawnEffects(self)
+            self:TriggerWebSpawnEffects()
             self.triggerSpawnEffect = true
         end
 
