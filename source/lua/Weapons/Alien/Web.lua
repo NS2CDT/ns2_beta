@@ -137,7 +137,7 @@ function Web:OnCreate()
         
     end
 
-    self.numCharges = 0
+    self.numCharges = 1
     self.chargeScalingFactor = 1.0
     self.variant = kGorgeVariant.normal
 
@@ -331,6 +331,16 @@ local function GetDistance(self, fromPlayer)
 
 end
 
+local function RemoveCharge(self)
+
+    self.numCharges = self.numCharges - 1
+    self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
+    self:SetHealth(self:GetHealth())
+
+    return self.numCharges > 0
+    
+end
+
 local function CheckForIntersection(self, fromPlayer)
 
     if not self.endPoint then
@@ -361,11 +371,13 @@ local function CheckForIntersection(self, fromPlayer)
             if horizontalOk and verticalOk then
               
                 fromPlayer:SetWebbed(kWebbedDuration)
-                
+
                 if Server then
-                    DestroyEntity(self)
+
+                    if not RemoveCharge(self) then
+                        DestroyEntity(self)
+                    end
                 end
-          
             end
         
         end
@@ -375,7 +387,10 @@ local function CheckForIntersection(self, fromPlayer)
         local trace = Shared.TraceRay(self:GetOrigin(), self.endPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterNonWebables())
         if trace.entity and not trace.entity:isa("Player") then
             trace.entity:SetWebbed(kWebbedDuration)
-            -- DestroyEntity(self)
+
+            if not RemoveCharge(self) then
+                DestroyEntity(self)
+            end
         end    
     
     end
