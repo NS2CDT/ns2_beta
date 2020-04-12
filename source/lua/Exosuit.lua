@@ -30,7 +30,6 @@ Script.Load("lua/StaticTargetMixin.lua")
 Script.Load("lua/FlinchMixin.lua")
 Script.Load("lua/LOSMixin.lua")
 Script.Load("lua/AutoWeldMixin.lua")
-Script.Load("lua/BlightMixin.lua")
 
 class 'Exosuit' (ScriptActor)
 
@@ -70,7 +69,6 @@ AddMixinNetworkVars(EntityChangeMixin, networkVars)
 AddMixinNetworkVars(FlinchMixin, networkVars)
 AddMixinNetworkVars(LOSMixin, networkVars)
 AddMixinNetworkVars(AutoWeldMixin, networkVars)
-AddMixinNetworkVars(BlightMixin, networkVars)
 
 function Exosuit:OnCreate ()
 
@@ -88,7 +86,6 @@ function Exosuit:OnCreate ()
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, FlinchMixin, { kPlayFlinchAnimations = true })
     InitMixin(self, LOSMixin)
-    InitMixin(self, BlightMixin)
     
     InitMixin(self, PickupableMixin, { kRecipientType = "Marine" })
 
@@ -250,7 +247,6 @@ if Server then
                 exoPlayer:SetArmor(self:GetArmor())
                 exoPlayer:SetFlashlightOn(self:GetFlashlightOn())
                 exoPlayer:TransferParasite(self)
-                exoPlayer:TransferBlight(self)
     
                 -- Set the auto-weld cooldown of the player exo to match the cooldown of the dropped
                 -- exo.

@@ -34,7 +34,6 @@ Script.Load("lua/WebableMixin.lua")
 Script.Load("lua/ExoVariantMixin.lua")
 Script.Load("lua/MarineVariantMixin.lua")
 Script.Load("lua/AutoWeldMixin.lua")
-Script.Load("lua/BlightMixin.lua")
 
 local kExoFirstPersonHitEffectName = PrecacheAsset("cinematics/marine/exo/hit_view.cinematic")
 
@@ -153,7 +152,6 @@ AddMixinNetworkVars(WebableMixin, networkVars)
 AddMixinNetworkVars(MarineVariantMixin, networkVars)
 AddMixinNetworkVars(ExoVariantMixin, networkVars)
 AddMixinNetworkVars(AutoWeldMixin, networkVars)
-AddMixinNetworkVars(BlightMixin, networkVars)
 
 local function SmashNearbyEggs(self)
 
@@ -192,7 +190,6 @@ function Exo:OnCreate()
     InitMixin(self, CorrodeMixin)
     InitMixin(self, TunnelUserMixin)
     InitMixin(self, ParasiteMixin)
-    InitMixin(self, BlightMixin)
     InitMixin(self, MarineActionFinderMixin)
     InitMixin(self, WebableMixin)
     InitMixin(self, MarineVariantMixin)
@@ -800,7 +797,6 @@ if Server then
             exosuit:SetExoVariant(self:GetExoVariant())
             exosuit:SetFlashlightOn(self:GetFlashlightOn())
             exosuit:TransferParasite(self)
-            exosuit:TransferBlight(self)
             
             -- Set the auto-weld cooldown of the dropped exo to match the cooldown if we weren't
             -- ejecting just now.
