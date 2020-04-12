@@ -338,7 +338,7 @@ local function RemoveCharge(self)
     self:SetHealth(self:GetHealth())
 
     return self.numCharges > 0
-    
+
 end
 
 local function CheckForIntersection(self, fromPlayer)
@@ -375,7 +375,7 @@ local function CheckForIntersection(self, fromPlayer)
                 if Server then
 
                     if not RemoveCharge(self) then
-                        DestroyEntity(self)
+                        self:Kill(nil, nil, self:GetOrigin())
                     end
                 end
             end
@@ -390,7 +390,7 @@ local function CheckForIntersection(self, fromPlayer)
             trace.entity:SetWebbed(kWebbedDuration)
 
             if not RemoveCharge(self) then
-                DestroyEntity(self)
+                self:Kill(nil, nil, self:GetOrigin())
             end
         end    
     
