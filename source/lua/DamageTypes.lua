@@ -157,18 +157,6 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
         local veilLevel = attacker:GetVeilLevel()
         local damageBonus = doer:GetMaxFocusBonusDamage()
         damage = damage * (1 + (veilLevel/3) * damageBonus) --1.0, 1.333, 1.666, 2
-
-        local showHealthOutline = true
-        local parasiteDuration = kBlightParasitePlayersDurationAtMax
-        if not target:isa("Player") then
-            parasiteDuration = kBlightParasiteStructuresDurationAtMax
-        end
-
-        parasiteDuration = (parasiteDuration / 3) * veilLevel
-
-        if target.SetParasited then
-            target:SetParasited(attacker, parasiteDuration, showHealthOutline)
-        end
     end
     
     --!!!Note: if more than damage and armor fraction modified, be certain the calling-point of this function is updated
@@ -686,3 +674,4 @@ function GetDamageByType(target, attacker, doer, damage, damageType, hitPoint, w
     return damage, armorUsed, healthUsed
 
 end
+
