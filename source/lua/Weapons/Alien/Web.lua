@@ -97,7 +97,7 @@ local function AddWebCharge(self)
 
     self.numCharges = self.numCharges + 1
 
-    self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
+    self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
     self:SetHealth(self:GetHealth() + kWebHealthPerCharge)
 
     self.chargeScalingFactor = self.chargeScalingFactor + Web.ChargeScaleAdditive
