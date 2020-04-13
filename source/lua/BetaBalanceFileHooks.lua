@@ -3,8 +3,7 @@ ModLoader.SetupFileHook("lua/Player_Client.lua", "lua/BetaBalancePlayer.lua", "p
 
 if Locale then
     local sntl_strings = {
-        ["FOCUS"] = "Blight",
-        ["FOCUS_TOOLTIP"] = "Upon a hit, parasites and indicates health",
+        
     }
 
     local old_Locale_ResolveString = Locale.ResolveString
@@ -12,3 +11,4 @@ if Locale then
         return sntl_strings[text] or old_Locale_ResolveString(text)
     end
 end
+

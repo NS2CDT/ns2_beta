@@ -6,18 +6,11 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
-
+- 12/04/2020
+    - Reverted Blight and Aura changes.
 - 11/04/2020
     - Reverted Skulk bite cone changes for now (A/B test)
-
 - 04/04/2020
-    - Fixed blight not working with bile bomb on marines without armor.
-    - Fixed Exo HUD script errors.
-    - Fixed Lerk spikes for Umbra not applying Blight
-    - Fixed skulk parasite applying wrong duration of Blight.
-    - Updated Blight highlight colors.
-    - Tweaked Blight highlight shader to be more visible.
-    - Fixed Powernode not dispalying the correct outline while blighted.
     - Fixed commanders forced to repress the grid key for dual action items.
         - A commander can now keep the medpack key pressed, and drop one medpack for each subsequent mouse click.
     - Fixed scan not having a visual range displayed
@@ -35,22 +28,12 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Gorge Webs now fade into view at 10 meters (up from 5)
     - Gorge web ghost model stalk now stays visible even when placement is invalid. (Will turn red instead)
     - Gorge web snare duration is now 5 seconds (from 2.5)
-    - Blight now has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
-        - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
-            - Skulk : bite
-            - Gorge: Spit
-            - Lerk: Bite
-            - Fade: Swipe, Stab
-            - Onos: Gore
-        -Secondary Abilities: (1 second per veil for players, 3 seconds per veil for structures)
-            - Skulk: Parasite, Xenocide
-            - Gorge: Bilebomb
-            - Lerk: Spikes, Spores
-            - Fade: None
-            - Onos: Stomp
-    - Blight will outline the target based on their health. (Green: 4+ bites, Yellow: 3 bites, Orange: <= 2 bites, White: Parasited)
     - Added a Player Status icon for blight.
     - Decreased mine damage to 130 (from 150)
+- 18/03/2020
+    - Lerk Spike now penetrates soft targets (MACs)
+    - Fixed dead players displaying nameplate
+    - Fixed various script errors
     
 ## Full Changelog:
 
@@ -109,18 +92,17 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Overheat animation sped up such that the time out of combat now matches up exactly with the heat meter for that weapon (before, the overheat animation would finish well-after the heat meter was empty).
     - Powernodes
         - All Powernodes now start socketed but unbuilt. The
-        Powernodes in the Marine Base start built and Alien Hive
-        start destroyed upon round start.
+            Powernodes in the Marine Base start built and Alien Hive
+            start destroyed upon round start.
         - Powernodes that have no health are not highlighted for either team and
-        can't be damaged.
+            can't be damaged.
         - Powernodes that haven't been build yet don't
-        affect the location's light state.
+            affect the location's light state.
         - The construction progress of a Powernode is synchronized with their
-        hit points. This means when an enemy damages an unbuild Powernode by 1%
-        hp it also looses 1% construction progress.
+            hit points. This means when an enemy damages an unbuild Powernode by 1%
+            hp it also looses 1% construction progress.
         - Marines receive no automated order to construct a Powernode unless
-        there is a structure or blueprint inside the given location that requires power.
-
+            there is a structure or blueprint inside the given location that requires power.
     - Misc
         - Marine dropped weapon decay timer is now 16 seconds (down from 25)
         - Nanoshield duration is now 3 seconds when used on players (down from 5) 
@@ -130,7 +112,6 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         
     - Fixed Healing Soft clamp
         - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
-
     - Upgrades
         - Vampirism
             - Now each hit with your primary attack charges hp shield
@@ -139,32 +120,10 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - The shield does stack with mucous and babblers
             - Skulks only charge 14% health per bite (decreased from 20%)
             - Vampirism no longer has any effect when used against Exosuits
-        - Aura
-            - No longer displays any health information (marker will always be yellow)
-        - Focus
-            - Replaced with new upgrade: Blight (experimental):
-                - With Blight each attack now outlines the target much like a parasite.
-                    - Highlight color is based on enemy health, Depending if the target is a structure or player.
-                        - For players, Blue >= 4 bites, Yellow = 3 bites, Red <= 2 Bites
-                        - For Structures, Blue >= 66% eHP+, Yellow >= 33% eHP+, Red < 33% eHP
-                - Blight has "primary" and "secondary" categories which give certain alien abilities different durations of blight.
-                    - Primary Abilities: (5 seconds per veil for players, 15 seconds per veil for structures)
-                        - Skulk : bite
-                        - Gorge: Spit
-                        - Lerk: Bite
-                        - Fade: Swipe, Stab
-                        - Onos: Gore
-                    -Secondary Abilities: (1 second per veil for players, 3 seconds per veil for structures)
-                        - Skulk: Parasite, Xenocide
-                        - Gorge: Bilebomb
-                        - Lerk: Spikes, Spores
-                        - Fade: None
-                        - Onos: Stomp
     - Skulk
         - Model size decreased by 10% (90% original size).
         - Skulk sneak speed reduced to 4.0 (down from 4.785)
         - Skulks now only receive a speed boost from a consecutive jump.
-        
     - Gorge
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.

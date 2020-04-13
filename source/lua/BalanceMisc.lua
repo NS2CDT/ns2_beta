@@ -59,21 +59,14 @@ kCelerityAddSpeed = 1.5
 kAlienCrushDamagePercentByLevel = 0.07  --Max 21%
 
 -- Increases the delay between alien attacks by the given value in percentage while using the Focus upgrade.
-kFocusAttackSlowAtMax = 0
-kFocusDamageBonusAtMax = 0
+kFocusAttackSlowAtMax = 0.33
+kFocusDamageBonusAtMax = 0.33
 
 kStabFocusDamageBonusAtMax = kFocusDamageBonusAtMax -- anticipating this will need tweaking later
 
 -- special case for gorge spit
 kSpitFocusAttackSlowAtMax = 0
-kSpitFocusDamageBonusAtMax = 0
-
-kBlightCategory = enum({'None', 'Primary', 'Secondary'})
-kBlightPrimaryPlayerDurationPerChamber = 5
-kBlightPrimaryStructureDurationPerChamber = 15
-kBlightSecondaryPlayerDurationPerChamber = 1
-kBlightSecondaryStructureDurationPerChamber = 3
-
+kSpitFocusDamageBonusAtMax = 0.33
 
 kHydrasPerHive = 3
 kClogsPerHive = 10
