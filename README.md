@@ -160,6 +160,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Stab now deals 2x damage to structures (equivalent to skulk structure DPS).
             - Fades can now blink, jump and move freely while performing stab.
         - Fades now only receive speed bonuses from consecutive blinks when using celerity.
+        - Advanced Metabolize now heals according to effective HP. (Heals 15 eHP, so when armor is healed you should get 7.5 armor)
         
     - Drifter abilities
         - All abilities have now a cool down of 12 seconds (instead of only 1 second for mucous and hallucinations)
