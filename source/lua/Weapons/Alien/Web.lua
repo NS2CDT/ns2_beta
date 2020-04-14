@@ -43,8 +43,8 @@ local networkVars =
     chargeScalingFactor = "float (0 to 3 by 0.01)"
 }
 
-Web.kZeroVisDistance = 8.5
-Web.kFullVisDistance = 6.5
+Web.kZeroVisDistance = 4.8
+Web.kFullVisDistance = 4.0 -- The model opacity falloff seems to be off by 1.
 Web.kDistortionIntensity = 0.0625
 Web.ChargeScaleAdditive = 0.47 -- Percent to "thicken" webs by per charge.
 
