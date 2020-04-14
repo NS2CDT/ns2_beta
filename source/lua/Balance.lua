@@ -407,7 +407,7 @@ kWebbedParasiteDuration = 10
 kWebSlowVelocityScalar = 0.34 --Note: Exos override this
 kWebMaxCharges = 3
 kWebSecondsPerCharge = 10
-kWebHealthPerCharge = 13
+kWebHealthPerCharge = 10
 
 kLerkBiteDamage = 60
 kBitePoisonDamage = 6 -- per second

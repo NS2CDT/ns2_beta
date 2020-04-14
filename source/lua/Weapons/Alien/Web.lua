@@ -25,7 +25,6 @@ Script.Load("lua/ClogFallMixin.lua")
 Script.Load("lua/Mixins/BaseModelMixin.lua")
 Script.Load("lua/Mixins/ModelMixin.lua")
 Script.Load("lua/EffectsMixin.lua")
-Script.Load("lua/CloakableMixin.lua")
 
 class 'Web' (Entity)
 
@@ -33,8 +32,8 @@ Web.kMapName = "web"
 
 Web.kRootModelName = PrecacheAsset("models/alien/gorge/web_helper.model")
 Web.kModelName = PrecacheAsset("models/alien/gorge/web.model")
-local kAnimationGraph = PrecacheAsset("models/alien/gorge/web.animation_graph")
 
+local kAnimationGraph = PrecacheAsset("models/alien/gorge/web.animation_graph")
 local kEnemyDetectInterval = 0.2
 
 local networkVars =
@@ -44,18 +43,18 @@ local networkVars =
     chargeScalingFactor = "float (0 to 3 by 0.01)"
 }
 
-Web.kZeroVisDistance = 12.5
-Web.kFullVisDistance = 10.0
+Web.kZeroVisDistance = 4.8
+Web.kFullVisDistance = 4.0 -- The model opacity falloff seems to be off by 1.
 Web.kDistortionIntensity = 0.0625
 Web.ChargeScaleAdditive = 0.47 -- Percent to "thicken" webs by per charge.
 
 local kWebDistortMaterial = PrecacheAsset("models/alien/gorge/web_distort.material")
+local kWebCloakedMaterial = PrecacheAsset("cinematics/vfx_materials/cloaked.material")
 
 AddMixinNetworkVars(TechMixin, networkVars)
 AddMixinNetworkVars(BaseModelMixin, networkVars)
 AddMixinNetworkVars(ModelMixin, networkVars)
 AddMixinNetworkVars(TeamMixin, networkVars)
-AddMixinNetworkVars(CloakableMixin, networkVars)
 AddMixinNetworkVars(LiveMixin, networkVars)
 AddMixinNetworkVars(LOSMixin, networkVars)
 
@@ -97,11 +96,13 @@ local function AddWebCharge(self)
 
     self.numCharges = self.numCharges + 1
 
-    self:SetMaxHealth(kWebHealth + (self.numCharges * kWebHealthPerCharge))
+    self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
     self:SetHealth(self:GetHealth() + kWebHealthPerCharge)
 
     self.chargeScalingFactor = self.chargeScalingFactor + Web.ChargeScaleAdditive
     self:SetCoords(self:GetCoords())
+
+    self:TriggerWebSpawnEffects()
 
     return self.numCharges < kWebMaxCharges
 
@@ -118,7 +119,6 @@ function Web:OnCreate()
     InitMixin(self, TeamMixin)
     InitMixin(self, LiveMixin)
     InitMixin(self, EntityChangeMixin)
-    InitMixin(self, CloakableMixin)
     InitMixin(self, LOSMixin)
 
     InitMixin(self, ClogFallMixin)
@@ -135,7 +135,7 @@ function Web:OnCreate()
         
     end
 
-    self.numCharges = 0
+    self.numCharges = 1
     self.chargeScalingFactor = 1.0
     self.variant = kGorgeVariant.normal
 
@@ -179,32 +179,12 @@ local function GetAreEnemiesInRange(self)
 
 end
 
-local function ScanForNearbyEnemies(self)
-    
-    PROFILE("Web:ScanForNearbyEnemies")
-    
-    if GetAreEnemiesInRange(self) then
-    
-        self:TriggerUncloak()
-    
-    end
-    
-    return (self:GetIsAlive()) -- stop callback when dead.
-    
-end
-
 function Web:OnInitialized()
 
     self:SetModel(Web.kModelName, kAnimationGraph)
     
     self:SetPhysicsType(PhysicsType.Kinematic)
     self:SetPhysicsGroup(PhysicsGroup.WebsGroup)
-    
-    if Server then
-        
-        self:AddTimedCallback(ScanForNearbyEnemies, kEnemyDetectInterval)
-        
-    end
   
 end
 
@@ -306,10 +286,48 @@ if Client then
         
         -- TODO these values should be baked into the shader, but they're exposed and set here every
         -- frame so that balance team can tweak values as they please.
-        if self.distortMaterial then
-            self.distortMaterial:SetParameter("noVisDist", Web.kZeroVisDistance)
-            self.distortMaterial:SetParameter("fullVisDist", Web.kFullVisDistance)
-            self.distortMaterial:SetParameter("distortionIntensity", Web.kDistortionIntensity)
+
+        local player = Client.GetLocalPlayer()
+        local model = self:GetRenderModel()
+
+        if player and model then
+            local isFriendly = GetAreFriends(self, player)
+            local distance = (self:GetOrigin() - player:GetOrigin()):GetLength()
+            local cloakAmount = Clamp((distance - Web.kZeroVisDistance) / (Web.kZeroVisDistance - Web.kFullVisDistance), 0, 1)
+
+            if isFriendly then
+                if not self.cloakedMaterial then
+                    self.cloakedMaterial = AddMaterial(model, kWebCloakedMaterial)
+                end
+
+                if self.distortMaterial then
+                    RemoveMaterial(model, self.distortMaterial)
+                    self.distortMaterial = nil
+                end
+            else
+                if not self.distortMaterial then
+                    self.distortMaterial = AddMaterial(model, kWebDistortMaterial)
+                end
+
+                if self.cloakedMaterial then
+                    RemoveMaterial(model, self.cloakedMaterial)
+                    self.cloakedMaterial = nil
+                end
+            end
+
+            if self.cloakedMaterial then
+
+                self:SetOpacity(1 - cloakAmount, "cloak")
+                self.cloakedMaterial:SetParameter("cloakAmount", Clamp(cloakAmount, 0, 0.3))
+            end
+
+            if self.distortMaterial then
+                self:SetOpacity(1 - cloakAmount, "cloak")
+                self.distortMaterial:SetParameter("noVisDist", Web.kZeroVisDistance)
+                self.distortMaterial:SetParameter("fullVisDist", Web.kFullVisDistance)
+                self.distortMaterial:SetParameter("distortionIntensity", Web.kDistortionIntensity)
+            end
+
         end
         
     end
@@ -326,6 +344,21 @@ local function GetDistance(self, fromPlayer)
     local relativePoint = tranformCoords:TransformPoint(fromPlayer:GetOrigin())    
 
     return math.abs(relativePoint.x), relativePoint.y
+
+end
+
+local function RemoveWebCharge(self)
+
+    self.numCharges = self.numCharges - 1
+
+    local isAlive = self.numCharges > 0
+
+    if isAlive then
+        self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
+        self:SetHealth(self:GetHealth())
+    end
+
+    return isAlive
 
 end
 
@@ -356,24 +389,30 @@ local function CheckForIntersection(self, fromPlayer)
 
             --DebugPrint("horizontalDistance %s  verticalDistance %s", ToString(horizontalDistance), ToString(verticalDistance))
 
-            if horizontalOk and verticalOk then
-              
+            if horizontalOk and verticalOk and HasMixin(fromPlayer, "Webable") and not fromPlayer:GetIsWebbed() then
+
                 fromPlayer:SetWebbed(kWebbedDuration)
-                
+
                 if Server then
-                    DestroyEntity(self)
+
+                    if not RemoveWebCharge(self) then
+                        self:Kill(nil, nil, self:GetOrigin())
+                    end
                 end
-          
             end
         
         end
     
     elseif Server then
-    
+
         local trace = Shared.TraceRay(self:GetOrigin(), self.endPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterNonWebables())
-        if trace.entity and not trace.entity:isa("Player") then
+        if trace.entity and not trace.entity:isa("Player") and not trace.entity:GetIsWebbed() then
+
             trace.entity:SetWebbed(kWebbedDuration)
-            -- DestroyEntity(self)
+
+            if not RemoveWebCharge(self) then
+                self:Kill(nil, nil, self:GetOrigin())
+            end
         end    
     
     end
@@ -392,7 +431,7 @@ end
 
 if Server then
 
-    local function TriggerWebSpawnEffects(self)
+    function Web:TriggerWebSpawnEffects()
 
         local startPoint = self:GetOrigin()
         local zAxis = -self:GetCoords().zAxis
@@ -419,7 +458,7 @@ if Server then
         end
         
         if not self.triggerSpawnEffect then
-            TriggerWebSpawnEffects(self)
+            self:TriggerWebSpawnEffects()
             self.triggerSpawnEffect = true
         end
 

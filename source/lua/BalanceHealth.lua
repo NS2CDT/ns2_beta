@@ -133,7 +133,7 @@ kHydraHealthPerBioMass = 16
 kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
 kClogHealthPerBioMass = 4
 
-kWebHealth = 25
+kWebHealth = 10
 
 kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 300    kMatureCystArmor = 1    kCystPointValue = 1
