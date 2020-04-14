@@ -6,6 +6,12 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
+- 14/4/2020
+    - Gorge webs now properly have multiple "charges", so that marines can be webbed from them multiple times. When 0 charges are reached the web dies.
+    - Changed gorge web full visibility distance to 5 meters.
+    - Changed gorge web base hp to 10.
+    - Changed gorge web charge hp to 10. (Max 30 hp)
+    - Made gorge web invisibility client-side. Friends of the web will have the "cloaked" shader applied when not in range.
 - 12/04/2020
     - Reverted Blight and Aura changes.
 - 11/04/2020
@@ -130,14 +136,18 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Heal spray
             - Now also adds maturity to alien structures and speeds up player evolutions while they are embryos.
         - Web
-            - Web GhostModel stalk will now stay visible even if the palcement is invalid. (Will be colored red)
+            - Web GhostModel stalk will now stay visible even if the placement is invalid. (Will be colored red)
             - Webs are now only placeable on the ground from one endpoint. (to fix "duct tape" webs)
             - Gorges can finish placing webs from much further away.  Starting placement range is unchanged.
-            - Now break on contact.
             - Snare now reduces movement speed by 66% and tapers off gradually over 5 seconds (up from 2.5 seconds)
-            - Webs now turn invisible, only fading into view at 10 meters or closer.
+            - Webs now turn invisible, only fading into view at 5 meters or closer. (Client-side)
             - No longer parasite marines.
             - No longer appears in the kill-feed.
+            - Now have a "hardening" mechanic, where a gorge web will have "charges", which will allow them to web enemies multiple times. 
+                - When charges run out, the web will die.
+                - Each charge gives the web 10 hp.
+                - Webs start with 10 hp.
+                - Max 30 hp.
         - Babbler
             - Do not gain hp with each biomass anymore (they received 1.5 hp for each biomass)
     - Lerk
