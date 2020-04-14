@@ -350,10 +350,15 @@ end
 local function RemoveWebCharge(self)
 
     self.numCharges = self.numCharges - 1
-    self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
-    self:SetHealth(self:GetHealth())
 
-    return self.numCharges > 0
+    local isAlive = self.numCharges > 0
+
+    if isAlive then
+        self:SetMaxHealth(kWebHealth + ((self.numCharges - 1) * kWebHealthPerCharge))
+        self:SetHealth(self:GetHealth())
+    end
+
+    return isAlive
 
 end
 
