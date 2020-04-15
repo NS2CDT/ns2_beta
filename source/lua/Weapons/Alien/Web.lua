@@ -45,7 +45,9 @@ local networkVars =
 
 Web.kZeroVisDistance = 4.8
 Web.kFullVisDistance = 4.0 -- The model opacity falloff seems to be off by 1.
+Web.kDistortionZeroVisDistance = Web.kZeroVisDistance + 2.5
 Web.kDistortionIntensity = 0.0625
+--Web.kDistortionIntensity = 0.25
 Web.ChargeScaleAdditive = 0.47 -- Percent to "thicken" webs by per charge.
 
 local kWebDistortMaterial = PrecacheAsset("models/alien/gorge/web_distort.material")
@@ -293,7 +295,7 @@ if Client then
         if player and model then
             local isFriendly = GetAreFriends(self, player)
             local distance = (self:GetOrigin() - player:GetOrigin()):GetLength()
-            local cloakAmount = Clamp((distance - Web.kZeroVisDistance) / (Web.kZeroVisDistance - Web.kFullVisDistance), 0, 1)
+            local opaque = Clamp((distance - Web.kZeroVisDistance) / (Web.kZeroVisDistance - Web.kFullVisDistance), 0, 1)
 
             if isFriendly then
                 if not self.cloakedMaterial then
@@ -316,14 +318,13 @@ if Client then
             end
 
             if self.cloakedMaterial then
-
-                self:SetOpacity(1 - cloakAmount, "cloak")
-                self.cloakedMaterial:SetParameter("cloakAmount", Clamp(cloakAmount, 0, 0.3))
+                self:SetOpacity(1 - opaque, "cloak")
+                self.cloakedMaterial:SetParameter("cloakAmount", Clamp(opaque, 0, 0.3))
             end
 
             if self.distortMaterial then
-                self:SetOpacity(1 - cloakAmount, "cloak")
-                self.distortMaterial:SetParameter("noVisDist", Web.kZeroVisDistance)
+                self:SetOpacity(1 - opaque, "cloak")
+                self.distortMaterial:SetParameter("noVisDist", Web.kDistortionZeroVisDistance)
                 self.distortMaterial:SetParameter("fullVisDist", Web.kFullVisDistance)
                 self.distortMaterial:SetParameter("distortionIntensity", Web.kDistortionIntensity)
             end

@@ -12,6 +12,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Changed gorge web base hp to 10.
     - Changed gorge web charge hp to 10. (Max 30 hp)
     - Made gorge web invisibility client-side. Friends of the web will have the "cloaked" shader applied when not in range.
+    - Made gorge web distortion less visible the further away the player is.
 - 12/04/2020
     - Reverted Blight and Aura changes.
 - 11/04/2020
@@ -140,7 +141,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Webs are now only placeable on the ground from one endpoint. (to fix "duct tape" webs)
             - Gorges can finish placing webs from much further away.  Starting placement range is unchanged.
             - Snare now reduces movement speed by 66% and tapers off gradually over 5 seconds (up from 2.5 seconds)
-            - Webs now turn invisible, only fading into view at 5 meters or closer. (Client-side)
+            - Webs now turn invisible, only fading into view at 5 meters or closer, with a distortion effect at longer range. (Client-side)
             - No longer parasite marines.
             - No longer appears in the kill-feed.
             - Now have a "hardening" mechanic, where a gorge web will have "charges", which will allow them to web enemies multiple times. 
