@@ -26,7 +26,7 @@
         void MaterialShader(in Material_Input input, inout Material material)
         {
             float distance = length(input.vsPosition);
-            float visibility = saturate((distance - noVisDist) / (fullVisDist - noVisDist));
+            float visibility = saturate((distance - fullVisDist) / (noVisDist - fullVisDist));
 
             // Can't do transparency, so try to erode the edges by cutting out fragments facing
             // away from the viewer (eg on the edges) with increasing strictness as the visibility
@@ -36,7 +36,7 @@
                               tsNormal.y * input.vsBinormal +
                               tsNormal.z * input.vsNormal;
             
-            material.ssDistortion = vsNormal.xy * float2(1, -1) * visibility * tex2D(opacityMap, input.texCoord).r * distortionIntensity;
+            material.ssDistortion = vsNormal.xy * float2(1, -1) * (1 - visibility) * tex2D(opacityMap, input.texCoord).r * distortionIntensity;
         }
     ]]>
     </code>
