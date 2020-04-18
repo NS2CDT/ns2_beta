@@ -8,6 +8,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## Recent
 - 17/4/2020
     - Fixed Gorge webs only cloaking from one endpoint. Will now use the shortest distance of both endpoints and midpoint.
+    - Mines now only are revealed on the map for aliens when they are parasited or in combat.
 - 14/4/2020
     - Gorge webs now properly have multiple "charges", so that marines can be webbed from them multiple times. When 0 charges are reached the web dies.
     - Changed gorge web full visibility distance to 5 meters.
@@ -75,6 +76,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Mines now award 5 score points when killed by an alien.
         - Display Mines at the minimap for Marines.
         - Decrease weight to 0 (from 0.1). So that mines don't slow down Marines.
+        - Now only appear on map for aliens when parasited or in combat.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
