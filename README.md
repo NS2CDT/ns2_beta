@@ -6,6 +6,8 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
+- 17/4/2020
+    - Fixed Gorge webs only cloaking from one endpoint. Will now use the shortest distance of both endpoints and midpoint.
 - 14/4/2020
     - Gorge webs now properly have multiple "charges", so that marines can be webbed from them multiple times. When 0 charges are reached the web dies.
     - Changed gorge web full visibility distance to 5 meters.
