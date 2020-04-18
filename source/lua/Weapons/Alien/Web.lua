@@ -38,6 +38,7 @@ local kEnemyDetectInterval = 0.2
 
 local networkVars =
 {
+    endPoint = "vector",
     length = "float",
     variant = "enum kGorgeVariant",
     chargeScalingFactor = "float (0 to 3 by 0.01)"
@@ -292,9 +293,24 @@ if Client then
         local player = Client.GetLocalPlayer()
         local model = self:GetRenderModel()
 
-        if player and model then
+        if player and model and self.endPoint then
             local isFriendly = GetAreFriends(self, player)
+
+            -- Try distances from 3 both endpoints and the middle, and use the shortest one.
             local distance = (self:GetOrigin() - player:GetOrigin()):GetLength()
+            local endDistance = (self.endPoint - player:GetOrigin()):GetLength()
+            local midPoint = (self:GetOrigin() + self.endPoint) * 0.5
+
+            if endDistance < distance then
+                distance = endDistance
+            end
+
+            local midDistance = (midPoint - player:GetOrigin()):GetLength()
+
+            if midDistance < distance then
+                distance = midDistance
+            end
+
             local opaque = Clamp((distance - Web.kZeroVisDistance) / (Web.kZeroVisDistance - Web.kFullVisDistance), 0, 1)
 
             if isFriendly then
@@ -328,7 +344,6 @@ if Client then
                 self.distortMaterial:SetParameter("fullVisDist", Web.kFullVisDistance)
                 self.distortMaterial:SetParameter("distortionIntensity", Web.kDistortionIntensity)
             end
-
         end
         
     end
@@ -364,10 +379,6 @@ local function RemoveWebCharge(self)
 end
 
 local function CheckForIntersection(self, fromPlayer)
-
-    if not self.endPoint then
-        self.endPoint = self:GetOrigin() + self.length * self:GetCoords().zAxis
-    end
     
     if fromPlayer then
     
