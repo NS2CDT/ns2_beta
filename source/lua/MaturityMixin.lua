@@ -259,7 +259,6 @@ if Server then
         local updateRate = GetMaturityRate(self)
         local mistBonus = self:GetMistBonus()
 
-        local maturityRate = (1 / (updateRate - amount)) * mistBonus
         local rateThreshold = self:GetUncappedMaturityRateThreshold()
         local averageRate = (self._maturityFraction + fractionalChange) / (Shared.GetTime() - self.maturityStartTime)
 

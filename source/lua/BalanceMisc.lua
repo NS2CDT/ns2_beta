@@ -141,6 +141,9 @@ kMaturityBuiltSpeedup = 1
 kNutrientMistMaturitySpeedup = 2
 kNutrientMistAutobuildMultiplier = 1
 
+kGestationSoftcapThreshold = 1.5
+kGestationCappedEfficiency = 0.25
+
 kMinBuildTimePerHealSpray = 0.9
 kMaxBuildTimePerHealSpray = 1.8
 
