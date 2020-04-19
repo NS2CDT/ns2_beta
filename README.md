@@ -8,6 +8,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## Recent
 - 19/4/2020
     - Fixed structures being detected but not visible if scanned
+    - Implemented a softcap for maturity and gestation (evolving rate).
+        - Both maturity and gestation have a 1.5x threshold, and a 0.25 capped efficiency. 
+            This means that no softcap will be applied for 1.5x of the added amount's rate, but leftovers will be subjected to a -75% penalty.
 - 17/4/2020
     - Fixed Gorge webs only cloaking from one endpoint. Will now use the shortest distance of both endpoints and midpoint.
     - Mines now only are revealed on the map for aliens when they are parasited or in combat.
@@ -125,7 +128,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Nanoshield used on structures remains unchanged at 5 seconds
         - Fixed cluster grenade burn damage numbers being displayed to the target
 - Alien
-        
+    - Implemented a softcap for maturity and gestation (evolving rate).
+        - Both maturity and gestation have a 1.5x threshold, and a 0.25 capped efficiency. 
+            This means that no softcap will be applied for 1.5x of the added amount's rate, but leftovers will be subjected to a -75% penalty.
     - Fixed Healing Soft clamp
         - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
     - Upgrades
