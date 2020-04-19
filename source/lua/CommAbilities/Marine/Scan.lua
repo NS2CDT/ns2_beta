@@ -54,6 +54,10 @@ function Scan:OverrideCheckVision()
     return true
 end
 
+function Scan:GetVisionRadius()
+    return Scan.kScanDistance
+end
+
 function Scan:GetRepeatCinematic()
     return Scan.kScanEffect
 end
@@ -75,7 +79,7 @@ if Server then
     function Scan:ScanEntity(ent)
 
         if HasMixin(ent, "LOS") then
-            ent:SetIsSighted(true)
+            ent:SetIsSighted(true, self)
         end
 
         if HasMixin(ent, "Detectable") then

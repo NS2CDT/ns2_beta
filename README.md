@@ -6,6 +6,8 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
+- 19/4/2020
+    - Fixed structures being detected but not visible if scanned
 - 17/4/2020
     - Fixed Gorge webs only cloaking from one endpoint. Will now use the shortest distance of both endpoints and midpoint.
     - Mines now only are revealed on the map for aliens when they are parasited or in combat.
@@ -54,6 +56,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
 - Fixed commanders forced to repress the grid key for dual action items
 - Fixed scan not having a visual range displayed
+- Fixed structures being detected but not visible if scanned
 
 - Marine
     - Shotgun
