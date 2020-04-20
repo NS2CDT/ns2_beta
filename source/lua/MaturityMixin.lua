@@ -185,6 +185,21 @@ if Server then
 
     end
 
+    function MaturityMixin:GetSoftCappedAmount(amount)
+
+        local averageRate = (self._maturityFraction + amount) / (Shared.GetTime() - self.maturityStartTime)
+        local rateThreshold = self:GetUncappedMaturityRateThreshold()
+
+        if averageRate > rateThreshold then
+
+            local uncappedFraction = rateThreshold / averageRate
+            local cappedFraction = 1 - uncappedFraction
+
+            amount = (amount * uncappedFraction) + (amount * cappedFraction * kMaturityCappedEfficiency)
+        end
+
+        return amount
+    end
 
     function MaturityMixin:OnMaturityUpdate(deltaTime)
         
@@ -202,17 +217,7 @@ if Server then
         local maturityRate = (1 / updateRate) * mistBonus
         local maturityIncrease = maturityRate * deltaTime
 
-        local averageRate = (self._maturityFraction + maturityIncrease) / (Shared.GetTime() - self.maturityStartTime)
-        local rateThreshold = self:GetUncappedMaturityRateThreshold()
-
-        if averageRate > rateThreshold then
-
-            local uncappedFraction = rateThreshold / averageRate
-            local cappedFraction = 1 - uncappedFraction
-
-            maturityIncrease = (maturityIncrease * uncappedFraction) + (maturityIncrease * cappedFraction * kMaturityCappedEfficiency)
-        end
-
+        maturityIncrease = self:GetSoftCappedAmount(maturityIncrease)
         self._maturityFraction = math.min(self._maturityFraction + maturityIncrease, 1)
 
         local isMature = self._maturityFraction == 1
@@ -261,15 +266,7 @@ if Server then
 
         local rateThreshold = self:GetUncappedMaturityRateThreshold()
         local averageRate = (self._maturityFraction + fractionalChange) / (Shared.GetTime() - self.maturityStartTime)
-
-        if averageRate > rateThreshold then
-
-            local uncappedFraction = rateThreshold / averageRate
-            local cappedFraction = 1 - uncappedFraction
-
-            amount = (amount * uncappedFraction) + (amount * cappedFraction * kMaturityCappedEfficiency)
-            fractionalChange = amount / secondsToMature
-        end
+        fractionalChange = self:GetSoftCappedAmount(fractionalChange)
 
         local maturityFractionBefore = self._maturityFraction
         self._maturityFraction = Clamp(self._maturityFraction + fractionalChange, 0, 1)
