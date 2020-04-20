@@ -180,6 +180,17 @@ if Server then
             return false
         end
         
+        -- Scans ignore the vertical component
+        if viewer:isa("Scan") then
+            local origA = viewer:GetOrigin()
+            local origB = entity:GetOrigin()
+
+            origA.y, origB.y = 0, 0
+            if origA:GetDistanceTo(origB) <= viewer:GetVisionRadius() then
+                return true -- Always see
+            end
+        end
+
         -- Check if this entity is beyond our vision radius.
         local maxDist = viewer:GetVisionRadius()
         local dist = (entity:GetOrigin() - viewer:GetOrigin()):GetLengthSquared()

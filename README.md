@@ -6,6 +6,15 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
+- 19/4/2020
+    - Fixed structures being detected but not visible if scanned
+    - Implemented a softcap for maturity and gestation (evolving rate).
+        - Both maturity and gestation have a 1.5x threshold, and a 0.25 capped efficiency. 
+            This means that no softcap will be applied for 1.5x of the added amount's rate, but leftovers will be subjected to a -75% penalty.
+    - Fade air friction is now dynamic, based on blinking status, celerity upgrade, and some max speed.
+- 17/4/2020
+    - Fixed Gorge webs only cloaking from one endpoint. Will now use the shortest distance of both endpoints and midpoint.
+    - Mines now only are revealed on the map for aliens when they are parasited or in combat.
 - 14/4/2020
     - Gorge webs now properly have multiple "charges", so that marines can be webbed from them multiple times. When 0 charges are reached the web dies.
     - Changed gorge web full visibility distance to 5 meters.
@@ -51,6 +60,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Decreased re-drop block times for cysts and resource towers to 1 second (from 5-7 seconds)
 - Fixed commanders forced to repress the grid key for dual action items
 - Fixed scan not having a visual range displayed
+- Fixed structures being detected but not visible if scanned
 
 - Marine
     - Shotgun
@@ -73,6 +83,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Mines now award 5 score points when killed by an alien.
         - Display Mines at the minimap for Marines.
         - Decrease weight to 0 (from 0.1). So that mines don't slow down Marines.
+        - Now only appear on map for aliens when parasited or in combat.
     - Hand Grenades
         - Removed lengthy deploy animation so grenades are now thrown much faster. (quickthrow and regular throw)
         - Pulse grenade
@@ -118,7 +129,9 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
         - Nanoshield used on structures remains unchanged at 5 seconds
         - Fixed cluster grenade burn damage numbers being displayed to the target
 - Alien
-        
+    - Implemented a softcap for maturity and gestation (evolving rate).
+        - Both maturity and gestation have a 1.5x threshold, and a 0.25 capped efficiency. 
+            This means that no softcap will be applied for 1.5x of the added amount's rate, but leftovers will be subjected to a -75% penalty.
     - Fixed Healing Soft clamp
         - If an Alien structure or player is healed by more than 14%/sec of their total effective hit points any additional healing is reduced by 66% .
     - Upgrades
@@ -160,7 +173,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
             - Decrease base damage to 120 (from 160)
             - Stab now deals 2x damage to structures (equivalent to skulk structure DPS).
             - Fades can now blink, jump and move freely while performing stab.
-        - Fades now only receive speed bonuses from consecutive blinks when using celerity.
+        - Fade air friction is now dynamic, based on blinking status, celerity upgrade, and some max speed.
         - Advanced Metabolize now heals according to effective HP. (Heals 15 eHP, so when armor is healed you should get 7.5 armor)
         
     - Drifter abilities
