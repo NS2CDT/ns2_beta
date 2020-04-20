@@ -106,18 +106,18 @@ function MaturityMixin:GetMaturityLevel()
     end
 end
 
-function MaturityMixin:GetMaxTheoreticalMaturityMistBonus()
+function MaturityMixin:GetMaxMaturityMistBonus()
     return kNutrientMistMaturitySpeedup + kMaturityBuiltSpeedup
 end
 
-function MaturityMixin:GetUncappedMaturityRateThreshold()
-    local updateRate = self:GetMaturityRate()
-    local baseMaxRate = (1 / updateRate) * self:GetMaxTheoreticalMaturityMistBonus()
+function MaturityMixin:GetMaturityThresholdRate()
+    local updateRate = GetMaturityRate(self)
+    local baseMaxRate = (1 / updateRate) * self:GetMaxMaturityMistBonus()
 
     return baseMaxRate * kMaturitySoftcapThreshold
 end
 
-function MaturityMixin:GetMistBonus()
+function MaturityMixin:GetMaturityMistBonus()
 
     local mistBonus = 0
 
@@ -126,6 +126,22 @@ function MaturityMixin:GetMistBonus()
 
     return mistBonus
 
+end
+
+function MaturityMixin:GetMaturitySoftCappedAmount(amount)
+
+    local averageRate = (self._maturityFraction + amount) / (Shared.GetTime() - self.maturityStartTime)
+    local rateThreshold = self:GetMaturityThresholdRate()
+
+    if averageRate > rateThreshold then
+
+        local uncappedFraction = rateThreshold / averageRate
+        local cappedFraction = 1 - uncappedFraction
+
+        amount = (amount * uncappedFraction) + (amount * cappedFraction * kMaturityCappedEfficiency)
+    end
+
+    return amount
 end
 
 if Server then
@@ -185,39 +201,21 @@ if Server then
 
     end
 
-    function MaturityMixin:GetSoftCappedAmount(amount)
-
-        local averageRate = (self._maturityFraction + amount) / (Shared.GetTime() - self.maturityStartTime)
-        local rateThreshold = self:GetUncappedMaturityRateThreshold()
-
-        if averageRate > rateThreshold then
-
-            local uncappedFraction = rateThreshold / averageRate
-            local cappedFraction = 1 - uncappedFraction
-
-            amount = (amount * uncappedFraction) + (amount * cappedFraction * kMaturityCappedEfficiency)
-        end
-
-        return amount
-    end
-
     function MaturityMixin:OnMaturityUpdate(deltaTime)
         
         PROFILE("MaturityMixin:OnMaturityUpdate")
-
-        local p = self:isa("Veil")
 
         if self.maturityStartTime == 0 then
             self.maturityStartTime = Shared.GetTime()
         end
 
         local updateRate = GetMaturityRate(self)
-        local mistBonus = self:GetMistBonus()
+        local mistBonus = self:GetMaturityMistBonus()
 
         local maturityRate = (1 / updateRate) * mistBonus
         local maturityIncrease = maturityRate * deltaTime
 
-        maturityIncrease = self:GetSoftCappedAmount(maturityIncrease)
+        maturityIncrease = self:GetMaturitySoftCappedAmount(maturityIncrease)
         self._maturityFraction = math.min(self._maturityFraction + maturityIncrease, 1)
 
         local isMature = self._maturityFraction == 1
@@ -258,15 +256,10 @@ if Server then
     function MaturityMixin:AddMaturity(amount)
         
         -- Misnomer... NOT a rate, but 1/rate... grrr
-        local secondsToMature = self:GetMaturityRate()
+        local secondsToMature = GetMaturityRate(self)
         local fractionalChange = amount / secondsToMature
 
-        local updateRate = GetMaturityRate(self)
-        local mistBonus = self:GetMistBonus()
-
-        local rateThreshold = self:GetUncappedMaturityRateThreshold()
-        local averageRate = (self._maturityFraction + fractionalChange) / (Shared.GetTime() - self.maturityStartTime)
-        fractionalChange = self:GetSoftCappedAmount(fractionalChange)
+        fractionalChange = self:GetMaturitySoftCappedAmount(fractionalChange)
 
         local maturityFractionBefore = self._maturityFraction
         self._maturityFraction = Clamp(self._maturityFraction + fractionalChange, 0, 1)

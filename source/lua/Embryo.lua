@@ -96,19 +96,20 @@ function Embryo:GetIsAllowedToBuy()
     return false
 end
 
-function Embryo:GetUncappedThresholdRate(baseTime)
+function Embryo:GetGestationThresholdRate(baseTime)
 
     local catalystTime = baseTime * (1 + kNutrientMistPercentageIncrease/100)
     return catalystTime * kGestationSoftcapThreshold * (1/baseTime) -- Rate is based on a per second basis, so we need to compensate.
 
 end
 
-function Embryo:GetSoftCappedAmount(amount)
+function Embryo:GetGestationSoftCappedAmount(amount)
 
     local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
-    local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
+    local thresholdRate = self:GetGestationThresholdRate(kUpdateGestationTime)
 
     if averageRate > thresholdRate then
+
         local uncappedFraction = thresholdRate / averageRate
         local cappedFraction = 1 - uncappedFraction
 
@@ -116,7 +117,6 @@ function Embryo:GetSoftCappedAmount(amount)
     end
 
     return amount
-
 end
 
 local function UpdateGestation(self) -- Gestation Update Routine
@@ -133,7 +133,7 @@ local function UpdateGestation(self) -- Gestation Update Routine
         
         -- Take into account catalyst effects
         local amount = GetAlienCatalystTimeAmount(kUpdateGestationTime, self) + kUpdateGestationTime
-        amount = self:GetSoftCappedAmount(amount)
+        amount = self:GetGestationSoftCappedAmount(amount)
 
         self.evolveTime = self.evolveTime + amount
         self.evolvePercentage = Clamp((self.evolveTime / self.gestationTime) * 100, 0, 100)
@@ -535,7 +535,7 @@ if Server then
     -- Skips X seconds of evolution time (speeds it up).
     function Embryo:AddEvolutionTime(amount)
 
-        amount = self:GetSoftCappedAmount(amount)
+        amount = self:GetGestationSoftCappedAmount(amount)
         self.evolveTime = self.evolveTime + amount
 
     end
