@@ -216,6 +216,10 @@ function Rifle:GetPickupOrigin()
     return self:GetCoords():TransformPoint(Vector(0.08637750148773193, 0.0058140382170677185, -0.13895681500434875))
 end
 
+function Rifle:GetBulletSizeOverride()
+    return 0.03
+end
+
 function Rifle:OnPrimaryAttack(player)
 
     if not self:GetIsReloading() then

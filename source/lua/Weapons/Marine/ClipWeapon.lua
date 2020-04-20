@@ -387,6 +387,11 @@ function ClipWeapon:GetSecondaryAttacking()
 end
 
 function ClipWeapon:GetBulletSize()
+
+    if self.GetBulletSizeOverride then
+        return self:GetBulletSizeOverride()
+    end
+
     return kBulletSize
 end
 
