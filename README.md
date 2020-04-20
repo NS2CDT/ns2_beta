@@ -8,6 +8,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 ## Recent
 - 20/4/2020
     - Changed Rifle bullet size to 0.03 (from 0.018)
+    - Fixed marines going throw gates without phasing
 - 19/4/2020
     - Fixed structures being detected but not visible if scanned
     - Implemented a softcap for maturity and gestation (evolving rate).
@@ -63,6 +64,7 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - Fixed commanders forced to repress the grid key for dual action items
 - Fixed scan not having a visual range displayed
 - Fixed structures being detected but not visible if scanned
+- Fixed marines going throw gates without phasing
 
 - Marine
     - Shotgun
