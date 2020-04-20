@@ -6,6 +6,8 @@ This mod contains various balance changes based on various ideas of the NS2 bala
 Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 ## Recent
+- 20/4/2020
+    - Changed Rifle bullet size to 0.03 (from 0.018)
 - 19/4/2020
     - Fixed structures being detected but not visible if scanned
     - Implemented a softcap for maturity and gestation (evolving rate).
