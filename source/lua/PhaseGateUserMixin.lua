@@ -20,7 +20,7 @@ local function SharedUpdate(self)
     PROFILE("PhaseGateUserMixin:OnUpdate")
     if self:GetCanPhase() then
 
-        for _, phaseGate in ipairs(GetEntitiesForTeamWithinRange("PhaseGate", self:GetTeamNumber(), self:GetOrigin(), 0.5)) do
+        for _, phaseGate in ipairs(GetEntitiesForTeamWithinRange("PhaseGate", self:GetTeamNumber(), self:GetOrigin(), 0.8)) do
         
             if phaseGate:GetIsDeployed() and GetIsUnitActive(phaseGate) and phaseGate:Phase(self) then
 
