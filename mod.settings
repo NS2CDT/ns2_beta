@@ -1,0 +1,11 @@
+name        = "NS2 Balance Beta"
+source_dir  = "source"
+output_dir  = "output"
+description = [=[Mod ID = 77FAFE74
+
+Changelog: https://ns2cdt.github.io/ns2_beta/
+Github: https://github.com/NS2CDT/ns2_beta]=]
+image       = "preview.jpg"
+tag_modtype = "Gameplay Tweak"
+tag_support = "Must be run on Server"
+publish_id = "77FAFE74"
