@@ -23,6 +23,7 @@ Script.Load("lua/MarineOutlineMixin.lua")
 Script.Load("lua/PointGiverMixin.lua")
 Script.Load("lua/Ragdoll.lua")
 Script.Load("lua/MapBlipMixin.lua")
+Script.Load("lua/CombatMixin.lua")
 
 class 'Mine' (ScriptActor)
 
@@ -53,6 +54,7 @@ AddMixinNetworkVars(StunMixin, networkVars)
 AddMixinNetworkVars(TeamMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
 AddMixinNetworkVars(LOSMixin, networkVars)
+AddMixinNetworkVars(CombatMixin, networkVars)
 
 function Mine:OnCreate()
     
@@ -69,6 +71,7 @@ function Mine:OnCreate()
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LOSMixin)
     InitMixin(self, PointGiverMixin)
+    InitMixin(self, CombatMixin)
     
     if Client then
         InitMixin(self, MarineOutlineMixin)
@@ -368,6 +371,13 @@ function Mine:ComputeDamageOverride(attacker, damage, damageType, hitPoint)
     
     return damage
     
+end
+
+function Mine:OverrideCheckVisibilty()
+    local isParasited = HasMixin(self, "ParasiteAble") and self:GetIsParasited()
+    local isInCombat = HasMixin(self, "Combat") and self:GetIsInCombat()
+
+    return isParasited or isInCombat
 end
 
 function Mine:GetShowSensorBlip()
