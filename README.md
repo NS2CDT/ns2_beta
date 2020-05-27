@@ -9,8 +9,12 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 
 - 27/05/2020
     - Revert skulk bite cone to {1.2 x 1.2} (Pre B332)
+    - Mines now only show up on the map for Aliens when parasited or damaged.
     
 ## Full Changelog:
 
 - Skulk
     - Bite cone is back to pre B332 days. ({1.2 x 1.2} from {0.8 x 1.2})
+    
+- Mines
+    - Now only show up on the map for Aliens when parasited or damaged.
