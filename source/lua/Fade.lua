@@ -61,6 +61,8 @@ local kMass = 158
 local kJumpHeight = 1.4
 
 local kFadeScanDuration = 4
+local kCelerityFrictionFactor = 0.04
+local kFastMovingAirFriction = 0.40
 
 local kShadowStepCooldown = 0.73
 local kShadowStepForce = 4
@@ -656,6 +658,11 @@ function Fade:HandleButtons(input)
         input.commands = bit.bor(input.commands, Move.Crouch)
     end
 
+end
+
+function Fade:GetAirFriction()
+    local currentVelocityVector = self:GetVelocityLength()
+    return (self:GetIsBlinking() or self:GetRecentlyShadowStepped()) and 0 or GetHasCelerityUpgrade(self) and (kFastMovingAirFriction - (kCelerityFrictionFactor * self:GetSpurLevel())) or currentVelocityVector > kEtherealForce and kFastMovingAirFriction or 0.17
 end
 
 function Fade:OnGroundChanged(onGround, impactForce, normal, velocity)
