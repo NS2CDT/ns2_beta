@@ -10,6 +10,8 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
 - 27/05/2020
     - Revert skulk bite cone to {1.2 x 1.2} (Pre B332)
     - Mines now only show up on the map for Aliens when parasited or damaged.
+    - Softcap for maturity and gestation (evolving).
+        - Any rate that goes over 1.5x of the original max individual rate will have it's extra increase stunted by 75%
     
 ## Full Changelog:
 
