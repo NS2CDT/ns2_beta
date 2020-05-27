@@ -18,10 +18,10 @@ class 'Blink' (Ability)
 Blink.kMapName = "blink"
 
 -- initial force added when starting blink.
-kEtherealForce = 0.833
+kEtherealForce = 16.25
 kEtherealCelerityForcePerSpur = 0.5
 -- Boost added when player blinks again in the same direction. The added benefit exact.
-local kEtherealBoost = 0.833
+local kEtherealBoost = 2.5
 local kEtherealVerticalForce = 2
 
 local networkVars =
@@ -150,11 +150,11 @@ function Blink:SetEthereal(player, state)
             local currentVelocityVector = player:GetVelocity()
 
             -- Add a speedboost to the current velocity.
-            currentVelocityVector:Add(playerForwardAxis * kEtherealBoost * celerityLevel)
+            currentVelocityVector:Add(playerForwardAxis * kEtherealBoost)
             -- Extract the player's velocity in the player's forward direction:
             local forwardVelocity = currentVelocityVector:DotProduct(playerForwardAxis)
 
-            local blinkSpeed = kEtherealForce + celerityLevel * kEtherealCelerityForcePerSpur
+            local blinkSpeed = kEtherealForce
             -- taperedVelocity is tracked so that if we're for some reason going faster than blink speed, we use that instead of
             -- slowing the player down. This allows for a skilled build up of extra speed.
             local taperedVelocity = math.max(forwardVelocity, blinkSpeed)
