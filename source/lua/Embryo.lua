@@ -97,6 +97,22 @@ function Embryo:GetUncappedThresholdRate(baseTime)
 
 end
 
+function Embryo:GetSoftCappedAmount(amount)
+
+    local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
+    local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
+
+    if averageRate > thresholdRate then
+        local uncappedFraction = thresholdRate / averageRate
+        local cappedFraction = 1 - uncappedFraction
+
+        amount = (amount * uncappedFraction) + (amount * cappedFraction * kGestationCappedEfficiency)
+    end
+
+    return amount
+
+end
+
 local function UpdateGestation(self)
 
     -- Cannot spawn unless alive.
@@ -111,15 +127,7 @@ local function UpdateGestation(self)
         
         -- Take into account catalyst effects
         local amount = GetAlienCatalystTimeAmount(kUpdateGestationTime, self) + kUpdateGestationTime
-        local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
-        local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
-
-        if averageRate > thresholdRate then
-            local uncappedFraction = thresholdRate / averageRate
-            local cappedFraction = 1 - uncappedFraction
-
-            amount = (amount * uncappedFraction) + (amount * cappedFraction * kGestationCappedEfficiency)
-        end
+        amount = self:GetSoftCappedAmount(amount)
 
         self.evolveTime = self.evolveTime + amount
         
@@ -527,17 +535,7 @@ if Server then
     -- Skips X seconds of evolution time (speeds it up).
     function Embryo:AddEvolutionTime(amount)
 
-        local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
-        local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
-
-        if averageRate > thresholdRate then
-            local uncappedFraction = thresholdRate / averageRate
-            local cappedFraction = 1 - uncappedFraction
-
-            amount = (amount * uncappedFraction) + (amount * cappedFraction * kGestationCappedEfficiency)
-        end
-
-
+        amount = self:GetSoftCappedAmount(amount)
         self.evolveTime = self.evolveTime + amount
         
     end
