@@ -12,11 +12,15 @@ Join the official ns2 discord server (discord.gg/ns2) to leave feedback!
     - Mines now only show up on the map for Aliens when parasited or damaged.
     - Softcap for maturity and gestation (evolving).
         - Any rate that goes over 1.5x of the original max individual rate will have it's extra increase stunted by 75%
+    - Fade will now have less friction based on the level of celerity it has. (Instead of directly buffing blink speed)
     
 ## Full Changelog:
 
 - Skulk
     - Bite cone is back to pre B332 days. ({1.2 x 1.2} from {0.8 x 1.2})
+    
+- Fade
+    - Now has less friction based on the level of celerity it has. (Instead of directly buffing blink speed)
     
 - Mines
     - Now only show up on the map for Aliens when parasited or damaged.
