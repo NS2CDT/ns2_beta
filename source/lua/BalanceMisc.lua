@@ -142,6 +142,9 @@ kNutrientMistAutobuildMultiplier = 1
 kMinBuildTimePerHealSpray = 0.9
 kMaxBuildTimePerHealSpray = 1.8
 
+kGestationSoftcapThreshold = 1.5
+kGestationCappedEfficiency = 0.25
+
 -- Marine buy costs
 kFlamethrowerAltCost = 25
 

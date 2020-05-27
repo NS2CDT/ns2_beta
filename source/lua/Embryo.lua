@@ -90,6 +90,13 @@ function Embryo:GetIsAllowedToBuy()
     return false
 end
 
+function Embryo:GetUncappedThresholdRate(baseTime)
+
+    local catalystTime = baseTime * (1 + kNutrientMistPercentageIncrease/100)
+    return catalystTime * kGestationSoftcapThreshold * (1/baseTime) -- Rate is based on a per second basis, so we need to compensate.
+
+end
+
 local function UpdateGestation(self)
 
     -- Cannot spawn unless alive.
@@ -103,8 +110,18 @@ local function UpdateGestation(self)
         end
         
         -- Take into account catalyst effects
-        local amount = GetAlienCatalystTimeAmount(kUpdateGestationTime, self)
-        self.evolveTime = self.evolveTime + kUpdateGestationTime + amount
+        local amount = GetAlienCatalystTimeAmount(kUpdateGestationTime, self) + kUpdateGestationTime
+        local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
+        local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
+
+        if averageRate > thresholdRate then
+            local uncappedFraction = thresholdRate / averageRate
+            local cappedFraction = 1 - uncappedFraction
+
+            amount = (amount * uncappedFraction) + (amount * cappedFraction * kGestationCappedEfficiency)
+        end
+
+        self.evolveTime = self.evolveTime + amount
         
         self.evolvePercentage = Clamp((self.evolveTime / self.gestationTime) * 100, 0, 100)
         
@@ -509,7 +526,18 @@ if Server then
     
     -- Skips X seconds of evolution time (speeds it up).
     function Embryo:AddEvolutionTime(amount)
-        
+
+        local thresholdRate = self:GetUncappedThresholdRate(kUpdateGestationTime)
+        local averageRate = (self.evolveTime + amount) / (Shared.GetTime() - self.gestationStartTime)
+
+        if averageRate > thresholdRate then
+            local uncappedFraction = thresholdRate / averageRate
+            local cappedFraction = 1 - uncappedFraction
+
+            amount = (amount * uncappedFraction) + (amount * cappedFraction * kGestationCappedEfficiency)
+        end
+
+
         self.evolveTime = self.evolveTime + amount
         
     end
