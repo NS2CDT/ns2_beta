@@ -133,6 +133,9 @@ kHydraMaturationTime = 140
 kBabblerEggMaturationTime = 20
 kTunnelEntranceMaturationTime = 135
 
+kMaturitySoftcapThreshold = 1.5
+kMaturityCappedEfficiency = 0.25
+kMaturityBuiltSpeedup = 1
 kNutrientMistMaturitySpeedup = 2
 kNutrientMistAutobuildMultiplier = 1
 
