@@ -58,6 +58,7 @@ function MaturityMixin:__initmixin()
         self.maturityArmor = 0
         self.timeMaturityLastUpdate = 0
         self.updateMaturity = true
+        self.maturityStartTime = 0
 
         if self.startsMature then
             self:SetMature()
@@ -87,6 +88,28 @@ function MaturityMixin:GetMaturityFraction()
     return Server and self._maturityFraction or self.maturityFraction
 end
 
+function MaturityMixin:GetMaxMaturityMistBonus()
+    return kNutrientMistMaturitySpeedup + kMaturityBuiltSpeedup
+end
+
+function MaturityMixin:GetMaturityThresholdRate()
+    local updateRate = GetMaturityRate(self)
+    local baseMaxRate = (1 / updateRate) * self:GetMaxMaturityMistBonus()
+
+    return baseMaxRate * kMaturitySoftcapThreshold
+end
+
+function MaturityMixin:GetMaturityMistBonus()
+
+    local mistBonus = 0
+
+    mistBonus = ConditionalValue(HasMixin(self, "Catalyst") and self:GetIsCatalysted(), kNutrientMistMaturitySpeedup, 0)
+    mistBonus = mistBonus + ( (not HasMixin(self, "Construct") or self:GetIsBuilt()) and kMaturityBuiltSpeedup or 0 )
+
+    return mistBonus
+
+end
+
 function MaturityMixin:GetMaturityLevel()
     local maturityFraction = self:GetMaturityFraction()
 
@@ -97,6 +120,22 @@ function MaturityMixin:GetMaturityLevel()
     else
         return kMaturityLevel.Mature
     end
+end
+
+function MaturityMixin:GetMaturitySoftCappedAmount(amount)
+
+    local averageRate = (self._maturityFraction + amount) / (Shared.GetTime() - self.maturityStartTime)
+    local rateThreshold = self:GetMaturityThresholdRate()
+
+    if averageRate > rateThreshold then
+
+        local uncappedFraction = rateThreshold / averageRate
+        local cappedFraction = 1 - uncappedFraction
+
+        amount = (amount * uncappedFraction) + (amount * cappedFraction * kMaturityCappedEfficiency)
+    end
+
+    return amount
 end
 
 if Server then
@@ -156,24 +195,29 @@ if Server then
 
     end
 
-
     function MaturityMixin:OnMaturityUpdate(deltaTime)
         
         PROFILE("MaturityMixin:OnMaturityUpdate")
+
+        if self.maturityStartTime == 0 then
+            self.maturityStartTime = Shared.GetTime()
+        end
         
         local updateRate = GetMaturityRate(self)
-        
-        local mistMultiplier = ConditionalValue(HasMixin(self, "Catalyst") and self:GetIsCatalysted(), kNutrientMistMaturitySpeedup, 0)
-        local rate = ( (not HasMixin(self, "Construct") or self:GetIsBuilt()) and 1 or 0 ) + mistMultiplier
+        local mistBonus = self:GetMaturityMistBonus()
 
-        self._maturityFraction = math.min(self._maturityFraction + deltaTime * (1 / updateRate) * rate, 1)
+        local maturityRate = (1 / updateRate) * mistBonus
+        local maturityIncrease = maturityRate * deltaTime
+        maturityIncrease = self:GetMaturitySoftCappedAmount(maturityIncrease)
+
+        self._maturityFraction = math.min(self._maturityFraction + maturityIncrease, 1)
         
         local isMature = self._maturityFraction == 1
         
         -- to prevent too much network spam from happening we update only every second the max health
         if self.maturityFraction ~= self._maturityFraction and (isMature or self.timeMaturityLastUpdate + 1 < Shared.GetTime()) then
 
-            if isMature and self.OnMaturityCompletethen then
+            if isMature and self.OnMaturityComplete then
                 self:OnMaturityComplete()
             end
 
@@ -181,8 +225,9 @@ if Server then
             self.timeMaturityLastUpdate = Shared.GetTime()
             
         end
-        
-        return true
+
+        -- Stop processing maturity once we reach full maturity.
+        return not isMature
         
     end
 
@@ -205,9 +250,11 @@ if Server then
     function MaturityMixin:AddMaturity(amount)
         
         -- Misnomer... NOT a rate, but 1/rate... grrr
-        local secondsToMature = self:GetMaturityRate()
+        local secondsToMature = GetMaturityRate(self)
         local fractionalChange = amount / secondsToMature
-        
+        fractionalChange = self:GetMaturitySoftCappedAmount(fractionalChange)
+
+
         local maturityFractionBefore = self._maturityFraction
         self._maturityFraction = Clamp(self._maturityFraction + fractionalChange, 0, 1)
     
